@@ -1,0 +1,25 @@
+#banner {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  background-image: url("..\\images\\banner.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 50vh;
+  width: 100%;
+}
+
+/* #trending {
+
+
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 2em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    text-align: center;
+
+} */
