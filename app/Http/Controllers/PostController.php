@@ -14,7 +14,6 @@ class PostController extends Controller
     public function index()
     {
         //return data from getTrendingPosts function
-
         $posts = PostModel::getTrendingPosts();
         return view('welcome', compact('posts'));
         

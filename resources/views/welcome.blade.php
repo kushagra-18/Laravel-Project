@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Blogwayy</title>
+    <title>Shopwayy</title>
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
@@ -28,35 +28,41 @@
 
     <hr>
     <!-- TREDING TOPICS -->
-    <h5><div class="mb-1 text-muted">&nbsp;&nbsp; Trending on Blogwayy !!!</div></h5>
+    <h5>
+        <div class="mb-1 text-muted">&nbsp;&nbsp; Trending on Shopwayy !!!</div>
+    </h5>
     <hr>
     <div class="row mb-3">
-    <!-- get data from PostController using loop in bootstrap -->
-    @foreach($posts as $post)
-        <div class="col-md-4">
-            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-240 position-relative">
+        <!-- get data from PostController using loop in bootstrap -->
+        @foreach($posts as $post)
+        <div class="col-md-2">
+            <div class="row no-gutters rounded overflow-hidden flex-md-row mb-1 shadow-sm h-md-220 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-success">{{$post->username}}</strong>
+                    <center>
+                        <strong class="d-inline-block mb-1 text-success">{{$post->category}}</strong>
+                    </center>
+                    <div class="col-auto d-none d-lg-block">
+                        <img class="bd-placeholder-img" src='{{ $post->thumbnail}}' width="100%" height="120vh">
+                    </div>
+                    <br>
                     <!-- get title of post -->
-                    <h3 class="mb-0"> {{ $post->title }}</h3>
-                    <div class="mb-1 text-muted">{{$post->created_at}}</div>
-                    <p class="mb-auto">{{$post->body}}</p>
-                    <a href="#" class="stretched-link">Continue reading</a>
-                </div>
-                <div class="col-auto d-none d-lg-block">
-                    <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                    </svg>
+                    <h4 class="mb-1"> {{ $post->title }}</h4>
 
+                    <div class="starRating">3.9 <span>&#9733;</span> (1,000,00)</div>
+
+                    <p class="mb-auto"> <b> ₹ {{$post->price_revised}} </b>
+                        <font class="text-muted"> &nbsp; <strike>₹ {{$post->price_original}}</strike></font>
+                        <font size=1 color="red"><b>{{(ceil(($post->price_original - $post->price_revised)/$post->price_original*100))}}% off</b></font>
+                    </p>
+                    <font size=1 class="text-muted"> Sale ends in {{$post->created_at}}</font>
                 </div>
             </div>
         </div>
         <!-- end loop -->
-    @endforeach
+        @endforeach
     </div>
 
-    
+
     <!-- TRENDING TOPICS END -->
 
     <!-- <div class="flex-center position-ref full-height">
@@ -78,16 +84,5 @@
     </div> -->
 </body>
 
-<script type="text/javascript">
-$(function(){
-  $(".mb-auto").each(function(i){
-    len=$(this).text().length;
-    if(len>120)
-    {
-      $(this).text($(this).text().substr(0,120)+'...');
-    }
-  });
-});
-</script>
 
 </html>
