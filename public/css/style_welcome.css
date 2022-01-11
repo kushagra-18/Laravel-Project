@@ -12,6 +12,11 @@ body {
   padding-top: 75px;
 }
 
+.pluslink, .pluslink:visited,.pluslink:hover,.pluslink:active {
+  color: black;
+  text-decoration: none;
+}
+
 .starRating {
   line-height: normal;
   display: inline-block;

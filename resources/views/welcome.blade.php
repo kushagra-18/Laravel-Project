@@ -21,11 +21,6 @@
     @include('essentials.navbar')
 
     <img src="..\images\banner.gif" id="banner">
-
-    <!-- <div id = 'trending'>
-        Trending
-    </div> -->
-
     <hr>
     <!-- TREDING TOPICS -->
     <h5>
@@ -35,28 +30,31 @@
     <div class="row mb-3">
         <!-- get data from PostController using loop in bootstrap -->
         @foreach($posts as $post)
+
         <div class="col-md-2">
-            <div class="row no-gutters rounded overflow-hidden flex-md-row mb-1 shadow-sm h-md-220 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                    <center>
-                        <strong class="d-inline-block mb-1 text-success">{{$post->category}}</strong>
-                    </center>
-                    <div class="col-auto d-none d-lg-block">
-                        <img class="bd-placeholder-img" src='{{ $post->thumbnail}}' width="100%" height="120vh">
+            <a class = "pluslink" href="">
+                <div class="card" class="row no-gutters rounded overflow-hidden flex-md-row mb-1 shadow-sm h-md-220 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <center>
+                            <strong class="d-inline-block mb-1 text-success">{{$post->category}}</strong>
+                        </center>
+                        <div class="col-auto d-none d-lg-block">
+                            <img class="bd-placeholder-img" src='{{ $post->thumbnail}}' width="100%" height="120vh">
+                        </div>
+                        <br>
+                        <!-- get title of post -->
+                        <h4 class="mb-1"> {{ $post->title }}</h4>
+
+                        <div class="starRating">3.9 <span>&#9733;</span> (1,000,00)</div>
+
+                        <p class="mb-auto"> <b> ₹ {{$post->price_revised}} </b>
+                            <font class="text-muted"> &nbsp; <strike>₹ {{$post->price_original}}</strike></font>
+                            <font size=1 color="red"><b>{{(ceil(($post->price_original - $post->price_revised)/$post->price_original*100))}}% off</b></font>
+                        </p>
+                        <font size=1 class="text-muted"> Sale ends in {{$post->created_at}}</font>
                     </div>
-                    <br>
-                    <!-- get title of post -->
-                    <h4 class="mb-1"> {{ $post->title }}</h4>
-
-                    <div class="starRating">3.9 <span>&#9733;</span> (1,000,00)</div>
-
-                    <p class="mb-auto"> <b> ₹ {{$post->price_revised}} </b>
-                        <font class="text-muted"> &nbsp; <strike>₹ {{$post->price_original}}</strike></font>
-                        <font size=1 color="red"><b>{{(ceil(($post->price_original - $post->price_revised)/$post->price_original*100))}}% off</b></font>
-                    </p>
-                    <font size=1 class="text-muted"> Sale ends in {{$post->created_at}}</font>
                 </div>
-            </div>
+            </a>
         </div>
         <!-- end loop -->
         @endforeach
