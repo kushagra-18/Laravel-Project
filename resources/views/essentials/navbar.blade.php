@@ -19,6 +19,10 @@
     color: #00128b;
   }
 
+  .fa-user {
+    color: #00128b;
+  }
+
   .fa-sign-in {
     color: #00128b;
   }
@@ -54,26 +58,25 @@
           @else
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
-          <b>
-            <font color="#00128b">{{ Auth::user()->name }}</font>
+          <b><i class="fa fa-user" aria-hidden="true"></i>
+            <font color="#00128b">
+              {{ Auth::user()->name }}
+            </font>
           </b>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="{{ url('/login')}}">My Profile</a>
           <a class="dropdown-item" href="#">My Orders</a>
           <a class="dropdown-item" a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">Logout</a>
+                                                     document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp; Logout</a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
           </form>
       </li>
-      <!-- <a class="navbar-brand" href="{{ url('/login') }}">
-        <font color="#00128b">{{ Auth::user()->name }}</font>
-      </a> -->
       @endif
       <a class="navbar-brand" href="#">
         <i class="fas fa-shopping-cart"></i>
-        <font color="#00128b">Cart </font>
+        <font color="#00128b"> <a href = "{{ route('cart') }} ">Cart </font></a>
       </a>
       </b>
       </li>

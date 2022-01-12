@@ -5,7 +5,7 @@
 <style>
     /* container padding from top aligned center*/
     .container {
-        padding-top: 8%;
+        padding-top: 10%;
         float: right;
         width: 70%;
     }
@@ -49,28 +49,14 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="firstname" class="col-md-4 control-label">First Name</label>
+                            <label for="name" class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">
-                                <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
-                                @if ($errors->has('firstname'))
+                                @if ($errors->has('name'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('firstname') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="lastname" class="col-md-4 control-label">Last Name</label>
-
-                            <div class="col-md-6">
-                                <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" required autofocus>
-
-                                @if ($errors->has('lastname'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('lastname') }}</strong>
+                                    <strong>{{ $errors->first('name') }}</strong>
                                 </span>
                                 @endif
                             </div>

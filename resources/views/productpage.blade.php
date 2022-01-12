@@ -6,12 +6,11 @@
     <title>Products | {{$posts[0]->title}}</title>
 
     <!-- style_productPage css -->
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="{{ URL::asset('css/style_productPage.css') }}">
 </head>
 
 <body>
-
-
     <div class="container">
         <div class="card">
             <div class="card-body">
@@ -24,9 +23,14 @@
                         </div>
                         <div id="show">
                             <div class="btn-group">
-                                <button class="btn buy btn-warning btn-rounded mr-1" id="buy" data-toggle="tooltip" title="" data-original-title="Add to cart">
-                                    <i class="fa add fa-shopping-cart"></i>&nbsp; Add to Cart
-                                </button>
+                                <form action="{{route('cart')}}" method="post">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" name="itemId" value="{{ $posts[0]->id }}">
+                                    <button class="btn buy btn-warning btn-rounded mr-1" id="buy" data-toggle="tooltip" title="" data-original-title="Add to cart">
+                                        <i class="fa add fa-shopping-cart"></i>&nbsp; Add to Cart
+                                    </button>
+                                </form>
                                 <button class="btn buy btn-primary btn-rounded" id="buy"><i class="fas fa-gift"></i> &nbsp; Buy Now</button>
                             </div>
                         </div>
