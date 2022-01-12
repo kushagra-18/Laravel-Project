@@ -5,7 +5,7 @@
 <style>
     /* container padding from top aligned center*/
     .container {
-        padding-top: 10%;
+        padding-top: 8%;
         float: right;
         width: 70%;
     }
@@ -31,8 +31,9 @@
 
 <div class="jumbotron">
     <h1 class="display-5">Hello, Guest!</h1>
-    <h3> Get access to your Orders, Wishlist and Recommendations. 
-        <br>Sign up now!!</h3>
+    <h3> Get access to your Orders, Wishlist and Recommendations.
+        <br>Sign up now!!
+    </h3>
     <hr class="my-4">
     <h4>It is super easy and free.</h4>
 
@@ -48,14 +49,28 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                            <label for="firstname" class="col-md-4 control-label">First Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" required autofocus>
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('firstname'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                                    <strong>{{ $errors->first('firstname') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label for="lastname" class="col-md-4 control-label">Last Name</label>
+
+                            <div class="col-md-6">
+                                <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" required autofocus>
+
+                                @if ($errors->has('lastname'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('lastname') }}</strong>
                                 </span>
                                 @endif
                             </div>
@@ -104,7 +119,7 @@
                                 </button>
                                 <br><br>
                                 <a class="btn btn-link" href="{{ route('login') }}">
-                                   Already have an account? Sign in...!!
+                                    Already have an account? Sign in...!!
                                 </a>
                             </div>
                         </div>

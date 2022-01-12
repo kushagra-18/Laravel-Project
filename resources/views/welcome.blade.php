@@ -8,14 +8,13 @@
 
     <title>Shopwayy</title>
 
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
     <!-- import welcome_css -->
     <link rel="stylesheet" href="{{ URL::asset('css/style_welcome.css') }}">
 </head>
-
 <body>
 
     @include('essentials.navbar')
@@ -32,7 +31,8 @@
         @foreach($posts as $post)
 
         <div class="col-md-2">
-            <a class = "pluslink" href="">
+            
+            <a class = "pluslink" target="_blank" href="{{route('products',[$post->id])}}"> 
                 <div class="card" class="row no-gutters rounded overflow-hidden flex-md-row mb-1 shadow-sm h-md-220 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
                         <center>
@@ -43,7 +43,7 @@
                         </div>
                         <br>
                         <!-- get title of post -->
-                        <h4 class="mb-1"> {{ $post->title }}</h4>
+                        <h4 class="mb-1 post-title"> {{ $post->title }}</h4>
 
                         <div class="starRating">3.9 <span>&#9733;</span> (1,000,00)</div>
 
@@ -60,27 +60,17 @@
         @endforeach
     </div>
 
-
-    <!-- TRENDING TOPICS END -->
-
-    <!-- <div class="flex-center position-ref full-height">
-        @if (Route::has('login'))
-        <div class="top-right links">
-            @if (Auth::check())
-            <a href="{{ url('/home') }}">Home</a>
-            @else
-            <a href="{{ url('/login') }}">Login</a>
-            <a href="{{ url('/register') }}">Register</a>
-            @endif
-        </div>
-        @endif
-
-        <div class="content">
-            <div class="title m-b-md">
-            </div>
-        </div>
-    </div> -->
 </body>
 
-
+<script type="text/javascript">// <![CDATA[
+$(function(){
+  $(".post-title").each(function(i){
+    len=$(this).text().length;
+    if(len>15)
+    {
+      $(this).text($(this).text().substr(0,15)+'...');
+    }
+  });
+});
+// ]]></script>
 </html>

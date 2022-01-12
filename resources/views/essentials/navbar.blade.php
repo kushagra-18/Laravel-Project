@@ -11,15 +11,23 @@
     background: #ffc1cc;
   }
 
- .nav-item{
-   margin-right: 10px;
- }
+  .nav-item {
+    margin-right: 10px;
+  }
+
+  .fa-shopping-cart {
+    color: #00128b;
+  }
+
+  .fa-sign-in {
+    color: #00128b;
+  }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
 
 
@@ -33,39 +41,42 @@
     <button class="btn my-2 my-sm-0 btn-primary" type="submit">Search</button>
   </form>
 
-  &nbsp;
+  &nbsp;&nbsp;
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <b>
+          @if (Auth::guest())
           <a class="navbar-brand" href="{{ url('/login') }}">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
             <font color="#00128b"> Sign in </font>
           </a>
-          <a class="navbar-brand" href="#">
-            <font color="#00128b">Cart </font>
-          </a>
-          <!-- <a class="navbar-brand" href="#"><font color="#00128b">More</font></a> -->
-        </b>
+          @else
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+          <b>
+            <font color="#00128b">{{ Auth::user()->name }}</font>
+          </b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{{ url('/login')}}">My Profile</a>
+          <a class="dropdown-item" href="#">My Orders</a>
+          <a class="dropdown-item" a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Logout</a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            {{ csrf_field() }}
+          </form>
+      </li>
+      <!-- <a class="navbar-brand" href="{{ url('/login') }}">
+        <font color="#00128b">{{ Auth::user()->name }}</font>
+      </a> -->
+      @endif
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-shopping-cart"></i>
+        <font color="#00128b">Cart </font>
+      </a>
+      </b>
       </li>
     </ul>
   </div>
 </nav>
-
-
-<!--     <div class="flex-center position-ref full-height">
-        @if (Route::has('login'))
-        <div class="top-right links">
-            @if (Auth::check())
-            <a href="{{ url('/home') }}">Home</a>
-            @else
-            <a href="{{ url('/login') }}">Login</a>
-            <a href="{{ url('/register') }}">Register</a>
-            @endif
-        </div>
-        @endif
-
-        <div class="content">
-            <div class="title m-b-md">
-            </div>
-        </div>
-    </div> -->
