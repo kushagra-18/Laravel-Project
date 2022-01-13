@@ -19,6 +19,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/cart', 'CartController@store')->name('cart');
 
-Route::get('/cart', 'CartController@index')->name('cart');
+Route::get('/cartItems', 'CartController@show')->name('cartItems');
+
+Route::post('/cartItems', 'CartController@destroy')->name('cartItemsDelete');
+
+Route::get('/cart', 'CartController@index')->name('cartIndex');
 
 Route::get('/products/{id}', 'ProductPageController@index')->name('products');

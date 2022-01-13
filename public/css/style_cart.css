@@ -1,5 +1,5 @@
 body {
-margin-top: 60px;
+margin-top: 10%;
 }
 
 .title {
@@ -10,7 +10,6 @@ margin-top: 60px;
     margin: auto;
     max-width: auto;
     width: 90%;
-    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 1rem;
     border: transparent
 }
@@ -37,7 +36,8 @@ margin-top: 60px;
 }
 
 .summary {
-    background-color: #ddd;
+    margin-top: 10px;
+    background-color: #ffc1cc;
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     padding: 4vh;
@@ -151,12 +151,9 @@ input:focus::-webkit-input-placeholder {
 }
 
 a {
-    color: black
+    text-decoration: none;
 }
 
 a:hover {
-    color: black;
     text-decoration: none
 }
-
-\\

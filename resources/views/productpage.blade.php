@@ -12,7 +12,7 @@
 
 <body>
     <div class="container">
-        <div class="card">
+        <div class="card shadow p-3">
             <div class="card-body">
                 <h3 class="card-title">{{$posts[0]->title}}</h3>
                 <h6 class="card-subtitle">{{$posts[0]->category}}</h6>
@@ -24,20 +24,21 @@
                         <div id="show">
                             <div class="btn-group">
                                 <form action="{{route('cart')}}" method="post">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token()}}">
                                     <input type="hidden" name="itemId" value="{{ $posts[0]->id }}">
                                     <button class="btn buy btn-warning btn-rounded mr-1" id="buy" data-toggle="tooltip" title="" data-original-title="Add to cart">
                                         <i class="fa add fa-shopping-cart"></i>&nbsp; Add to Cart
                                     </button>
                                 </form>
-                                <button class="btn buy btn-primary btn-rounded" id="buy"><i class="fas fa-gift"></i> &nbsp; Buy Now</button>
+                                <form>
+                                    <button class="btn buy btn-primary btn-rounded" id="buy"><i class="fas fa-gift"></i> &nbsp; Buy Now</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-7 col-sm-6">
                         <h4 class="box-title mt-5">Product description</h4>
-                        <p>Lorem Ipsum available,but the majority have suffered alteration in some form,by injected humour,or randomised words which don't look even slightly believable.but the majority have suffered alteration in some form,by injected humour</p>
+                        <p>Very good fone</p>
                         <h2 class="mt-5">
                             ₹ {{$posts[0]->price_revised}}&nbsp;<small class="text-success">{{(ceil(($posts[0]->price_original - $posts[0]->price_revised)/$posts[0]->price_original*100))}}% off</small>
                         </h2>
@@ -83,7 +84,5 @@
         </div>
     </div>
 </body>
-
-
 
 </html>

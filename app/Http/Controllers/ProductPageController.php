@@ -11,7 +11,6 @@ class ProductPageController extends Controller
     public function index($id)
 
     {
-        echo $id;
         $posts = DB::table('posts')->where('id', $id)->get();
         return view('productpage', compact('posts'));
     }

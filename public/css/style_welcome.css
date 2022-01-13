@@ -9,7 +9,12 @@
   width: 100%;
 }
 body {
-  padding-top: 75px;
+  padding-top: 12vh;
+}
+
+
+.card:hover {
+  transform: scale(1.1);
 }
 
 
@@ -23,6 +28,7 @@ body {
   display: inline-block;
   color: #fff;
   padding: 2px 4px 2px 6px;
+  border-color: white;
   border-radius: 3px;
   font-weight: 500;
   font-size: 12px;

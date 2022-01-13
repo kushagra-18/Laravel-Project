@@ -3,6 +3,10 @@
     box-sizing: border-box;
 }
 
+body{
+
+    margin-top: 60px;
+}
 
 
 .heading {
@@ -112,13 +116,8 @@ img {
 }
 
 
-body {
-
-    margin-top: 60px;
-}
-
 .card {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 #buy {

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Exception;
 use App\Models\CartModel;
 
 class CartController extends Controller
@@ -36,8 +37,13 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //get id from request and call addCartItems function
-        CartModel::addCartItems($request);
+        $cartModel = new CartModel();
+        try{
+            $cartModel->addCartItems($request);
+            return  $this->show();
+        }catch(Exception $e){
+            return $e;
+        }
     }
 
     /**
@@ -46,9 +52,22 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $isEmpty = false;
+        $id = Auth::user()->id;
+        //show cart items and return 
+        $cartModel = new CartModel();
+        $cartItemsShow = $cartModel->showCartItems($id);
+
+        //find if query return any data 
+        if(count($cartItemsShow) == 0){
+            $isEmpty = true;
+            return view('cart', compact('isEmpty'));
+        }
+        else{
+            return view('cart', compact('cartItemsShow','isEmpty'));
+        }
     }
 
     /**
@@ -75,13 +94,18 @@ class CartController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
+     * This function is used to delete cart items
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return {NULL}
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $cartModel = new CartModel();
+        try{
+            $cartModel->deleteCartItems($request);
+            return  $this->show();
+        }catch(Exception $e){
+            return $e;
+        }
     }
 }

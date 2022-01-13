@@ -1,6 +1,30 @@
 <!-- Bootstrap CSS -->
 
 <style>
+  .badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+  }
+
+  .label-warning[href],
+  .badge-warning[href] {
+    background-color: #c67605;
+  }
+
+  #lblCartCount {
+    font-size: 12px;
+    background: #ff0000;
+    color: #fff;
+    border-color: white;
+    border: 3px;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px;
+  }
+
   .logo {
     height: 60px;
     width: 220px;
@@ -9,6 +33,14 @@
 
   .navbar-default {
     background: #ffc1cc;
+  }
+
+  .pluslinkcart,
+  .pluslinkcart:visited,
+  .pluslinkcart:hover,
+  .pluslinkcart:active {
+    color: #00128b;
+    text-decoration: none;
   }
 
   .nav-item {
@@ -24,6 +56,10 @@
   }
 
   .fa-sign-in {
+    color: #00128b;
+  }
+
+  .fa-money-bill-wave {
     color: #00128b;
   }
 </style>
@@ -74,12 +110,23 @@
           </form>
       </li>
       @endif
-      <a class="navbar-brand" href="#">
-        <i class="fas fa-shopping-cart"></i>
-        <font color="#00128b"> <a href = "{{ route('cart') }} ">Cart </font></a>
-      </a>
-      </b>
+      <li>
+        <a class="navbar-brand" href="{{route('cartItems')}}">
+          <i class="fas fa-shopping-cart"></i>
+          <span class='badge badge-warning' id='lblCartCount'>0</span>
+          <font color="#00128b"> Cart</font>
+        </a>
+
+        <a class="navbar-brand" href="{{route('cartItems')}}">
+          <i class="fas fa-money-bill-wave"></i>
+          <font color="#00128b"> Sell here</font>
+        </a>
       </li>
-    </ul>
+
+  </div>
+  </a>
+  </b>
+  </li>
+  </ul>
   </div>
 </nav>
