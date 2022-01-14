@@ -96,7 +96,11 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
           <b><i class="fa fa-user" aria-hidden="true"></i>
             <font color="#00128b">
+            @if(Auth::check() && !Auth()->user()->user == 'seller')
               {{ Auth::user()->name }}
+            @else
+              {{ Auth::user()->companyName }}
+            @endif
             </font>
           </b>
         </a>
@@ -111,12 +115,13 @@
       </li>
       @endif
       <li>
+        @if(Auth::check() && !Auth()->user()->user == 'seller')
         <a class="navbar-brand" href="{{route('cartItems')}}">
           <i class="fas fa-shopping-cart"></i>
           <span class='badge badge-warning' id='lblCartCount'>0</span>
           <font color="#00128b"> Cart</font>
         </a>
-
+        @endif
         <a class="navbar-brand" href="{{route('cartItems')}}">
           <i class="fas fa-money-bill-wave"></i>
           <font color="#00128b"> Sell here</font>

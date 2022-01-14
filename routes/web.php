@@ -17,12 +17,23 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/cart', 'CartController@store')->name('cart');
+Route::group(['middleware' => ['auth']], function() {
+    Route::post('/cart', 'CartController@store')->name('cart');
 
-Route::get('/cartItems', 'CartController@show')->name('cartItems');
+    Route::get('/cartItems', 'CartController@show')->name('cartItems');
+    
+    
+    Route::post('/cartItems', 'CartController@destroy')->name('cartItemsDelete');
+    
+    Route::get('/cart', 'CartController@index')->name('cartIndex');
+    
+    Route::get('/checkout', 'CartController@checkoutCart')->name('checkout');
+    
+    Route::get('/products/{id}', 'ProductPageController@index')->name('products');
+    
+    Route::get('/category/{category}', 'PostController@category')->name('category');
+    
+    Route::get('/category/{category}/{sort}', 'PostController@categorySort')->name('categorySort');
+});
 
-Route::post('/cartItems', 'CartController@destroy')->name('cartItemsDelete');
 
-Route::get('/cart', 'CartController@index')->name('cartIndex');
-
-Route::get('/products/{id}', 'ProductPageController@index')->name('products');

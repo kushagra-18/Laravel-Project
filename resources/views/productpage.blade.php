@@ -9,7 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="{{ URL::asset('css/style_productPage.css') }}">
 </head>
-
 <body>
     <div class="container">
         <div class="card shadow p-3">
@@ -31,7 +30,7 @@
                                     </button>
                                 </form>
                                 <form>
-                                    <button class="btn buy btn-primary btn-rounded" id="buy"><i class="fas fa-gift"></i> &nbsp; Buy Now</button>
+                                    <button class="btn buy btn-primary btn-rounded" id="buy"><i class="fas fa-gift"></i> <a href = "{{route('checkout')}}">&nbsp; Buy Now</a></button>
                                 </form>
                             </div>
                         </div>
@@ -83,6 +82,8 @@
             </div>
         </div>
     </div>
+    
+@include('essentials.footer')
 </body>
 
 </html>

@@ -108,4 +108,10 @@ class CartController extends Controller
             return $e;
         }
     }
+
+
+    public function checkoutCart(){
+
+        return view('checkout');
+    }
 }

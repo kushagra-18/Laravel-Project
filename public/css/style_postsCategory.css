@@ -1,0 +1,30 @@
+body {
+  padding-top: 8%;
+}
+
+.sorting{
+    box-shadow: black 0px 0px 2px;
+}
+
+.row-product {
+  padding-left: 2%;
+}
+.sorting>a {
+    display: inline-block;
+    width: 10%;
+    padding: 0;
+    margin: 0;
+  }
+/* MEDIA TAGS ONLY */
+
+@media only screen and (max-width: 700px) {
+  body {
+    padding-top: 30%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+    body {
+      padding-top: 55%;
+    }
+}

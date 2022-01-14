@@ -8,6 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="{{ URL::asset('css/style_cart.css') }}">
 
+<body>
 <div id = "ajaxReload">
 @if(!$isEmpty)
 <div class="card shadow p-3">
@@ -105,6 +106,10 @@
 </div>
 
 @endif
+
+</body>
+
+@include('essentials.footer')
 <script>
     $('.blade-hide').hide();
 
