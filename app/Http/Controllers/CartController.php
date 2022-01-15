@@ -14,6 +14,7 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         return view('cart');
@@ -110,8 +111,18 @@ class CartController extends Controller
     }
 
 
-    public function checkoutCart(){
+    public function checkoutCart($id){
 
-        return view('checkout');
+        $cartModel = new CartModel();
+        $cartItemsShow = $cartModel->checkoutItem($id);
+
+        $checkSavedAddress = $cartModel->checkSavedAddress();
+
+        $getSavedAddress = $cartModel->getSavedAddress();
+
+        return view('checkout', compact('cartItemsShow','checkSavedAddress','getSavedAddress'));
+
     }
+
+    
 }

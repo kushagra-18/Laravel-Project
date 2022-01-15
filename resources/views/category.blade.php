@@ -72,7 +72,7 @@
         @endforeach
     </div>
 
-    {{$posts->links()}}
+    {{$posts->links(("pagination::bootstrap-4"))}}
 
     <script>
 

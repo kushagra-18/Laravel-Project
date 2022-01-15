@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', 'PostController@index')->name('post');
 
 Auth::routes();
@@ -18,6 +19,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function() {
+
     Route::post('/cart', 'CartController@store')->name('cart');
 
     Route::get('/cartItems', 'CartController@show')->name('cartItems');
@@ -27,10 +29,14 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::get('/cart', 'CartController@index')->name('cartIndex');
     
-    Route::get('/checkout', 'CartController@checkoutCart')->name('checkout');
+    Route::get('/checkout/{id}', 'CartController@checkoutCart')->name('checkout');
+
+    Route::post('/confirmOrder', 'UserController@checkoutCartFinal')->name('checkoutFinal');
     
     Route::get('/products/{id}', 'ProductPageController@index')->name('products');
     
+    Route::get('/category/{category}', 'PostController@category')->name('category');
+
     Route::get('/category/{category}', 'PostController@category')->name('category');
     
     Route::get('/category/{category}/{sort}', 'PostController@categorySort')->name('categorySort');

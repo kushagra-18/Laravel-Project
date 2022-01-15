@@ -46,7 +46,7 @@
     <hr>
     <div class="row mb-3">
         <!-- get data from PostController using loop in bootstrap -->
-        @foreach($posts as $post)
+        @foreach($topDeals as $post)
 
         <div class="col-md-2">
 

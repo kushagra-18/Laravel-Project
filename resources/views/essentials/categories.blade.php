@@ -1,6 +1,9 @@
 
 <style>
    #shop-categories {
+
+    margin: auto;
+    width: auto;
   
 }
 

@@ -14,11 +14,15 @@ class PostController extends Controller
     public function index()
     {
         //return data from getTrendingPosts function
-        $posts = PostModel::getTrendingPosts();
-        return view('welcome', compact('posts'));
+        $postModel = new PostModel();
+        $posts = $postModel->getTrendingPosts();
+
+        //return data from getTopDeals function
+        $topDeals = $postModel->getTopDeals();
+
+        return view('welcome', compact('posts','topDeals'));
         
     }
-
 
     /**
      * This function is used to get the data from the posts table

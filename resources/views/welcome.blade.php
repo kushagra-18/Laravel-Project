@@ -29,7 +29,7 @@
     @elseif(Auth::check() && Auth::user()->user=='seller')
         @include('essentials.sellerPage')
     @endif
-<!-- Footer -->
+
 <style>
 
 .footer-color{

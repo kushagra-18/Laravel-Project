@@ -30,7 +30,7 @@
                                     </button>
                                 </form>
                                 <form>
-                                    <button class="btn buy btn-primary btn-rounded" id="buy"><i class="fas fa-gift"></i> <a href = "{{route('checkout')}}">&nbsp; Buy Now</a></button>
+                                    <button class="btn buy btn-primary btn-rounded" id="buy"><i class="fas fa-gift"></i> <a href = "{{route('checkout',[$posts[0]->id])}}">&nbsp; Buy Now</a></button>
                                 </form>
                             </div>
                         </div>
