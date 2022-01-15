@@ -237,6 +237,7 @@
 
 
     <script>
+
         // if saved is check hide check-out form
         if ($('#saved').is(':checked')) {
             $('.address-info').hide();

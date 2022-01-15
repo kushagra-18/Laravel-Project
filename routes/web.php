@@ -40,6 +40,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/category/{category}', 'PostController@category')->name('category');
     
     Route::get('/category/{category}/{sort}', 'PostController@categorySort')->name('categorySort');
+
+    Route::get('/seller', 'SellerController@index')->name('sellerProduct');
+
+    Route::post('/seller', 'SellerController@addProduct')->name('addProduct');
+
+
 });
 
 

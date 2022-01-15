@@ -4,6 +4,8 @@
 
     margin: auto;
     width: auto;
+    padding-left: 15%;
+    padding-right: 10%;
   
 }
 
@@ -12,10 +14,8 @@
         height: 10px;
     }
 </style>
-
 <div id="shop-categories">
-    <div class="row mb-2">
-        <div class="col-md-1">
+    <div class="row">
             <a class="pluslink" target="_blank" href="{{route('category','mobile')}}">
                 <div class="card">
                     <center>
@@ -30,9 +30,8 @@
                     <!-- get title of post -->
                 </div>
             </a>
-        </div>
+            &nbsp;
 
-        <div class="col-md-1">
             <a class="pluslink" target="_blank" href="#">
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
@@ -47,8 +46,53 @@
                     </div>
                 </div>
             </a>
-        </div>
-        <div class="col-md-1">
+      &nbsp;
+      <a class="pluslink" target="_blank" href="#">
+                <div class="card">
+                    <div class="col p-0 d-flex flex-column position-static">
+                        <center>
+                            <strong class="d-inline-block mb-1 text-success">Fashion</strong>
+                        </center>
+                        <div class="col-auto d-none d-lg-block">
+                            <img class="bd-placeholder-img" src="{{asset('../category/fashion.png')}}" width="80vh" height="50vh">
+                        </div>
+                        <br>
+                        <!-- get title of post -->
+                    </div>
+                </div>
+            </a>
+      &nbsp;
+      <a class="pluslink" target="_blank" href="#">
+                <div class="card">
+                    <div class="col p-0 d-flex flex-column position-static">
+                        <center>
+                            <strong class="d-inline-block mb-1 text-success">Fashion</strong>
+                        </center>
+                        <div class="col-auto d-none d-lg-block">
+                            <img class="bd-placeholder-img" src="{{asset('../category/fashion.png')}}" width="80vh" height="50vh">
+                        </div>
+                        <br>
+                        <!-- get title of post -->
+                    </div>
+                </div>
+            </a>
+      &nbsp;
+      <a class="pluslink" target="_blank" href="#">
+                <div class="card">
+                    <div class="col p-0 d-flex flex-column position-static">
+                        <center>
+                            <strong class="d-inline-block mb-1 text-success">Fashion</strong>
+                        </center>
+                        <div class="col-auto d-none d-lg-block">
+                            <img class="bd-placeholder-img" src="{{asset('../category/fashion.png')}}" width="80vh" height="50vh">
+                        </div>
+                        <br>
+                        <!-- get title of post -->
+                    </div>
+                </div>
+            </a>
+      &nbsp;
+      
             <a class="pluslink" target="_blank" href="#">
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
@@ -63,8 +107,7 @@
                     </div>
                 </div>
             </a>
-        </div>
-        <div class="col-md-1">
+            &nbsp;
             <a class="pluslink" target="_blank" href="#">
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
@@ -79,8 +122,7 @@
                     </div>
                 </div>
             </a>
-        </div>
-        <div class="col-md-1">
+            &nbsp;
             <a class="pluslink" target="_blank" href="#">
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
@@ -95,8 +137,7 @@
                     </div>
                 </div>
             </a>
-        </div>
-        <div class="col-md-1">
+            &nbsp;
             <a class="pluslink" target="_blank" href="#">
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
