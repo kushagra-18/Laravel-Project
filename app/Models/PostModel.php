@@ -31,25 +31,30 @@ class PostModel extends Model
             ->limit(6)
             ->get();
 
+        foreach ($posts as $post) {
+
+            if ($post->discount_till != null) {
+                $post->discount_till  = Carbon::parse($post->discount_till);
+                $post->discount_till = $post->discount_till->diffForHumans();
+            }
+        }
+
         return $posts;
     }
 
 
     public static function getTrendingPosts()
     {
-        //fetches all the posts from the posts table from database
+
 
         $posts = DB::table('posts')->limit(6)->get();
 
-        //fetch created_at from posts table and convert it to days ago
         foreach ($posts as $post) {
 
-            //check if discount is not null
             if ($post->discount_till != null) {
                 $post->discount_till  = Carbon::parse($post->discount_till);
                 $post->discount_till = $post->discount_till->diffForHumans();
             }
-
         }
 
         return $posts;
@@ -74,6 +79,7 @@ class PostModel extends Model
         //search items from the database on titie and tags
         $posts = DB::table('posts')->where('title', 'like', '%' . $search . '%')
             ->orWhere('tags', 'like', '%' . $search . '%')->paginate(10);
+
 
         return $posts;
     }

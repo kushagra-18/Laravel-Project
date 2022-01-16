@@ -106,7 +106,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="{{ url('/login')}}">My Profile</a>
-          <a class="dropdown-item" href="#">My Orders</a>
+          <a class="dropdown-item" href="{{ route('user') }}">My Orders</a>
           <a class="dropdown-item" a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp; Logout</a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

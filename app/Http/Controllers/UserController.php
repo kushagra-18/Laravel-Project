@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use App\Models\UserMetaModel;
 use App\Models\UserModel;
 
 class UserController extends Controller
@@ -24,6 +25,29 @@ class UserController extends Controller
             }
         }
 
+        //get product_id
+        $product_id = $request->input('product_id');
+        $this->saveProductInfo($product_id);
+
+
        return "success";
     }
+
+    /**
+     * save product_id and user_email in UserMeta tables
+     * @param Request $request
+     */
+
+    public function saveProductInfo($product_id){
+     
+        $userMetaModel = new UserMetaModel();
+        try{
+            $userMetaModel->saveProductInfo($product_id);
+        }
+        catch(Exception $e){
+            echo $e;
+        }
+    }
+
+
 }

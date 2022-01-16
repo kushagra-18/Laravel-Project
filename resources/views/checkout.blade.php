@@ -42,6 +42,7 @@
                 @if($checkSavedAddress)
                 <form id='saved-form' action="{{route('checkoutFinal')}}" method='post'>
                     <input type="hidden" name="_token" value="{{ csrf_token()}}">
+                    <input type="hidden" name="product_id" value="{{$cartItemsShow[0]->id}}">
                     <div class="custom-control custom-checkbox">
 
                         <input type="checkbox" class="custom-control-input" name="saved" id="saved">

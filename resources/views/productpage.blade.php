@@ -16,7 +16,7 @@
                 <h3 class="card-title">{{$posts[0]->title}}</h3>
                 <h6 class="card-subtitle">{{$posts[0]->category}}</h6>
                 <div class="row">
-                    <div class="col-lg-5 col-md-5 col-sm-6">
+                    <div class="col-lg-5 col-md-5 col-sm-4">
                         <div id="main">
                             <div class="white-box text-center"><img class="zoom" src="{{$posts[0]->thumbnail}}" alt="product image"></div>
                         </div>
@@ -35,21 +35,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-7 col-md-7 col-sm-6">
-                        <h4 class="box-title mt-5">Product description</h4>
-                        <p>Very good fone</p>
+
+                    <div class="col-lg-6 col-md-4 col-sm-4">
+                        <h4 class="box-title mt-0">Product description</h4>
+                        <p>{{$posts[0]->description}}</p>
                         <h2 class="mt-5">
                             ₹ {{$posts[0]->price_revised}}&nbsp;<small class="text-success">{{(ceil(($posts[0]->price_original - $posts[0]->price_revised)/$posts[0]->price_original*100))}}% off</small>
                         </h2>
+            
                         <font class="text-muted"> &nbsp; <strike>₹ {{$posts[0]->price_original}}</strike></font>
                         <h3 class="box-title mt-3">Key Highlights</h3>
                         <ul class="list-unstyled">
-                            <li><i class="fa fa-check text-success"></i>Sturdy structure</li>
-                            <li><i class="fa fa-check text-success"></i>Designed to foster easy portability</li>
-                            <li><i class="fa fa-check text-success"></i>Perfect furniture to flaunt your wonderful collectibles</li>
+
+                        <!-- get data from database and split by ; -->
+                        @foreach(explode(';',$posts[0]->product_key_points) as $key_points)
+                        <li><i class="fa fa-check text-success"></i>&nbsp;{{$key_points}}</li>
+                        @endforeach
                         </ul>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-10 col-md-6 col-sm-6">
                         <h3 class="box-title mt-5">General Info</h3>
 
                         <span class="heading">User Rating</span>

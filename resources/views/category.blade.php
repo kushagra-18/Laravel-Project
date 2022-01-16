@@ -68,7 +68,7 @@
                         <p class="card-text"><b> ₹ {{$post->price_revised}} </b>
                             <font class="text-muted"> &nbsp; <strike>₹ {{$post->price_original}}</strike></font>
                             <font size=1 color="red"><b>{{(ceil(($post->price_original - $post->price_revised)/$post->price_original*100))}}% off</b></font></p>
-                            <p class="card-text">{{$post->description}}
+                            <p class="card-text desc-text">{{$post->description}}
                         <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                     </div>
                 </div>
@@ -98,3 +98,15 @@
 @include('essentials.footer')
 
 </html>
+
+<script type="text/javascript">
+    $(function() {
+        $(".desc-text").each(function(i) {
+            len = $(this).text().length;
+            if (len > 60) {
+                $(this).text($(this).text().substr(0, 60) + '...');
+            }
+        });
+    });
+    
+    </script>

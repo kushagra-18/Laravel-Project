@@ -138,7 +138,7 @@
                 </div>
             </a>
             &nbsp;
-            <a class="pluslink" target="_blank" href="#">
+            <a class="pluslink" target="_blank" href="{{route('category','Electronics')}}">
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
                         <center>
