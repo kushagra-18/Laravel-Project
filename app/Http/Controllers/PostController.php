@@ -20,8 +20,7 @@ class PostController extends Controller
         //return data from getTopDeals function
         $topDeals = $postModel->getTopDeals();
 
-        return view('welcome', compact('posts','topDeals'));
-        
+        return view('welcome', compact('posts', 'topDeals'));
     }
 
     /**
@@ -34,7 +33,8 @@ class PostController extends Controller
      * 
      */
 
-    public function category($category){
+    public function category($category)
+    {
 
         //create object of PostModel class
         $postModel = new PostModel();
@@ -54,11 +54,35 @@ class PostController extends Controller
      * @throws \Exception
      */
 
-     public function categorySort($category,$sort){
+    public function searchItems(Request $request)
+    {
+
+        $search  = $request->input('search-bar');
+
+       // echo $search;
+
+        $postModel = new PostModel();
+        $posts = $postModel->searchItems($search);
+
+        //check if search is empty
+        if(count($posts) == 0){
+
+            $isEmpty = true;
+
+            return view('category', compact('posts','isEmpty'));
+        }
+
+        $posts->appends(['search-bar' => $search]);
+
+        return view('category', compact('posts'));
+    }
+
+    public function categorySort($category, $sort)
+    {
 
         //create object of PostModel class
         $postModel = new PostModel();
-        $posts = $postModel->sortPostsByCategory($category,$sort);
+        $posts = $postModel->sortPostsByCategory($category, $sort);
         return view('category', compact('posts'));
-     }
+    }
 }

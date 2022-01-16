@@ -22,21 +22,22 @@
 <div class="product-info">
 
     <h4 class="mb-3">Add product information</h4>
-    <form id='checkout-form' action="{{route('addProduct')}}" method='post' class="needs-validation" novalidate>
+    <form id='checkout-form' action="{{route('addProduct')}}" method='post'  enctype="multipart/form-data"class="needs-validation" novalidate>
 
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="firstName">Name</label>
-                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="" value="" required>
+                <label for="product_name">Name</label>
+                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="" value="" required>
                 <div class="invalid-feedback">
                     Valid Name is required.
                 </div>
             </div>
         </div>
         <div class="mb-3">
-            <label for="address">Description</label>
-            <textarea class="form-control" id="desc" name="desc" placeholder="Description (Min 50 words)" required></textarea>
+            <label for="product_description">Description</label>
+            <textarea class="form-control" id="product_description" name="product_description" placeholder="Description (Min 50 words)" required></textarea>
 
             <div class="invalid-feedback">
                 Please enter your descriptions
@@ -46,12 +47,12 @@
 
         <div class="row">
             <div class="col-md-5 mb-3">
-                <label for="price_original">MRP Original <span class="text-muted"></span></label>
+                <label for="product_price_original">MRP Original <span class="text-muted"></span></label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">&#8377; </span>
                     </div>
-                    <input type="text" id="price_original" name="price_original" class="form-control" aria-label="Amount (to the nearest rupee)" required>
+                    <input type="text" id="product_price_original" name="product_price_original" class="form-control" aria-label="Amount (to the nearest rupee)" required>
                     <div class="input-group-append">
                         <span class="input-group-text">.00</span>
                     </div>
@@ -62,12 +63,12 @@
             </div>
 
             <div class="col-md-5 mb-3">
-                <label for="price_original">MRP Revised <span class="text-muted"></span></label>
+                <label for="product_price_revised">MRP Revised <span class="text-muted"></span></label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">&#8377; </span>
                     </div>
-                    <input type="text" id="price_revised" name="price_revised" class="form-control" aria-label="Amount (to the nearest rupee)" required>
+                    <input type="text" id="product_price_revised" name="product_price_revised" class="form-control" aria-label="Amount (to the nearest rupee)" required>
                     <div class="input-group-append">
                         <span class="input-group-text">.00</span>
                     </div>
@@ -82,10 +83,10 @@
 
         <div class="row">
             <div class="col-md-5 mb-3">
-                <label for="country">Category</label>
-                <select class="custom-select d-block w-100" id="category" name="category" required>
+                <label for="product_category">Category</label>
+                <select class="custom-select d-block w-100" id="product_category" name="product_category" required>
                     <option value="" selected disabled>Choose...</option>
-                    <option value="Mobiles">Mobiles</option>
+                    <option value="Mobile">Mobiles</option>
                     <option value="Wearables">Wearables</option>
                     <option value="Electronics">Electronics</option>
                     <option value="Home Decor">Home Decor</option>
@@ -101,8 +102,8 @@
                 </div>
             </div>
             <div class="col-md-3 mb-3">
-                <label for="zip">Discount valid till:</label>
-                <input type="date" name="calender" class="form-control" name="date" id="date" placeholder="" required>
+                <label for="product_discount_till">Discount valid till:</label>
+                <input type="date" class="form-control" name="product_discount_till" id="product_discount_till" placeholder="" required>
                 <div class="invalid-feedback">
                     Add discount valid till
                 </div>
@@ -110,8 +111,8 @@
 
         </div>
         <div class="mb-3">
-            <label for="address">Key points</label>
-            <textarea class="form-control" id="desc" name="desc" placeholder="Add minimum of three points for the product seprated by ;" required></textarea>
+            <label for="product_key_points">Key points</label>
+            <textarea class="form-control" id="product_key_points" name="product_key_points" placeholder="Add minimum of three points for the product seprated by ;" required></textarea>
 
             <div class="invalid-feedback">
                 Add minimum of three points for the product seprated by ;
@@ -122,8 +123,8 @@
                 <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
             </div>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                <input type="file" class="custom-file-input" name = 'product_image' id="product_image" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="product_image">Choose file</label>
             </div>
         </div>
         <hr class="mb-4">
@@ -136,23 +137,23 @@
 
 <script>
     var today = new Date().toISOString().split('T')[0];
-    document.getElementsByName("calender")[0].setAttribute('min', today);
+    document.getElementsByName("product_discount_till")[0].setAttribute('min', today);
 
-    (function() {
-        'use strict';
+    // (function() {
+    //     'use strict';
 
-        window.addEventListener('load', function() {
-            var forms = document.getElementsByClassName('needs-validation');
+    //     window.addEventListener('load', function() {
+    //         var forms = document.getElementsByClassName('needs-validation');
 
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
+    //         var validation = Array.prototype.filter.call(forms, function(form) {
+    //             form.addEventListener('submit', function(event) {
+    //                 if (form.checkValidity() === false) {
+    //                     event.preventDefault();
+    //                     event.stopPropagation();
+    //                 }
+    //                 form.classList.add('was-validated');
+    //             }, false);
+    //         });
+    //     }, false);
+    // })();
 </script>

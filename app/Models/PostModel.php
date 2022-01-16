@@ -22,7 +22,8 @@ class PostModel extends Model
      */
 
 
-    public function getTopDeals(){
+    public function getTopDeals()
+    {
 
         $posts = DB::table('posts')
             ->select('posts.*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
@@ -30,23 +31,23 @@ class PostModel extends Model
             ->limit(6)
             ->get();
 
-            return $posts;
+        return $posts;
     }
 
 
     public static function getTrendingPosts()
     {
-            //fetches all the posts from the posts table from database
-          
-            $posts = DB::table('posts')->limit(6)->get();
+        //fetches all the posts from the posts table from database
 
-            //fetch created_at from posts table and convert it to days ago
-            foreach ($posts as $post) {
-                $post->created_at  = Carbon::parse($post->created_at );
-                $post->created_at = $post->created_at->diffForHumans();
-            }
+        $posts = DB::table('posts')->limit(6)->get();
 
-            return $posts;
+        //fetch created_at from posts table and convert it to days ago
+        foreach ($posts as $post) {
+            $post->created_at  = Carbon::parse($post->created_at);
+            $post->created_at = $post->created_at->diffForHumans();
+        }
+
+        return $posts;
     }
 
     /**
@@ -57,28 +58,43 @@ class PostModel extends Model
      * @return {array}
      */
 
-    public function getPostsByCategory($category){
+    public function getPostsByCategory($category)
+    {
         $posts = DB::table('posts')->where('category', $category)->paginate(10);
         return $posts;
     }
 
+    public function searchItems($search)
+    {
 
-    public function sortPostsByCategory($category,$sort){
+        $posts = DB::table('posts')->where('title', 'like', '%' . $search . '%')->paginate(10);
+
+        return $posts;
+    }
 
 
-        if($sort == 'newest'){
+    public function sortPostsByCategory($category, $sort)
+    {
+
+        if ($sort == 'newest') {
             $posts = DB::table('posts')->where('category', $category)->orderBy('created_at', 'desc')->paginate(10);
-        }elseif($sort == 'oldest'){
+        } elseif ($sort == 'oldest') {
             $posts = DB::table('posts')->where('category', $category)->orderBy('created_at', 'asc')->paginate(10);
-        }elseif($sort == 'price_low_high'){
+        } elseif ($sort == 'price_low_high') {
             $posts = DB::table('posts')->where('category', $category)->orderBy('price_revised', 'asc')->paginate(10);
-        }elseif($sort == 'price_high_low'){
+        } elseif ($sort == 'price_high_low') {
             $posts = DB::table('posts')->where('category', $category)->orderBy('price_revised', 'desc')->paginate(10);
-        }elseif($sort == 'rating_high_low'){
+        } elseif ($sort == 'rating_high_low') {
             $posts = DB::table('posts')->where('category', $category)->orderBy('rating', 'desc')->get()->paginate(10);
-        }elseif($sort == 'rating_low_high'){
+        } elseif ($sort == 'rating_low_high') {
             $posts = DB::table('posts')->where('category', $category)->orderBy('rating', 'asc')->get()->paginate(10);
         }
         return $posts;
+    }
+
+    public function addProduct($data)
+    {
+        echo $data;
+        DB::table('posts')->insert($data);
     }
 }

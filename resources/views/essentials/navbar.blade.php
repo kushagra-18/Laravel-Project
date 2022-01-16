@@ -76,8 +76,8 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <form class="form-inline my-2 my-lg-0 my-lg-0">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" style="width: 600px;">
+  <form action = "{{route('searchItems')}}"  method = "get" class="form-inline my-2 my-lg-0 my-lg-0">
+    <input class="form-control mr-sm-2" type="text" id = "search-bar" name = "search-bar" placeholder="Search" aria-label="Search" style="width: 600px;">
     <button class="btn my-2 my-sm-0 btn-primary" type="submit">Search</button>
   </form>
 

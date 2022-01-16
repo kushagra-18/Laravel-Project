@@ -15,6 +15,7 @@
 
     <!-- sorting functions -->
 
+    @if(!$isEmpty)
     <div class="sorting">
         <a class="text-decoration-none" href="#">
             <h6><i class="fas fa-sort"></i> &nbsp; Sort By</h6>
@@ -73,12 +74,9 @@
     </div>
 
     {{$posts->links(("pagination::bootstrap-4"))}}
-
-    <script>
-
-
-
-    </script>
+    @else
+    Not Found
+    @endif
 
 @include('essentials.footer')
 
