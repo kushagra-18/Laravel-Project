@@ -40,7 +40,8 @@ class PostController extends Controller
         $postModel = new PostModel();
         $posts = $postModel->getPostsByCategory($category);
         //return view with data
-        return view('category', compact('posts'));
+        $isEmpty = false;
+        return view('category', compact('posts','isEmpty'));
     }
 
 
@@ -64,6 +65,8 @@ class PostController extends Controller
         $postModel = new PostModel();
         $posts = $postModel->searchItems($search);
 
+        $isEmpty = false;
+
         //check if search is empty
         if(count($posts) == 0){
 
@@ -74,7 +77,7 @@ class PostController extends Controller
 
         $posts->appends(['search-bar' => $search]);
 
-        return view('category', compact('posts'));
+        return view('category', compact('posts','isEmpty'));
     }
 
     public function categorySort($category, $sort)

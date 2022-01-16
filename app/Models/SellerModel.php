@@ -18,4 +18,18 @@ class SellerModel extends Model
         echo $data;
         DB::table('seller')->insert($data);
     }
+
+    /**
+     * @description : This function is used to get the data from the posts table
+     * based on seller's email
+     * @return : array of posts
+     * @author : Kushagra Sharma
+     */
+
+    public function getSellerInfo()
+    {
+        $seller_email = Auth::user()->email;
+        $seller_info = DB::table('posts')->where('seller_email', $seller_email)->get();
+        return $seller_info;
+    }
 }

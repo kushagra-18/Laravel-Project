@@ -17,6 +17,17 @@ body {
   }
 /* MEDIA TAGS ONLY */
 
+.pluslink {
+  text-decoration: none;
+  color: black;
+
+}
+
+.pluslink:hover {
+  text-decoration: none;
+  color: black;
+}
+
 @media only screen and (max-width: 700px) {
   body {
     padding-top: 30%;

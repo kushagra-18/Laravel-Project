@@ -45,6 +45,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/seller', 'SellerController@index')->name('sellerProduct');
 
+    Route::get('/sellerView', 'SellerController@sellerView')->name('sellerView');
+
     Route::post('/sellerProduct', 'SellerController@addProduct')->name('addProduct');
 
 

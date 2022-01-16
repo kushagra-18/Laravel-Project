@@ -29,8 +29,8 @@
                                         <i class="fa add fa-shopping-cart"></i>&nbsp; Add to Cart
                                     </button>
                                 </form>
-                                <form>
-                                    <button class="btn buy btn-primary btn-rounded" id="buy"><i class="fas fa-gift"></i> <a href = "{{route('checkout',[$posts[0]->id])}}">&nbsp; Buy Now</a></button>
+                                <form action="{{route('checkout',[$posts[0]->id])}}">
+                                    <button class="btn buy btn-primary btn-rounded" id="buy"><i class="fas fa-gift"></i>&nbsp; Buy Now</a></button>
                                 </form>
                             </div>
                         </div>

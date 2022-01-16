@@ -43,8 +43,13 @@ class PostModel extends Model
 
         //fetch created_at from posts table and convert it to days ago
         foreach ($posts as $post) {
-            $post->created_at  = Carbon::parse($post->created_at);
-            $post->created_at = $post->created_at->diffForHumans();
+
+            //check if discount is not null
+            if ($post->discount_till != null) {
+                $post->discount_till  = Carbon::parse($post->discount_till);
+                $post->discount_till = $post->discount_till->diffForHumans();
+            }
+
         }
 
         return $posts;
@@ -66,8 +71,9 @@ class PostModel extends Model
 
     public function searchItems($search)
     {
-
-        $posts = DB::table('posts')->where('title', 'like', '%' . $search . '%')->paginate(10);
+        //search items from the database on titie and tags
+        $posts = DB::table('posts')->where('title', 'like', '%' . $search . '%')
+            ->orWhere('tags', 'like', '%' . $search . '%')->paginate(10);
 
         return $posts;
     }
@@ -94,7 +100,6 @@ class PostModel extends Model
 
     public function addProduct($data)
     {
-        echo $data;
         DB::table('posts')->insert($data);
     }
 }

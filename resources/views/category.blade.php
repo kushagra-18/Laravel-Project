@@ -2,9 +2,15 @@
 
 <head>
     <title>
-        Shopwayy | {{$posts[0]->category}}
+        Shopwayy | Search
     </title>
 </head>
+
+<style>
+    body{
+        height: 100%;
+    }
+    </style>
 
 <!-- link style_postsCategory -->
 <link rel="stylesheet" href="{{ URL::asset('css/style_postsCategory.css') }}">
@@ -48,8 +54,10 @@
 
     <div class="row row-product">
         @foreach($posts as $post)
-        <!-- <a class="pluslink" target="_blank" href="{{route('products',[$post->id])}}"> -->
+        
+
         <div class="card mb-3" style="width: 48%;" >
+        <a class="pluslink" target="_blank" href="{{route('products',[$post->id])}}">
             <div class="row no-gutters">
                 <div class="col-md-4">
                 <img src="{{URL::asset($post->thumbnail)}}"  height = '170px' width="150px" alt="...">
@@ -75,12 +83,18 @@
 
     {{$posts->links(("pagination::bootstrap-4"))}}
     @else
-    Not Found
+    
+    <!-- not found -->
+    <center>
+    <div class="not-found">
+        <h1>Oops!</h1>
+        <h3>No items found</h3>
+    </div>
+    </center>
+
     @endif
 
-@include('essentials.footer')
-
 </body>
-
+@include('essentials.footer')
 
 </html>

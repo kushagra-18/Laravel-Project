@@ -1,4 +1,4 @@
-<footer class="bg-dark text-center text-white footer-color">  
+<footer class="bg-dark text-center text-white footer-color navbar-static-bottom">  
 
   <div class="container p-4">
     
@@ -26,7 +26,7 @@
   </div>
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
     © 2022 :
-    <a class="text-white" href="#">www.Shopwayy.com</a>
+    <a class="text-white" href="#">www.shopwayy.com</a>
   </div>
   <!-- Copyright -->
 </footer>

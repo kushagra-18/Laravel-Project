@@ -38,8 +38,8 @@
 
 
     <div class="col-sm-6">
+    <a href = "{{route('sellerView')}}">
       <div class="card">
-        <a href="#">
           <div class="card-body">
             <h5 class="card-title">Checkout your Sales</h5>
             <p class="card-text">Checkout detailed statistics your sales happening at Shopwayy.</p>

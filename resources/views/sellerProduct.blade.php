@@ -22,9 +22,9 @@
 <div class="product-info">
 
     <h4 class="mb-3">Add product information</h4>
-    <form id='checkout-form' action="{{route('addProduct')}}" method='post'  enctype="multipart/form-data"class="needs-validation" novalidate>
+    <form id='checkout-form' action="{{route('addProduct')}}" method='post' enctype="multipart/form-data" class="needs-validation" novalidate>
 
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <div class="row">
             <div class="col-md-6 mb-3">
@@ -109,21 +109,41 @@
                 </div>
             </div>
 
-        </div>
-        <div class="mb-3">
-            <label for="product_key_points">Key points</label>
-            <textarea class="form-control" id="product_key_points" name="product_key_points" placeholder="Add minimum of three points for the product seprated by ;" required></textarea>
-
-            <div class="invalid-feedback">
-                Add minimum of three points for the product seprated by ;
+            <div class="col-md-2 mb-3">
+                <label for="product_discount_till">Quantity:</label>
+                <input type="number" class="form-control" name="quantity" id=quantity" placeholder="Add Quantity" required>
+                <div class="invalid-feedback">
+                    Add Quantity
+                </div>
             </div>
+
+        </div>
+        <div class="row">
+        <div class="col-md-5 mb-3">
+                <label for="product_key_points">Key points</label>
+                <textarea class="form-control" id="product_key_points" name="product_key_points" placeholder="Add minimum of three points for the product seprated by ;" required></textarea>
+
+                <div class="invalid-feedback">
+                    Add minimum of three points for the product seprated by ;
+                </div>
+            </div>
+            <div class="col-md-5 mb-3">
+                <label for="product_key_points">Tags</label>
+                <input type = "text" class="form-control" id="tags" name="tags" placeholder="Add comma seprated tags for search" required></textarea>
+
+                <div class="invalid-feedback">
+                    Add comma seprated tags for search
+                </div>
+            </div>
+
+            
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
             </div>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" name = 'product_image' id="product_image" aria-describedby="inputGroupFileAddon01">
+                <input type="file" class="custom-file-input" name='product_image' id="product_image" aria-describedby="inputGroupFileAddon01">
                 <label class="custom-file-label" for="product_image">Choose file</label>
             </div>
         </div>
@@ -134,6 +154,10 @@
         <button class="btn btn-primary btn-lg btn-block" type="submit">Add Product</button>
     </form>
 </div>
+
+@include('essentials.footer')
+
+</html>
 
 <script>
     var today = new Date().toISOString().split('T')[0];
