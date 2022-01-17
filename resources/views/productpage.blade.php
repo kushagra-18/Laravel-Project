@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="{{ URL::asset('css/style_productPage.css') }}">
 </head>
+
 <body>
     <div class="container">
         <div class="card shadow p-3">
@@ -36,25 +37,74 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-4 col-sm-4">
+                    <div class="col-lg-6 col-md-4 col-sm-4 product-info">
                         <h4 class="box-title mt-0">Product description</h4>
                         <p>{{$posts[0]->description}}</p>
                         <h2 class="mt-5">
                             ₹ {{$posts[0]->price_revised}}&nbsp;<small class="text-success">{{(ceil(($posts[0]->price_original - $posts[0]->price_revised)/$posts[0]->price_original*100))}}% off</small>
                         </h2>
-            
+
                         <font class="text-muted"> &nbsp; <strike>₹ {{$posts[0]->price_original}}</strike></font>
                         <h3 class="box-title mt-3">Key Highlights</h3>
                         <ul class="list-unstyled">
 
-                        <!-- get data from database and split by ; -->
-                        @foreach(explode(';',$posts[0]->product_key_points) as $key_points)
-                        <li><i class="fa fa-check text-success"></i>&nbsp;{{$key_points}}</li>
-                        @endforeach
+                            <!-- get data from database and split by ; -->
+                            @foreach(explode(';',$posts[0]->product_key_points) as $key_points)
+                            <li><i class="fa fa-check text-success"></i>&nbsp;{{$key_points}}</li>
+                            @endforeach
                         </ul>
                     </div>
-                    <div class="col-lg-10 col-md-6 col-sm-6">
-                        <h3 class="box-title mt-5">General Info</h3>
+
+                    <!-- THIS CONTENT WILL BE SHOWN ONLY IF THE USER HAS BOUGHT THE PRODUCT -->
+                   @if($checkBought)
+                    <div class="user-rating">
+                    <div class="col">
+                    <hr>
+
+                    <h3 class="box-title mt-1">Your Rating</h3>
+                        <form action = {{route('rating')}} name = "ratingForm" method = "post" id = "ratingForm" class="rating">
+                            <input type="hidden" name="_token" value="{{ csrf_token()}}">
+                            <input type="hidden" name="itemId" value="{{ $posts[0]->id }}">
+                            <label>
+                                <input type="radio" name="stars" value="1" />
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="2" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="3" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="4" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="5" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                        </form>
+                    </div>
+
+                    </div>
+                    @endif
+                     <!-- ENDS STATEMENT -->
+
+
+                    <div class="col-lg-10">
+                        <h3 class="box-title mt-0">General Info</h3>
 
                         <span class="heading">User Rating</span>
                         <span class="fa fa-star checked"></span>
@@ -86,8 +136,41 @@
             </div>
         </div>
     </div>
-    
-@include('essentials.footer')
+
+    @include('essentials.footer')
 </body>
+
+<script>
+
+
+    $(':radio').change(function() {
+//   console.log('New star rating: ' + this.value);
+});
+
+//submit form-rating without refresh
+
+    // $('#ratingForm').submit(function(e){
+    //    e.preventDefault();
+    //     var form = $(this);
+    //     var url = form.attr('action');
+    //     console.log(url);
+    //     console.log(form.serialize());
+    //     var data = form.serialize();
+    //     $.ajax({
+    //         type: "POST",
+    //         url: url,
+    //         data: data,
+    //         success: function(data){
+    //             console.log(data);
+    //             if(data.success){
+    //                 alert('Rating submitted successfully');
+    //             }else(
+    //                 alert('Rating not submitted')
+    //             )
+    //         }
+    //     });
+    // });
+
+</script>
 
 </html>

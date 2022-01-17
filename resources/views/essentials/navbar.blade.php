@@ -118,7 +118,7 @@
         @if(Auth::check() && !Auth()->user()->user == 'seller')
         <a class="navbar-brand" href="{{route('cartItems')}}">
           <i class="fas fa-shopping-cart"></i>
-          <span class='badge badge-warning' id='lblCartCount'>0</span>
+          <span class='badge badge-warning' id='lblCartCount'>{{$cartNumber}}</span>
           <font color="#00128b"> Cart</font>
         </a>
         @endif

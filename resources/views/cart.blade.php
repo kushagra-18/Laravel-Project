@@ -37,7 +37,7 @@
                         <div class="row text-muted">{{$cartItem->category}}</div>
                         <div class="row">{{$cartItem->title}}</div>
                     </div>
-                    <div class="col"> <a href="#">-</a><a href="#" class="border">{{$cartItem->quantity}}</a><a href="#">+</a> </div>
+                    <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
                     <div class="col">&#8377; {{$cartItem->price_revised}}<span class="close">
                             <form  id = "deleteItems" action="" method="post">
                                 <input type="hidden" name="_token" value="{{ csrf_token()}}">

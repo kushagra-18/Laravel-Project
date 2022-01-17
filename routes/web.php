@@ -49,6 +49,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/sellerView', 'SellerController@sellerView')->name('sellerView');
 
+
+    Route::post('/rating', 'CartController@rating')->name('rating');
+
     Route::post('/sellerProduct', 'SellerController@addProduct')->name('addProduct');
 
     

@@ -9,6 +9,19 @@ use App\Models\CartModel;
 
 class CartController extends Controller
 {
+
+    
+
+
+    //create const user_email from auth
+   public function __construct()
+   {
+    //    $this->USER_EMAIL = Auth::user()->email;
+    //    $this->USER_ID  = Auth::user()->id;
+   }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -39,10 +52,10 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $cartModel = new CartModel();
-        try{
+        try {
             $cartModel->addCartItems($request);
             return  $this->show();
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return $e;
         }
     }
@@ -60,14 +73,12 @@ class CartController extends Controller
         //show cart items and return 
         $cartModel = new CartModel();
         $cartItemsShow = $cartModel->showCartItems($id);
-
         //find if query return any data 
-        if(count($cartItemsShow) == 0){
+        if (count($cartItemsShow) == 0) {
             $isEmpty = true;
             return view('cart', compact('isEmpty'));
-        }
-        else{
-            return view('cart', compact('cartItemsShow','isEmpty'));
+        } else {
+            return view('cart', compact('cartItemsShow', 'isEmpty'));
         }
     }
 
@@ -94,6 +105,8 @@ class CartController extends Controller
         //
     }
 
+
+
     /**
      * This function is used to delete cart items
      * @param  int  $id
@@ -102,16 +115,34 @@ class CartController extends Controller
     public function destroy(Request $request)
     {
         $cartModel = new CartModel();
-        try{
+        try {
             $cartModel->deleteCartItems($request);
             return  $this->show();
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return $e;
         }
     }
 
 
-    public function checkoutCart($id){
+    public function rating(Request $request)
+    {
+        $cartModel = new CartModel();
+        try {
+            $cartModel->rating($request);
+             return  $this->show();
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+    /**
+     * @description function used for final checkout
+     * @param  $id
+     * @return {View}
+     */
+
+    public function checkoutCart($id)
+    {
 
         $cartModel = new CartModel();
         $cartItemsShow = $cartModel->checkoutItem($id);
@@ -120,9 +151,13 @@ class CartController extends Controller
 
         $getSavedAddress = $cartModel->getSavedAddress();
 
-        return view('checkout', compact('cartItemsShow','checkSavedAddress','getSavedAddress'));
-
+        return view('checkout', compact('cartItemsShow', 'checkSavedAddress', 'getSavedAddress'));
     }
 
-    
+    public function cartNumber()
+    {
+        $cartModel = new CartModel();
+        $cartItemsShow = $cartModel->cartNumber();
+        return $cartItemsShow;
+    }
 }

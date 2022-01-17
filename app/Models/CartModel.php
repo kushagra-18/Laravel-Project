@@ -100,4 +100,52 @@ class CartModel extends Model
             return $e;
         }
     }
+
+    public function cartNumber()
+    {
+
+        try {
+            $cartNumber = DB::table('cart')
+                ->where('email', '=', Auth::user()->email)
+                ->count();
+        } catch (Exception $e) {
+            return 0;
+        }
+
+        //if cart is empty return 0
+        if ($cartNumber == 0) {
+            return 0;
+        } else {
+            return $cartNumber;
+        }
+    }
+
+
+    /**
+     * function is used to update the rating
+     * corresponding to the product id iff the user
+     * has purchased the product
+     * @param  Request $request
+     */
+    public function rating(Request $request)
+    {
+        $product_id = $request->input('itemId');
+        $rating = $request->input('stars');
+        $email = Auth::user()->email;
+
+        error_log("product id: " . $product_id);
+
+        try {
+            DB::table('user_meta')
+                ->where('product_id', '=', $product_id)
+                ->where('user_email', '=', $email)
+                ->update(['rating' => $rating]);
+        } catch (Exception $e) {
+           
+           error_log($e);
+           
+            return $e;
+        }
+    }
 }
+

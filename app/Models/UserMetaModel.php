@@ -54,6 +54,7 @@ class UserMetaModel extends Model
             )
             ->where('user_email', '=', $user_email)
             ->get();
+            
         return $userMeta;
     }
 }
