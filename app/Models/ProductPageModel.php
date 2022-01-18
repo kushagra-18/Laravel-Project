@@ -60,6 +60,34 @@ class ProductPageModel extends Model
         }
     }
 
+
+    /**
+     * show the individual rating of the product
+     * @param  int  $id
+     * @return ratings
+     * @throws Exception
+     */
+
+    public function showIndividualRating($id){
+        try {
+            $rating = DB::table('product_meta')
+                ->where('product_id', '=', $id)->get();
+        } catch (Exception $e) {
+            return $e;
+        }
+
+        //change $rating->rating_one to $rating->rating_1 and so on
+        
+        $rating[0]->rating_1 = $rating[0]->rating_one;
+        $rating[0]->rating_2 = $rating[0]->rating_two;
+        $rating[0]->rating_3 = $rating[0]->rating_three;
+        $rating[0]->rating_4 = $rating[0]->rating_four;
+        $rating[0]->rating_5 = $rating[0]->rating_five;
+
+
+        return $rating;
+    }
+
     /**
      * update rating corresponding to the product id based on number
      * of stars given by the user.

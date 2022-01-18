@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\users;
@@ -17,7 +18,11 @@ class ProductPageController extends Controller
 
         $checkBought = $this->checkBought($id);
 
-        return view('productpage', compact('posts','checkBought'));
+        $individualRating =  $this->showIndividualRating($id);
+
+        //error_log($individualRating);
+
+        return view('productpage', compact('posts', 'checkBought','individualRating'));
     }
 
     /**
@@ -34,7 +39,7 @@ class ProductPageController extends Controller
         return $checkBought;
     }
 
-    
+
     public function rating(Request $request)
     {
         $product_id = $request->input('itemId');
@@ -42,13 +47,25 @@ class ProductPageController extends Controller
         try {
             $ProductModel->rating($request);
             $this->productMetaRating($request);
-             return  $this->index($product_id);
+            return  $this->index($product_id);
         } catch (Exception $e) {
             return $e;
         }
     }
 
 
+    /**
+     * @description: Use to show the individual rating of the product
+     * @param  Request $id
+     * @return ratings
+     */
+
+    public function showIndividualRating($id)
+    {
+        $ProductModel = new ProductPageModel();
+        $rating = $ProductModel->showIndividualRating($id);
+        return $rating;
+    }
 
     public function productMetaRating(Request $request)
     {
@@ -56,10 +73,9 @@ class ProductPageController extends Controller
         $ProductModel = new ProductPageModel();
         try {
             $ProductModel->productMetaRating($request);
-             return  $this->index($product_id);
+            return  $this->index($product_id);
         } catch (Exception $e) {
             return $e;
         }
     }
-
 }

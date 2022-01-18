@@ -105,7 +105,6 @@
 
                     <div class="col-lg-10">
                         <h3 class="box-title mt-0">General Info</h3>
-
                         <span class="heading">User Rating</span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
@@ -122,11 +121,13 @@
                             </div>
                             <div class="middle">
                                 <div class="bar-container">
-                                    <div class="bar-{{$i}}"></div>
+                                    <div class="bar-{{$individualRating[0]->{'rating_'.$i} }}"></div>
                                 </div>
                             </div>
                             <div class="side right">
-                                <div>{{$i}}</div>
+                                <!-- concat rating with value of $i -->
+                                <div>{{$individualRating[0]->{'rating_'.$i} }}</div>
+                                
                             </div>
                             @endfor
 
