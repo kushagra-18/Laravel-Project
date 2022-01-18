@@ -119,33 +119,5 @@ class CartModel extends Model
             return $cartNumber;
         }
     }
-
-
-    /**
-     * function is used to update the rating
-     * corresponding to the product id iff the user
-     * has purchased the product
-     * @param  Request $request
-     */
-    public function rating(Request $request)
-    {
-        $product_id = $request->input('itemId');
-        $rating = $request->input('stars');
-        $email = Auth::user()->email;
-
-        error_log("product id: " . $product_id);
-
-        try {
-            DB::table('user_meta')
-                ->where('product_id', '=', $product_id)
-                ->where('user_email', '=', $email)
-                ->update(['rating' => $rating]);
-        } catch (Exception $e) {
-           
-           error_log($e);
-           
-            return $e;
-        }
-    }
 }
 

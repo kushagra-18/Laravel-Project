@@ -97,7 +97,8 @@
           <b><i class="fa fa-user" aria-hidden="true"></i>
             <font color="#00128b">
             @if(Auth::check() && !Auth()->user()->user == 'seller')
-              {{ Auth::user()->name }}
+              
+            {{ Auth::user()->name }}
             @else
               {{ Auth::user()->companyName }}
             @endif

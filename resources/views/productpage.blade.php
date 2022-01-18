@@ -142,12 +142,18 @@
 
 <script>
 
-
     $(':radio').change(function() {
 //   console.log('New star rating: ' + this.value);
 });
 
-//submit form-rating without refresh
+//submit form on change
+$('#ratingForm').on('change', function() {
+    this.submit();
+});
+
+    
+
+// submit form-rating without refreshing the page
 
     // $('#ratingForm').submit(function(e){
     //    e.preventDefault();

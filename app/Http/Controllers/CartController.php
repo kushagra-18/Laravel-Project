@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Exception;
 use App\Models\CartModel;
 
+   
+
+
 class CartController extends Controller
 {
-
-    
-
 
     //create const user_email from auth
    public function __construct()
@@ -20,6 +20,14 @@ class CartController extends Controller
     //    $this->USER_ID  = Auth::user()->id;
    }
 
+
+    public function randomUserId()
+    {
+        $timestamp = time();
+        $random = rand(1, 100);
+        $user_id = $timestamp . $random;
+        return $user_id;
+    }
 
 
     /**
@@ -124,16 +132,6 @@ class CartController extends Controller
     }
 
 
-    public function rating(Request $request)
-    {
-        $cartModel = new CartModel();
-        try {
-            $cartModel->rating($request);
-             return  $this->show();
-        } catch (Exception $e) {
-            return $e;
-        }
-    }
 
     /**
      * @description function used for final checkout
