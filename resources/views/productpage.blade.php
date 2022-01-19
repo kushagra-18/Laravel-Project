@@ -55,64 +55,75 @@
                         </ul>
                     </div>
 
-                    <!-- THIS CONTENT WILL BE SHOWN ONLY IF THE USER HAS BOUGHT THE PRODUCT -->
-                   @if($checkBought)
-                    <div class="user-rating">
-                    <div class="col">
-                    <hr>
+                 
+                    <!-- If user has rated the product -->
+                    @if($checkIfRated  ?? 0)
+                    <br>
+                    <span class="heading">You have already rated the product</span>
 
-                    <h3 class="box-title mt-1">Your Rating</h3>
-                        <form action = {{route('rating')}} name = "ratingForm" method = "post" id = "ratingForm" class="rating">
-                            <input type="hidden" name="_token" value="{{ csrf_token()}}">
-                            <input type="hidden" name="itemId" value="{{ $posts[0]->id }}">
-                            <label>
-                                <input type="radio" name="stars" value="1" />
-                                <span class="icon">★</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="stars" value="2" />
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="stars" value="3" />
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="stars" value="4" />
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                            </label>
-                            <label>
-                                <input type="radio" name="stars" value="5" />
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                                <span class="icon">★</span>
-                            </label>
-                        </form>
-                    </div>
-
-                    </div>
                     @endif
-                     <!-- ENDS STATEMENT -->
 
+                    <!-- THIS CONTENT WILL BE SHOWN ONLY IF THE USER HAS BOUGHT THE PRODUCT -->
+                    @if($checkBought && !$checkIfRated ?? 0)
+                    <div class="user-rating">
+                        <div class="col">
+                            <hr>
+
+                            <h3 class="box-title mt-1">Your Rating</h3>
+                            <form action={{route('rating')}} name="ratingForm" method="post" id="ratingForm" class="rating">
+                                <input type="hidden" name="_token" value="{{ csrf_token()}}">
+                                <input type="hidden" name="itemId" value="{{ $posts[0]->id }}">
+                                <label>
+                                    <input type="radio" name="stars" value="1" />
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="stars" value="2" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="stars" value="3" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="stars" value="4" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="stars" value="5" />
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                    <span class="icon">★</span>
+                                </label>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    @endif
+
+                    <!-- ENDS STATEMENT -->
 
                     <div class="col-lg-10">
                         <h3 class="box-title mt-0">General Info</h3>
                         <span class="heading">User Rating</span>
+                        <!-- <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <p>4.1 average based on 254 reviews.</p>
+                        <span class="fa fa-star"></span> -->
+                        <p>{{$avgRating ?? 0 }} average based on {{$totRating ?? 0}} reviews.</p>
                         <hr style="border:3px solid #f1f1f1">
+
+                        @if(isset($avgRating))
 
                         <div class="row">
                             @for ($i = 5; $i > 0; $i--)
@@ -121,18 +132,20 @@
                             </div>
                             <div class="middle">
                                 <div class="bar-container">
-                                    <div class="bar-{{$individualRating[0]->{'rating_'.$i} }}"></div>
+                                    <div class="bar-{{$i}}"></div>
                                 </div>
                             </div>
                             <div class="side right">
                                 <!-- concat rating with value of $i -->
-                                <div>{{$individualRating[0]->{'rating_'.$i} }}</div>
-                                
+                                <div>{{$individualRating[0]->{'rating_'.$i} ?? 0 }}</div>
+
                             </div>
                             @endfor
 
                         </div>
+                        @endif
                     </div>
+
                 </div>
             </div>
         </div>
@@ -142,19 +155,18 @@
 </body>
 
 <script>
-
     $(':radio').change(function() {
-//   console.log('New star rating: ' + this.value);
-});
+        //   console.log('New star rating: ' + this.value);
+    });
 
-//submit form on change
-$('#ratingForm').on('change', function() {
-    this.submit();
-});
+    //submit form on change
+    $('#ratingForm').on('change', function() {
+        this.submit();
+    });
 
-    
 
-// submit form-rating without refreshing the page
+
+    // submit form-rating without refreshing the page
 
     // $('#ratingForm').submit(function(e){
     //    e.preventDefault();
@@ -177,7 +189,6 @@ $('#ratingForm').on('change', function() {
     //         }
     //     });
     // });
-
 </script>
 
 </html>

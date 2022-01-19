@@ -35,6 +35,28 @@ class ProductPageModel extends Model
         }
     }
 
+
+    /**
+     * check if the user has already rated the product
+     */
+
+    public function checkIfRated($id){
+        try {
+            $checkIfRated = DB::table('user_meta')
+                ->where('product_id', '=', $id)
+                ->where('user_email', '=', Auth::user()->email)
+                ->get();
+        } catch (Exception $e) {
+            return $e;
+        }
+
+        if (count($checkIfRated) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * function is used to update the rating
      * corresponding to the product id iff the user
@@ -68,7 +90,11 @@ class ProductPageModel extends Model
      * @throws Exception
      */
 
-    public function showIndividualRating($id){
+
+
+    public function showIndividualRating($id)
+    {
+
         try {
             $rating = DB::table('product_meta')
                 ->where('product_id', '=', $id)->get();
@@ -77,7 +103,7 @@ class ProductPageModel extends Model
         }
 
         //change $rating->rating_one to $rating->rating_1 and so on
-        
+
         $rating[0]->rating_1 = $rating[0]->rating_one;
         $rating[0]->rating_2 = $rating[0]->rating_two;
         $rating[0]->rating_3 = $rating[0]->rating_three;
@@ -86,6 +112,67 @@ class ProductPageModel extends Model
 
 
         return $rating;
+    }
+
+    /**show average rating  */
+    public function showAverageRating($id)
+    {
+        $rating = $this->showIndividualRating($id);
+        $rating_1 = $rating[0]->rating_1;
+        $rating_2 = $rating[0]->rating_2;
+        $rating_3 = $rating[0]->rating_3;
+        $rating_4 = $rating[0]->rating_4;
+        $rating_5 = $rating[0]->rating_5;
+
+        $total = ($rating_1)*1 + ($rating_2)*2 + ($rating_3)*3 + ($rating_4)*4 + ($rating_5)*5;;
+
+        return $total;
+    }
+
+    /**
+     * show the commulative rating of all the product
+     * @param  int  $id
+     * @return ratings
+     * @throws Exception
+     */
+
+    public function showAllCommulativeUsersRated(){
+        try {
+            $rating = DB::table('product_meta')
+                ->sum('rating_one') + DB::table('product_meta')
+                ->sum('rating_two') + DB::table('product_meta')
+                ->sum('rating_three') + DB::table('product_meta')
+                ->sum('rating_four') + DB::table('product_meta')
+                ->sum('rating_five');
+        } catch (Exception $e) {
+            return $e;
+        }
+
+        return $rating;
+    }
+
+    /**
+     * show the commulative rating of the product
+     * @param  int  $id
+     */
+
+    public function showCommulativeUsersRated($id)
+    {
+
+        try {
+            $rating = DB::table('product_meta')
+                ->where('product_id', '=', $id)->get();
+        } catch (Exception $e) {
+            return $e;
+        }
+
+        $totRating = $rating[0]->rating_one +
+            $rating[0]->rating_two +
+            $rating[0]->rating_three +
+            $rating[0]->rating_four +
+            $rating[0]->rating_five;
+
+            return $totRating;
     }
 
     /**

@@ -14,10 +14,18 @@
     <!-- style_productPage css -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+
 </head>
 
 
 <br>
+
+
 
 <div class="product-info">
 
@@ -28,8 +36,12 @@
 
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="product_name">Name</label>
-                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="" value="" required>
+                <label for="product_name">Enter Product Name</label>
+                <input type="text" class="form-control" id="product_name" name="product_name" value="{{ old('product_name') }}" placeholder="Enter Product Name" required>
+                @if($errors->has('product_name'))
+                <div class="error">{{ $errors->first('product_name') }}</div>
+                @endif
+
                 <div class="invalid-feedback">
                     Valid Name is required.
                 </div>
@@ -37,8 +49,10 @@
         </div>
         <div class="mb-3">
             <label for="product_description">Description</label>
-            <textarea class="form-control" id="product_description" name="product_description" placeholder="Description (Min 50 words)" required></textarea>
-
+            <textarea class="form-control" id="product_description" name="product_description" value="{{ old('product_description') }}" placeholder="Description (Min 50 words)" required></textarea>
+            @if($errors->has('product_description'))
+            <div class="error">{{ $errors->first('product_description') }}</div>
+            @endif
             <div class="invalid-feedback">
                 Please enter your descriptions
             </div>
@@ -52,14 +66,18 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">&#8377; </span>
                     </div>
-                    <input type="text" id="product_price_original" name="product_price_original" class="form-control" aria-label="Amount (to the nearest rupee)" required>
+                    <input type="text" id="product_price_original" name="product_price_original"  value="{{ old('product_price_original') }}" class="form-control" aria-label="Amount (to the nearest rupee)" required>
                     <div class="input-group-append">
                         <span class="input-group-text">.00</span>
                     </div>
+
                     <div class="invalid-feedback">
                         Enter a valid amount (in rupees).
                     </div>
                 </div>
+                @if($errors->has('product_price_original'))
+                <div class="error">{{ $errors->first('product_price_original') }}</div>
+                @endif
             </div>
 
             <div class="col-md-5 mb-3">
@@ -72,10 +90,14 @@
                     <div class="input-group-append">
                         <span class="input-group-text">.00</span>
                     </div>
+
                     <div class="invalid-feedback">
                         Enter a valid amount (in rupees).
                     </div>
                 </div>
+                @if($errors->has('product_price_revised'))
+                <div class="error">{{ $errors->first('product_price_revised') }}</div>
+                @endif
             </div>
         </div>
 
@@ -97,6 +119,9 @@
                     <option value="Books">Books</option>
                     <option value="Others">Others</option>
                 </select>
+                @if($errors->has('product_category'))
+                <div class="error">{{ $errors->first('product_category') }}</div>
+                @endif
                 <div class="invalid-feedback">
                     Please select a valid category
                 </div>
@@ -104,6 +129,9 @@
             <div class="col-md-3 mb-3">
                 <label for="product_discount_till">Discount valid till:</label>
                 <input type="date" class="form-control" name="product_discount_till" id="product_discount_till" placeholder="" required>
+                @if($errors->has('product_discount_till'))
+                <div class="error">{{ $errors->first('product_discount_till') }}</div>
+                @endif
                 <div class="invalid-feedback">
                     Add discount valid till
                 </div>
@@ -112,6 +140,9 @@
             <div class="col-md-2 mb-3">
                 <label for="product_discount_till">Quantity:</label>
                 <input type="number" class="form-control" name="quantity" id=quantity" placeholder="Add Quantity" required>
+                @if($errors->has('product_quantity'))
+                <div class="error">{{ $errors->first('product_quantity') }}</div>
+                @endif
                 <div class="invalid-feedback">
                     Add Quantity
                 </div>
@@ -119,24 +150,29 @@
 
         </div>
         <div class="row">
-        <div class="col-md-5 mb-3">
+            <div class="col-md-5 mb-3">
                 <label for="product_key_points">Key points</label>
                 <textarea class="form-control" id="product_key_points" name="product_key_points" placeholder="Add minimum of three points for the product seprated by ;" required></textarea>
 
+                @if($errors->has('product_key_points'))
+                <div class="error">{{ $errors->first('product_key_points') }}</div>
+                @endif
                 <div class="invalid-feedback">
                     Add minimum of three points for the product seprated by ;
                 </div>
             </div>
             <div class="col-md-5 mb-3">
-                <label for="product_key_points">Tags</label>
-                <input type = "text" class="form-control" id="tags" name="tags" placeholder="Add comma seprated tags for search" required></textarea>
-
+                <label for="product_tags">Tags</label>
+                <input type="text" class="form-control" id="tags" name="tags" placeholder="Add comma seprated tags for search" required></textarea>
+                @if($errors->has('tags'))
+                <div class="error">{{ $errors->first('tags') }}</div>
+                @endif
                 <div class="invalid-feedback">
                     Add comma seprated tags for search
                 </div>
             </div>
 
-            
+
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -146,7 +182,12 @@
                 <input type="file" class="custom-file-input" name='product_image' id="product_image" aria-describedby="inputGroupFileAddon01">
                 <label class="custom-file-label" for="product_image">Choose file</label>
             </div>
+
         </div>
+
+        @if($errors->has('product_image'))
+        <div class="error">{{ $errors->first('product_image') }}</div>
+        @endif
         <hr class="mb-4">
 
 

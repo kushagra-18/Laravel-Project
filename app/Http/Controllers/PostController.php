@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\users;
+use App\Models\ProductPageModel;
 use App\Models\PostModel;
 
 
@@ -15,10 +16,28 @@ class PostController extends Controller
     {
         //return data from getTrendingPosts function
         $postModel = new PostModel();
+
+        $ProductModel = new ProductPageModel();
+
         $posts = $postModel->getTrendingPosts();
 
         //return data from getTopDeals function
         $topDeals = $postModel->getTopDeals();
+
+        // $totRating = $ProductModel->showAllCommulativeUsersRated();
+
+        // $avgRating = $ProductModel->showAllAverageRating();
+
+        // $avgRating = $avgRating / $totRating;
+        // $avgRating = round($avgRating, 1);
+
+        // //if tot rating is 0 set isRating to false
+        // if ($totRating == 0) {
+        //     $isRated = false;
+        // }
+
+        //merge the two arrays
+        
 
         return view('welcome', compact('posts', 'topDeals'));
     }
@@ -86,6 +105,14 @@ class PostController extends Controller
         //create object of PostModel class
         $postModel = new PostModel();
         $posts = $postModel->sortPostsByCategory($category, $sort);
-        return view('category', compact('posts'));
+
+        $isEmpty = false;
+
+        //check if search is empty
+        if(count($posts) == 0){
+
+            $isEmpty = true;
+        }
+        return view('category', compact('posts','isEmpty'));
     }
 }

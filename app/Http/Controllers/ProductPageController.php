@@ -14,16 +14,42 @@ class ProductPageController extends Controller
     public function index($id)
 
     {
+
+        $isRated = 0;
+
+        $ProductModel = new ProductPageModel();
+
         $posts = DB::table('posts')->where('id', $id)->get();
 
         $checkBought = $this->checkBought($id);
 
-        $individualRating =  $this->showIndividualRating($id);
+        $checkIfRated = $ProductModel->checkIfRated($id);
+
+
+        try {
+
+            $individualRating =  $this->showIndividualRating($id);
+
+            $totRating = $ProductModel->showCommulativeUsersRated($id);
+
+            $avgRating = $ProductModel->showAverageRating($id);
+
+            $avgRating = $avgRating / $totRating;
+            $avgRating = round($avgRating, 1);
+
+            //if tot rating is 0 set isRating to false
+
+        } catch (Exception $e) {
+            //return $e;
+            return view('productpage', compact('posts', 'checkBought','checkIfRated'));
+
+        }
 
         //error_log($individualRating);
 
-        return view('productpage', compact('posts', 'checkBought','individualRating'));
+        return view('productpage', compact('posts', 'checkBought', 'individualRating', 'totRating', 'avgRating', 'checkIfRated'));
     }
+
 
     /**
      *  @description check if user has bought the product

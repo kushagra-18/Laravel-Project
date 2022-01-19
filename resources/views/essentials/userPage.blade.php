@@ -25,7 +25,7 @@
                         <!-- get title of post -->
                         <h5 class="mb-1 post-title"> {{ $post->title }}</h5>
 
-                        <div class="starRating">3.9 <span>&#9733;</span> (1,000,00)</div>
+                        <!-- <div class="starRating"> <span>&#9733;</span> (1,000,00)</div> -->
 
                         <p class="mb-auto"> <b> ₹ {{$post->price_revised}} </b>
                             <font class="text-muted"> &nbsp; <strike>₹ {{$post->price_original}}</strike></font>
