@@ -47,7 +47,14 @@ class PostModel extends Model
     {
 
 
-        $posts = DB::table('posts')->limit(6)->get();
+        $posts = DB::table('posts')
+            ->select('posts.*')
+            ->join('product_meta', 'posts.id', '=', 'product_meta.product_id')
+            ->orderBy('bought', 'desc')
+            ->limit(6)
+            ->get();
+        
+        // $posts = DB::table('posts')->limit(6)->get();
 
         foreach ($posts as $post) {
 

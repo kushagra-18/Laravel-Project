@@ -64,7 +64,7 @@
                     @endif
 
                     <!-- THIS CONTENT WILL BE SHOWN ONLY IF THE USER HAS BOUGHT THE PRODUCT -->
-                    @if($checkBought && !$checkIfRated ?? 0)
+                    @if($checkBought && !$checkIfRated)
                     <div class="user-rating">
                         <div class="col">
                             <hr>
@@ -165,30 +165,34 @@
     });
 
 
+        $(document).ready(function() {
+            $('#buy').click(function() {
+                $('#buy').html('<i class="fa fa-spinner fa-spin"></i>&nbsp; Adding to cart');
+            });
+        });
 
-    // submit form-rating without refreshing the page
+        $(document).ready(function() {
+        var oneRating = {{$individualRating[0]->rating_1 ?? 0 }};
+        var twoRating = {{$individualRating[0]->rating_2 ?? 0 }};
+        var threeRating = {{$individualRating[0]->rating_3 ?? 0 }};
+        var fourRating = {{$individualRating[0]->rating_4 ?? 0 }};
+        var fiveRating = {{$individualRating[0]->rating_5 ?? 0 }};
 
-    // $('#ratingForm').submit(function(e){
-    //    e.preventDefault();
-    //     var form = $(this);
-    //     var url = form.attr('action');
-    //     console.log(url);
-    //     console.log(form.serialize());
-    //     var data = form.serialize();
-    //     $.ajax({
-    //         type: "POST",
-    //         url: url,
-    //         data: data,
-    //         success: function(data){
-    //             console.log(data);
-    //             if(data.success){
-    //                 alert('Rating submitted successfully');
-    //             }else(
-    //                 alert('Rating not submitted')
-    //             )
-    //         }
-    //     });
-    // });
+        var oneRatingPercentage = (oneRating / {{$totRating ?? 0}}) * 100;
+        var twoRatingPercentage = (twoRating / {{$totRating ?? 0}}) * 100;
+        var threeRatingPercentage = (threeRating / {{$totRating ?? 0}}) * 100;
+        var fourRatingPercentage = (fourRating / {{$totRating ?? 0}}) * 100;
+        var fiveRatingPercentage = (fiveRating / {{$totRating ?? 0}}) * 100;
+
+
+        $('.bar-5').css('width', fiveRatingPercentage + '%');
+        $('.bar-4').css('width', fourRatingPercentage + '%');
+        $('.bar-3').css('width', threeRatingPercentage + '%');
+        $('.bar-2').css('width', twoRatingPercentage + '%');
+        $('.bar-1').css('width', oneRatingPercentage + '%');
+    });
+        
+
 </script>
 
 </html>

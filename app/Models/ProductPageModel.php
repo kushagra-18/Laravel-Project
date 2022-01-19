@@ -45,6 +45,7 @@ class ProductPageModel extends Model
             $checkIfRated = DB::table('user_meta')
                 ->where('product_id', '=', $id)
                 ->where('user_email', '=', Auth::user()->email)
+                ->where('rating', '!=', 0)
                 ->get();
         } catch (Exception $e) {
             return $e;

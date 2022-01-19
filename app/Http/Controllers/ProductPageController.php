@@ -25,7 +25,6 @@ class ProductPageController extends Controller
 
         $checkIfRated = $ProductModel->checkIfRated($id);
 
-
         try {
 
             $individualRating =  $this->showIndividualRating($id);
@@ -37,7 +36,7 @@ class ProductPageController extends Controller
             $avgRating = $avgRating / $totRating;
             $avgRating = round($avgRating, 1);
 
-            //if tot rating is 0 set isRating to false
+            
 
         } catch (Exception $e) {
             //return $e;

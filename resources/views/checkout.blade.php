@@ -223,7 +223,7 @@
                             </div>
                         </div>
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Confirm Order</button>
+                        <button class="btn btn-primary btn-lg btn-block" id = "confirm" name = "confirm" type="submit">Confirm Order</button>
                     </form>
                 </div>
             </div>
@@ -274,6 +274,18 @@
                 });
             }, false);
         })();
+
+
+        //spinner on confirm button
+        $('#confirm').click(function() {
+            $(this).html('<i class="fas fa-spinner fa-spin"></i> Confirming...');   
+        });
+
+        //spinner on saved-button
+        $('#saved-button').click(function() {
+            $(this).html('<i class="fas fa-spinner fa-spin"></i> Confirming..');   
+        });
+        
     </script>
 </body>
 

@@ -4,8 +4,8 @@
 
     margin: auto;
     width: auto;
-    padding-left: 15%;
-    padding-right: 10%;
+    padding-left: 7%;
+    /* padding-right: 10%; */
   
 }
 
@@ -36,10 +36,40 @@
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
                         <center>
-                            <strong class="d-inline-block mb-1 text-success">Fashion</strong>
+                            <strong class="d-inline-block mb-1 text-success">Books</strong>
                         </center>
                         <div class="col-auto d-none d-lg-block">
-                            <img class="bd-placeholder-img" src="{{asset('../category/fashion.png')}}" width="80vh" height="50vh">
+                            <img class="bd-placeholder-img" src="{{asset('../category/books.jpg')}}" width="80vh" height="50vh">
+                        </div>
+                        <br>
+                        <!-- get title of post -->
+                    </div>
+                </div>
+            </a>
+      &nbsp;
+      <a class="pluslink" target="_blank" href="#">
+                <div class="card">
+                    <div class="col p-0 d-flex flex-column position-static">
+                        <center>
+                            <strong class="d-inline-block mb-1 text-success">Sports</strong>
+                        </center>
+                        <div class="col-auto d-none d-lg-block">
+                            <img class="bd-placeholder-img" src="{{asset('../category/sports.png')}}" width="80vh" height="50vh">
+                        </div>
+                        <br>
+                        <!-- get title of post -->
+                    </div>
+                </div>
+            </a>
+      &nbsp;
+      <a class="pluslink" target="_blank" href="#">
+                <div class="card">
+                    <div class="col p-0 d-flex flex-column position-static">
+                        <center>
+                            <strong class="d-inline-block mb-1 text-success">Footwear</strong>
+                        </center>
+                        <div class="col-auto d-none d-lg-block">
+                            <img class="bd-placeholder-img" src="{{asset('../category/footwear.jpg')}}" width="80vh" height="50vh">
                         </div>
                         <br>
                         <!-- get title of post -->
@@ -66,33 +96,17 @@
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
                         <center>
-                            <strong class="d-inline-block mb-1 text-success">Fashion</strong>
+                            <strong class="d-inline-block mb-1 text-success">Wearables</strong>
                         </center>
                         <div class="col-auto d-none d-lg-block">
-                            <img class="bd-placeholder-img" src="{{asset('../category/fashion.png')}}" width="80vh" height="50vh">
+                            <img class="bd-placeholder-img" src="{{asset('../category/wearables.jpg')}}" width="80vh" height="50vh">
                         </div>
                         <br>
                         <!-- get title of post -->
                     </div>
                 </div>
             </a>
-      &nbsp;
-      <a class="pluslink" target="_blank" href="#">
-                <div class="card">
-                    <div class="col p-0 d-flex flex-column position-static">
-                        <center>
-                            <strong class="d-inline-block mb-1 text-success">Fashion</strong>
-                        </center>
-                        <div class="col-auto d-none d-lg-block">
-                            <img class="bd-placeholder-img" src="{{asset('../category/fashion.png')}}" width="80vh" height="50vh">
-                        </div>
-                        <br>
-                        <!-- get title of post -->
-                    </div>
-                </div>
-            </a>
-      &nbsp;
-      
+      &nbsp;     
             <a class="pluslink" target="_blank" href="#">
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
@@ -152,6 +166,22 @@
                     </div>
                 </div>
             </a>
+            &nbsp;
+            <a class="pluslink" target="_blank" href="#">
+                <div class="card">
+                    <div class="col p-0 d-flex flex-column position-static">
+                        <center>
+                            <strong class="d-inline-block mb-1 text-success">Others</strong>
+                        </center>
+                        <div class="col-auto d-none d-lg-block">
+                            <img class="bd-placeholder-img" src="{{asset('../category/others.jpg')}}" width="80vh" height="50vh">
+                        </div>
+                        <br>
+                        <!-- get title of post -->
+                    </div>
+                </div>
+            </a>
+      &nbsp;
         </div>
 
         <!-- end loop -->
