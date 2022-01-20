@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\UserMetaModel;
 use App\Models\UserModel;
 
+
+/**
+ // TODO : Filtering on price range
+ //TODO : Filtering on rating
+ //TODO : Rating on main page
+ */
+
 class UserController extends Controller
 {
     public function checkoutCartFinal(Request $request){

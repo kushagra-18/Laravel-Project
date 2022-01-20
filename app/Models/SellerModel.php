@@ -21,15 +21,20 @@ class SellerModel extends Model
 
     /**
      * @description : This function is used to get the data from the posts table
-     * based on seller's email
+     * based on seller's email join on product_meta table on product_id
      * @return : array of posts
      * @author : Kushagra Sharma
      */
 
-    public function getSellerInfo()
-    {
-        $seller_email = Auth::user()->email;
-        $seller_info = DB::table('posts')->where('seller_email', $seller_email)->get();
-        return $seller_info;
+
+    public function getSellerInfo(){
+
+        $sellerProducts = DB::table('posts')
+            ->join('product_meta', 'posts.id', '=', 'product_meta.product_id')
+            ->select("*")
+            ->get();
+
+            return $sellerProducts;
     }
+
 }

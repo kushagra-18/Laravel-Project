@@ -41,22 +41,16 @@
 </body>
 
 <script type="text/javascript">
-    // <![CDATA[
+  
     $(function() {
         $(".post-title").each(function(i) {
             len = $(this).text().length;
-            if (len > 15) {
-                $(this).text($(this).text().substr(0, 15) + '...');
+            if (len > 13) {
+                $(this).text($(this).text().substr(0, 13) + '...');
             }
         });
     });
-    // ]]>
 
-
-    //fade div id shop-categories on scroll    
-    $(document).ready(function() {
-        $("#shop-categories").fadeIn();
-    });
 </script>
 
 </html>

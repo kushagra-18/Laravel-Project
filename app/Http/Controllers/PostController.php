@@ -24,21 +24,6 @@ class PostController extends Controller
         //return data from getTopDeals function
         $topDeals = $postModel->getTopDeals();
 
-        // $totRating = $ProductModel->showAllCommulativeUsersRated();
-
-        // $avgRating = $ProductModel->showAllAverageRating();
-
-        // $avgRating = $avgRating / $totRating;
-        // $avgRating = round($avgRating, 1);
-
-        // //if tot rating is 0 set isRating to false
-        // if ($totRating == 0) {
-        //     $isRated = false;
-        // }
-
-        //merge the two arrays
-        
-
         return view('welcome', compact('posts', 'topDeals'));
     }
 

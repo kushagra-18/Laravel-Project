@@ -11,15 +11,16 @@ use Illuminate\Support\Facades\Auth;
 class SellerController extends Controller
 {
 
-
     public function index()
     {
         return view('sellerProduct');
     }
 
+
+    
+
     public function sellerView()
     {
-
         //create object of seller model
         $sellerModel = new SellerModel();
         //get seller info

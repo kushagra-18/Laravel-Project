@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Exception;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\CursorPaginator;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,7 @@ class PostModel extends Model
      * @description : This function is used to get top 6 posts from the database.
      * whose discount is most
      * discount is calculated by subtracting original price from revised price
+     * join on product meta table to get the ratings of the product
      * @return : array of posts
      * @author : Kushagra Sharma
      */
@@ -26,10 +28,14 @@ class PostModel extends Model
     {
 
         $posts = DB::table('posts')
-            ->select('posts.*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
+            ->join('product_meta', 'posts.id', '=', 'product_meta.product_id')
+            ->select('*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
             ->orderBy('discount', 'desc')
             ->limit(6)
             ->get();
+
+
+        $this->helperRating($posts);
 
         foreach ($posts as $post) {
 
@@ -43,18 +49,22 @@ class PostModel extends Model
     }
 
 
-    public static function getTrendingPosts()
+    public function getTrendingPosts()
     {
 
 
         $posts = DB::table('posts')
-            ->select('posts.*')
             ->join('product_meta', 'posts.id', '=', 'product_meta.product_id')
-            ->orderBy('bought', 'desc')
+            ->select('*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
+            ->orderBy('discount', 'desc')
             ->limit(6)
             ->get();
-        
-        // $posts = DB::table('posts')->limit(6)->get();
+
+        //calculate the rating of the product and set it to the post using loop
+
+       
+
+        $this->helperRating($posts);
 
         foreach ($posts as $post) {
 
@@ -63,6 +73,8 @@ class PostModel extends Model
                 $post->discount_till = $post->discount_till->diffForHumans();
             }
         }
+
+        error_log(print_r($posts, true));
 
         return $posts;
     }
@@ -114,5 +126,28 @@ class PostModel extends Model
     public function addProduct($data)
     {
         DB::table('posts')->insert($data);
+    }
+
+
+    public function helperRating($posts)
+    {
+        foreach ($posts as $post) {
+
+            $totRating = $post->rating_one * 1 +
+                $post->rating_two * 2 +
+                $post->rating_three * 3 +
+                $post->rating_four * 4 +
+                $post->rating_five * 5;
+
+            $post->ratingCount = $post->rating_one + $post->rating_two + $post->rating_three + $post->rating_four + $post->rating_five;
+
+
+
+            try {
+                $post->avgRating = round($totRating / $post->ratingCount, 1);
+            } catch (Exception $e) {
+                $post->avgRating = 0;
+            }
+        }
     }
 }

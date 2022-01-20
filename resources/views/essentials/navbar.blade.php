@@ -106,7 +106,7 @@
           </b>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{{ url('/login')}}">My Profile</a>
+          <a class="dropdown-item" href="{{ route('changePassword')}}">My Profile</a>
           <a class="dropdown-item" href="{{ route('user') }}">My Orders</a>
           <a class="dropdown-item" a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp; Logout</a>
@@ -123,10 +123,12 @@
           <font color="#00128b"> Cart</font>
         </a>
         @endif
+        @if(Auth::check() && !Auth()->user()->user == 'seller')
         <a class="navbar-brand" href="{{route('cartItems')}}">
           <i class="fas fa-money-bill-wave"></i>
           <font color="#00128b"> Sell here</font>
         </a>
+        @endif
       </li>
 
   </div>

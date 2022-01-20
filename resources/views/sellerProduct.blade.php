@@ -18,6 +18,12 @@
         .error {
             color: red;
         }
+
+        .input-group .tooltip {
+
+            width: 10px;
+        }
+
     </style>
 
 </head>
@@ -66,7 +72,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">&#8377; </span>
                     </div>
-                    <input type="text" id="product_price_original" name="product_price_original"  value="{{ old('product_price_original') }}" class="form-control" aria-label="Amount (to the nearest rupee)" required>
+                    <input type="text" id="product_price_original" name="product_price_original" value="{{ old('product_price_original') }}" class="form-control" aria-label="Amount (to the nearest rupee)" required>
                     <div class="input-group-append">
                         <span class="input-group-text">.00</span>
                     </div>
@@ -153,7 +159,6 @@
             <div class="col-md-5 mb-3">
                 <label for="product_key_points">Key points</label>
                 <textarea class="form-control" id="product_key_points" name="product_key_points" placeholder="Add minimum of three points for the product seprated by ;" required></textarea>
-
                 @if($errors->has('product_key_points'))
                 <div class="error">{{ $errors->first('product_key_points') }}</div>
                 @endif
@@ -171,7 +176,6 @@
                     Add comma seprated tags for search
                 </div>
             </div>
-
 
         </div>
         <div class="input-group mb-3">

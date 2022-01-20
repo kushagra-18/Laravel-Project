@@ -99,6 +99,7 @@
                             <th>Product Category</th>
                             <th>Product Price</th>
                             <th>Product Price Discounted</th>
+                            <th>Purchased On </th>
                             <!-- <th>Rating </th> -->
                         </tr>
                     </thead>
@@ -113,6 +114,7 @@
                             <td>{{$userMeta->category}}</td>
                             <td>{{$userMeta->price_original}}</td>
                             <td>{{$userMeta->price_revised}}</td>
+                            <td>{{$userMeta->created_at}}</td>
                         </tr>
                         </a>
                         @endforeach

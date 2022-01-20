@@ -56,7 +56,7 @@
         @foreach($posts as $post)
         
 
-        <div class="card mb-3" style="width: 48%;" >
+        <div class="card mb-3" style="width: 45%;" >
         <a class="pluslink" target="_blank" href="{{route('products',[$post->id])}}">
             <div class="row no-gutters">
                 <div class="col-md-4">
@@ -75,7 +75,12 @@
             </div>
         </div>
         </a>
+   
         &nbsp;&nbsp;
+        &nbsp;&nbsp;
+        &nbsp;&nbsp;
+        &nbsp;&nbsp;
+
 
         
         @endforeach

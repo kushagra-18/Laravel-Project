@@ -19,11 +19,15 @@ class UserMetaModel extends Model
     public function saveProductInfo($product_id)
     {
 
+        //get current time 
+
+        $current_time = date("Y-m-d H:i:s");
+
         $user_email = Auth::user()->email;
 
         try {
             DB::table('user_meta')->insert(
-                ['user_email' => $user_email, 'product_id' => $product_id]
+                ['user_email' => $user_email,'created_at' => $current_time ,'product_id' => $product_id]
             );
         } catch (Exception $e) {
             echo $e;
@@ -45,6 +49,7 @@ class UserMetaModel extends Model
             ->join('posts', 'user_meta.product_id', '=', 'posts.id')
             ->select(
                 'posts.id',
+                'user_meta.created_at',
                 'posts.title',
                 'posts.price_original',
                 'posts.price_revised',

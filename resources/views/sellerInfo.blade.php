@@ -6,13 +6,20 @@
 
     <style>
         .product-info {
-            padding: 5%;
+         padding: 1px;
+        }
+
+        table {
+            width: 100%;
+            border: 1px solid #000;
+        }
+
+        th.description {
+            width: 55%;
         }
     </style>
     <title>Shopwayy</title>
 
-    <!-- style_productPage css -->
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 </head>
 
@@ -22,24 +29,30 @@
 <!-- table to show all the products of the seller coming from database -->
 <div class="container">
     <div class="row">
-        <div
-            class="col-md-12 col-lg-12 col-sm-12 col-xs-12 product-info">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 product-info">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
+                            <th> Product ID </th>
+                            <th>Product Image </th>
                             <th>Product Name</th>
-                            <th>Product Description</th>
+                            <th class="description">Product Description</th>
                             <th>Product Category</th>
                             <th>Product Discount Till</th>
                             <th>Product Key Points</th>
                             <th>Product Price</th>
                             <th>Product Price Revised</th>
+                            <th>Items Bought</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($products as $product)
                         <tr>
+                            <td> {{$product->id}} </td>
+                            <td>
+                                <img src="{{ asset('products/'.$product->thumbnail) }}" alt="product" style="width:100px;height:100px;">
+                            </td>
                             <td>{{$product->title}}</td>
                             <td>{{$product->description}}</td>
                             <td>{{$product->category}}</td>
@@ -47,6 +60,7 @@
                             <td>{{$product->product_key_points}}</td>
                             <td>{{$product->price_original}}</td>
                             <td>{{$product->price_revised}}</td>
+                            <td>{{$product->bought}}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -59,28 +73,5 @@
 
 
 @include('essentials.footer')
+
 </html>
-
-<script>
-    var today = new Date().toISOString().split('T')[0];
-    document.getElementsByName("product_discount_till")[0].setAttribute('min', today);
-
-    // (function() {
-    //     'use strict';
-
-    //     window.addEventListener('load', function() {
-    //         var forms = document.getElementsByClassName('needs-validation');
-
-    //         var validation = Array.prototype.filter.call(forms, function(form) {
-    //             form.addEventListener('submit', function(event) {
-    //                 if (form.checkValidity() === false) {
-    //                     event.preventDefault();
-    //                     event.stopPropagation();
-    //                 }
-    //                 form.classList.add('was-validated');
-    //             }, false);
-    //         });
-    //     }, false);
-    // })();
-
-</script>
