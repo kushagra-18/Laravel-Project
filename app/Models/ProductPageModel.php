@@ -91,8 +91,6 @@ class ProductPageModel extends Model
      * @throws Exception
      */
 
-
-
     public function showIndividualRating($id)
     {
 
@@ -125,7 +123,7 @@ class ProductPageModel extends Model
         $rating_4 = $rating[0]->rating_4;
         $rating_5 = $rating[0]->rating_5;
 
-        $total = ($rating_1)*1 + ($rating_2)*2 + ($rating_3)*3 + ($rating_4)*4 + ($rating_5)*5;;
+        $total = ($rating_1)*1 + ($rating_2)*2 + ($rating_3)*3 + ($rating_4)*4 + ($rating_5)*5;
 
         return $total;
     }

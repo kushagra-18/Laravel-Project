@@ -24,7 +24,7 @@
     @if(Auth::guest())
         @include('essentials.userPage')
     <!--check if user is authenticated and with customer profile -->
-    @elseif(Auth::check() && !Auth::user()->user=='seller')
+    @elseif(Auth::check() && Auth::user()->user=='customer')
         @include('essentials.userPage')
     @elseif(Auth::check() && Auth::user()->user=='seller')
         @include('essentials.sellerPage')

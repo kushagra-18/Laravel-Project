@@ -5,14 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Exception;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Pagination\CursorPaginator;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use App\users;
 
 class PostModel extends Model
 {
+
+    /**
+     * Posts table can use the following columns
+     */
+
+    protected $fillable = [
+        'title', 'description', 'price', 'category', 'image', 'user_id', 'quantity', 'status', 'created_at', 'updated_at'
+    ];
 
     /**
      * @description : This function is used to get top 6 posts from the database.
@@ -48,10 +53,8 @@ class PostModel extends Model
         return $posts;
     }
 
-
     public function getTrendingPosts()
     {
-
 
         $posts = DB::table('posts')
             ->join('product_meta', 'posts.id', '=', 'product_meta.product_id')
@@ -61,8 +64,6 @@ class PostModel extends Model
             ->get();
 
         //calculate the rating of the product and set it to the post using loop
-
-       
 
         $this->helperRating($posts);
 
@@ -74,7 +75,7 @@ class PostModel extends Model
             }
         }
 
-        error_log(print_r($posts, true));
+        // error_log(print_r($posts, true));
 
         return $posts;
     }
@@ -140,8 +141,6 @@ class PostModel extends Model
                 $post->rating_five * 5;
 
             $post->ratingCount = $post->rating_one + $post->rating_two + $post->rating_three + $post->rating_four + $post->rating_five;
-
-
 
             try {
                 $post->avgRating = round($totRating / $post->ratingCount, 1);

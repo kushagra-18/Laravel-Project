@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Exception;
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -72,5 +75,22 @@ class RegisterController extends Controller
             'companyName' => $data['companyName'],
             'password' => bcrypt($data['password']),
         ]);
+
+        // email data
+        $emailData = array(
+            'name' => $data['name'],
+            'email' => $data['email'],
+        );
+
+        error_log("sddsdsdsdsdsdsdsdsdsdsdsdssds");
+
+        error_log("email data: " . print_r($emailData, true));
+
+        // send email with the template
+        try{
+        Mail::to($data['email'])->send(new WelcomeMail($emailData));
+        }catch(Exception $e){
+            error_log("error: " . $e->getMessage());
+        }
     }
 }

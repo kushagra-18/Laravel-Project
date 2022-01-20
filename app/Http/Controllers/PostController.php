@@ -48,7 +48,6 @@ class PostController extends Controller
         return view('category', compact('posts','isEmpty'));
     }
 
-
     /**
      * This function is used to get the data from the posts table
      * based on category of the items

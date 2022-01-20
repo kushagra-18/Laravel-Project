@@ -35,6 +35,11 @@
     background: #ffc1cc;
   }
 
+  .navbar-default-scroll {
+    background: white;
+  }
+
+
   .pluslinkcart,
   .pluslinkcart:visited,
   .pluslinkcart:hover,
@@ -69,6 +74,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
+<!-- @php
+
+if(Auth::check())
+{
+if(Auth::user()->user=='customer')
+$CUSTOMER_ROLE = 'customer';
+elseif(Auth::user()->user=='seller')
+$SELLER_ROLE = 'seller';
+}
+@endphp -->
 
 
 <nav class="navbar navbar-default navbar-expand-lg fixed-top navbar-light">
@@ -76,8 +91,8 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <form action = "{{route('searchItems')}}"  method = "get" class="form-inline my-2 my-lg-0 my-lg-0">
-    <input class="form-control mr-sm-2" type="text" id = "search-bar" name = "search-bar" placeholder="Search" aria-label="Search" style="width: 600px;">
+  <form action="{{route('searchItems')}}" method="get" class="form-inline my-2 my-lg-0 my-lg-0">
+    <input class="form-control mr-sm-2" type="text" id="search-bar" name="search-bar" placeholder="Search" aria-label="Search" style="width: 600px;">
     <button class="btn my-2 my-sm-0 btn-primary" type="submit">Search</button>
   </form>
 
@@ -96,12 +111,12 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
           <b><i class="fa fa-user" aria-hidden="true"></i>
             <font color="#00128b">
-            @if(Auth::check() && !Auth()->user()->user == 'seller')
-              
-            {{ Auth::user()->name }}
-            @else
+              @if(Auth::check() && Auth()->user()->user == 'customer')
+
+              {{ Auth::user()->name }}
+              @else
               {{ Auth::user()->companyName }}
-            @endif
+              @endif
             </font>
           </b>
         </a>
@@ -116,14 +131,14 @@
       </li>
       @endif
       <li>
-        @if(Auth::check() && !Auth()->user()->user == 'seller')
+        @if(Auth::check() && Auth()->user()->user == 'customer')
         <a class="navbar-brand" href="{{route('cartItems')}}">
           <i class="fas fa-shopping-cart"></i>
           <span class='badge badge-warning' id='lblCartCount'>{{$cartNumber}}</span>
           <font color="#00128b"> Cart</font>
         </a>
         @endif
-        @if(Auth::check() && !Auth()->user()->user == 'seller')
+        @if(Auth::check() && Auth()->user()->user == 'customer')
         <a class="navbar-brand" href="{{route('cartItems')}}">
           <i class="fas fa-money-bill-wave"></i>
           <font color="#00128b"> Sell here</font>
@@ -138,3 +153,17 @@
   </ul>
   </div>
 </nav>
+
+<script>
+      //change nabvar color on scroll
+
+      $(window).scroll(function() {
+        if ($(document).scrollTop() < 500) {
+            $('.navbar').addClass('navbar-default');
+            $('.navbar').removeClass('navbar-default-scroll');
+        } else {
+            $('.navbar').removeClass('navbar-default');
+            $('.navbar').addClass('navbar-default-scroll');
+        }
+    });
+</script>

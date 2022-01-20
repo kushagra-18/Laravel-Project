@@ -42,17 +42,15 @@ body {
   vertical-align: middle;
   background-color: #388e3c;
 }
-/* #trending {
 
+@media only screen and (max-width: 700px) {
+  body {
+    padding-top: 50%;
+  }
+}
 
-    position: absolute;
-    top: 58%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: black;
-    font-size: 2em;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: bold;
-    text-align: center;
-
-} */
+@media only screen and (max-width: 500px) {
+    body {
+      padding-top: 50%;
+    }
+}

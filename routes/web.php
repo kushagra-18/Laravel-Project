@@ -18,8 +18,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/', 'PostController@index')->name('post');
+
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', 'PostController@index')->name('post');
+    
 
     Route::post('/cart', 'CartController@store')->name('cart');
 
@@ -27,7 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/user', 'UserMetaController@showUserDetails')->name('user');
 
-    Route::post('/cartItems', 'CartController@destroy')->name('cartItemsDelete');
+    Route::delete('/cartItems', 'CartController@destroy')->name('cartItemsDelete');
 
     Route::get('/cart', 'CartController@index')->name('cartIndex');
 
