@@ -5,15 +5,18 @@
     margin: auto;
     width: auto;
     padding-left: 7%;
+    text-align: center;
     /* padding-right: 10%; */
   
 }
+
 
     .card-image {
 
         height: 10px;
     }
 </style>
+
 <div id="shop-categories">
     <div class="row">
             <a class="pluslink" target="_blank" href="{{route('category','mobile')}}">

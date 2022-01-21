@@ -73,11 +73,7 @@
                         <div class="col" style="padding-left:0;">ITEMS {{$count}}</div>
                         <div class="col text-right">&#8377; {{$totPrice}}</div>
                     </div>
-                    <form>
-                        <p>SHIPPING</p> <select>
-                            <option class="text-muted">Standard-Delivery- Free</option>
-                        </select>
-                    </form>
+                    
                     <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                         <div class="col">TOTAL PRICE</div>
                         <div class="col text-right">&#8377; {{$totPrice}}</div>
@@ -88,7 +84,7 @@
                         <div class="col text-right">&#8377; {{$totSaving}}</div>
 
                     </div>
-                    <button class="btn btnCheck">CHECKOUT</button>
+                    <!-- <button class="btn btnCheck">CHECKOUT</button> -->
                 </div>
             </div>
         </div>

@@ -92,7 +92,7 @@ $SELLER_ROLE = 'seller';
     <span class="navbar-toggler-icon"></span>
   </button>
   <form action="{{route('searchItems')}}" method="get" class="form-inline my-2 my-lg-0 my-lg-0">
-    <input class="form-control mr-sm-2" type="text" id="search-bar" name="search-bar" placeholder="Search" aria-label="Search" style="width: 600px;">
+    <input class="form-control mr-sm-2" type="text" id="search-bar" name="search-bar" placeholder="Search" aria-label="Search" style="width: 80vh;">
     <button class="btn my-2 my-sm-0 btn-primary" type="submit">Search</button>
   </form>
 
@@ -157,15 +157,15 @@ $SELLER_ROLE = 'seller';
 </nav>
 
 <script>
-      //change nabvar color on scroll
+  //change nabvar color on scroll
 
-      $(window).scroll(function() {
-        if ($(document).scrollTop() < 500) {
-            $('.navbar').addClass('navbar-default');
-            $('.navbar').removeClass('navbar-default-scroll');
-        } else {
-            $('.navbar').removeClass('navbar-default');
-            $('.navbar').addClass('navbar-default-scroll');
-        }
-    });
+  $(window).scroll(function() {
+    if ($(document).scrollTop() < 500) {
+      $('.navbar').addClass('navbar-default');
+      $('.navbar').removeClass('navbar-default-scroll');
+    } else {
+      $('.navbar').removeClass('navbar-default');
+      $('.navbar').addClass('navbar-default-scroll');
+    }
+  });
 </script>

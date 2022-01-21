@@ -19,11 +19,7 @@
         }
     </style>
     <title>Shopwayy</title>
-
-
 </head>
-
-
 <br>
 
 <!-- table to show all the products of the seller coming from database -->

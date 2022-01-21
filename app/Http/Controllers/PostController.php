@@ -33,7 +33,6 @@ class PostController extends Controller
      * Items will be paginated
      * @param $category
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Exception
      * 
      */
 

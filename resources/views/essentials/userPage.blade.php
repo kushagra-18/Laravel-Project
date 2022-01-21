@@ -6,7 +6,6 @@
   <div class="container_padding">
       <hr>
       <h5>
-
           <div class="mb-1 text-muted">&nbsp;&nbsp;<i class="fas fa-percent"></i> Deals of the Dawn!!</div>
       </h5>
       <hr>
@@ -39,7 +38,6 @@
 
                           <p class="mb-auto"> <b> ₹ {{$post->price_revised}} </b>
                               <font class="text-muted"> &nbsp; <strike>₹ {{$post->price_original}}</strike></font>
-
                           </p>
                           <font size=1 class="text-muted"> Sale ends in {{$post->discount_till}}</font>
                       </div>
