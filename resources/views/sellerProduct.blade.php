@@ -35,6 +35,17 @@
 
 <div class="product-info">
 
+<center>
+
+
+    @if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+    @endif
+
+</center>
+
     <h4 class="mb-3">Add product information</h4>
     <form id='checkout-form' action="{{route('addProduct')}}" method='post' enctype="multipart/form-data" class="needs-validation" novalidate>
 
@@ -207,6 +218,9 @@
 <script>
     var today = new Date().toISOString().split('T')[0];
     document.getElementsByName("product_discount_till")[0].setAttribute('min', today);
+
+ 
+    
 
     // (function() {
     //     'use strict';

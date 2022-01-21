@@ -38,7 +38,7 @@ class SellerController extends Controller
             'product_description' => ['required', 'min:50'],
             'product_image' => 'required|image|mimes:jpeg,png,jpg|max:6144',
             'product_category' => 'required',
-            'product_quantity' => 'required|numeric',
+            'quantity' => 'required|numeric',
             'product_price_original' => 'required|numeric',
             'product_price_revised' => 'required|numeric',
             'tags' => 'required',
@@ -46,8 +46,6 @@ class SellerController extends Controller
             'product_key_points' => 'required',
         ]);
 
-
-        // $seller_id = Auth::user()->id;
         $seller_email = Auth::user()->email;
 
         $product_name = $request->input('product_name');
@@ -87,7 +85,7 @@ class SellerController extends Controller
 
         try {
             $PostModel->addProduct($data);
-            return $data;
+             return redirect('/seller')->with('success', 'Product added successfully');
         } catch (Exception $e) {
             return $e->getMessage();
         }

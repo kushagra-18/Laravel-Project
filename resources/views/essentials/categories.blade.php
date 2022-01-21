@@ -32,7 +32,7 @@
             </a>
             &nbsp;
 
-            <a class="pluslink" target="_blank" href="#">
+            <a class="pluslink" target="_blank" href="{{route('category','Books')}}">
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
                         <center>
@@ -47,7 +47,7 @@
                 </div>
             </a>
       &nbsp;
-      <a class="pluslink" target="_blank" href="#">
+      <a class="pluslink" target="_blank" href="{{route('category','Sports')}}">
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
                         <center>
@@ -62,7 +62,7 @@
                 </div>
             </a>
       &nbsp;
-      <a class="pluslink" target="_blank" href="#">
+      <a class="pluslink" target="_blank" href="{{route('category','Footwear')}}">
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
                         <center>
@@ -77,7 +77,7 @@
                 </div>
             </a>
       &nbsp;
-      <a class="pluslink" target="_blank" href="#">
+      <a class="pluslink" target="_blank" href="{{route('category','Fashion')}}">
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
                         <center>
@@ -92,7 +92,7 @@
                 </div>
             </a>
       &nbsp;
-      <a class="pluslink" target="_blank" href="#">
+      <a class="pluslink" target="_blank" href="{{route('category','Wearables')}}">
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
                         <center>
@@ -107,7 +107,7 @@
                 </div>
             </a>
       &nbsp;     
-            <a class="pluslink" target="_blank" href="#">
+            <a class="pluslink" target="_blank" href="{{route('category','Home Decor')}}">
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
                         <center>
@@ -122,7 +122,7 @@
                 </div>
             </a>
             &nbsp;
-            <a class="pluslink" target="_blank" href="#">
+            <a class="pluslink" target="_blank" href="{{route('category','Grocery')}}">
                 <div class="card">
                     <div class="col p-0 d-flex flex-column position-static">
                         <center>

@@ -38,7 +38,7 @@ class UserController extends Controller
         $this->saveProductInfo($product_id);
         $this->saveProductBuy($request);
 
-       return "success";
+        return redirect()->back()->with('success', 'Item purchased successfully. Check your email for confirmation.');
     }
 
 

@@ -26,9 +26,7 @@ class UserModel extends Model
         $zip = $request->input('zip');
         //current time stamp IST
         $created_at = date('Y-m-d H:i:s');
-
         $data = array('email' => $email, 'first_name' => $first_name, 'last_name' => $last_name, 'address' => $address, 'address2' => $address2, 'city' => $city, 'state' => $state, 'zip' => $zip, 'created_at' => $created_at);
-
         DB::table('user_address')->insert($data);
     }
 

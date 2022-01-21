@@ -21,15 +21,6 @@ class CartController extends Controller
    }
 
 
-    public function randomUserId()
-    {
-        $timestamp = time();
-        $random = rand(1, 100);
-        $user_id = $timestamp . $random;
-        return $user_id;
-    }
-
-
     /**
      * Display a listing of the resource.
      *

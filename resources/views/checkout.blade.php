@@ -18,6 +18,14 @@
 </style>
 @include('essentials.navbar')
 
+<center>
+    @if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+    @endif
+</center>
+
 <body class="bg-light">
     <div class="container">
         <div class="row">
@@ -56,7 +64,8 @@
                             <h5 class="card-title">{{$getSavedAddress[0]->first_name}}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{$getSavedAddress[0]->city}}</h6>
                             <p class="card-text">{{$getSavedAddress[0]->address}} &nbsp;
-                            {{$getSavedAddress[0]->address2}}</p>
+                                {{$getSavedAddress[0]->address2}}
+                            </p>
                         </div>
                     </div>
 
@@ -223,7 +232,7 @@
                             </div>
                         </div>
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" id = "confirm" name = "confirm" type="submit">Confirm Order</button>
+                        <button class="btn btn-primary btn-lg btn-block" id="confirm" name="confirm" type="submit">Confirm Order</button>
                     </form>
                 </div>
             </div>
@@ -238,7 +247,6 @@
 
 
     <script>
-
         // if saved is check hide check-out form
         if ($('#saved').is(':checked')) {
             $('.address-info').hide();
@@ -278,14 +286,13 @@
 
         //spinner on confirm button
         $('#confirm').click(function() {
-            $(this).html('<i class="fas fa-spinner fa-spin"></i> Confirming...');   
+            $(this).html('<i class="fas fa-spinner fa-spin"></i> Confirming...');
         });
 
         //spinner on saved-button
         $('#saved-button').click(function() {
-            $(this).html('<i class="fas fa-spinner fa-spin"></i> Confirming..');   
+            $(this).html('<i class="fas fa-spinner fa-spin"></i> Confirming..');
         });
-        
     </script>
 </body>
 

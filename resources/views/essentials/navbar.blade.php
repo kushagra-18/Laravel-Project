@@ -112,8 +112,10 @@ $SELLER_ROLE = 'seller';
           <b><i class="fa fa-user" aria-hidden="true"></i>
             <font color="#00128b">
               @if(Auth::check() && Auth()->user()->user == 'customer')
-
-              {{ Auth::user()->name }}
+              @php
+              $name = explode(' ', Auth::user()->name);
+              @endphp
+              {{$name[0]}}
               @else
               {{ Auth::user()->companyName }}
               @endif
