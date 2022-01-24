@@ -80,6 +80,9 @@ class SellerController extends Controller
             'seller_email' => $seller_email
         );
 
+     
+
+
 
         $PostModel = new PostModel();
 
@@ -90,6 +93,8 @@ class SellerController extends Controller
             return $e->getMessage();
         }
     }
+
+
 
 
     public function addImageStorage(Request $request)

@@ -12,6 +12,12 @@ use Exception;
 class UserMetaModel extends Model
 {
 
+    protected $table = 'user_meta';
+
+    protected $fillable = [
+        'user_email', 'product_id', 'rating', 'created_at',
+    ];
+
     /**
      * save product_id and user_email in UserMeta tables
      */
@@ -25,12 +31,25 @@ class UserMetaModel extends Model
 
         $user_email = Auth::user()->email;
 
+        $data = array('user_email' => $user_email, 'product_id' => $product_id, 'created_at' => $current_time);
+
+        $userMetaModel = new UserMetaModel();
+
+        //using db transactions
+
+        DB::beginTransaction();
+
         try {
-            DB::table('user_meta')->insert(
-                ['user_email' => $user_email,'created_at' => $current_time ,'product_id' => $product_id]
-            );
+
+            $userMetaModel->insert($data);
+
+            DB::commit();
+            
         } catch (Exception $e) {
-            echo $e;
+
+            DB::rollback();
+
+            error_log("Exception: " . $e->getMessage());
         }
     }
 
@@ -59,7 +78,7 @@ class UserMetaModel extends Model
             )
             ->where('user_email', '=', $user_email)
             ->get();
-            
+
         return $userMeta;
     }
 }

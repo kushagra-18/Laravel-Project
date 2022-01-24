@@ -9,8 +9,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+
 class UserModel extends Model
 {
+    protected $table = 'user_address';
+
+    protected $fillable = [
+        'email', 'first_name', 'last_name',
+        'address2', 'address',
+        'city', 'state', 'zip', 'created_at',
+    ];
+
+
 
     public function saveUserInfo($request)
     {
@@ -27,7 +37,15 @@ class UserModel extends Model
         //current time stamp IST
         $created_at = date('Y-m-d H:i:s');
         $data = array('email' => $email, 'first_name' => $first_name, 'last_name' => $last_name, 'address' => $address, 'address2' => $address2, 'city' => $city, 'state' => $state, 'zip' => $zip, 'created_at' => $created_at);
-        DB::table('user_address')->insert($data);
+        
+        $userModel = new UserModel();
+        try{
+            $userModel->insert($data);
+        }catch(Exception $e){
+            error_log("Exception: " . $e->getMessage());
+        }
+     
+
     }
 
 
@@ -42,5 +60,4 @@ class UserModel extends Model
             DB::table('product_meta')->insert($data);
         }
     }
-
 }
