@@ -24,7 +24,7 @@ class PostController extends Controller
         //return data from getTopDeals function
         $topDeals = $postModel->getTopDeals();
 
-        // error_log("topDeals: " . print_r($topDeals, true));
+        // error_log("topDeals: " . print_r($topDeals));
 
         return view('welcome', compact('posts', 'topDeals'));
     }

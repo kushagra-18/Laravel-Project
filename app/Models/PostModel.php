@@ -15,9 +15,18 @@ class PostModel extends Model
      * Posts table can use the following columns
      */
 
+    protected $table = 'posts';
+
     protected $fillable = [
-        'title', 'description', 'price', 'category', 'image', 'user_id', 'quantity', 'status', 'created_at', 'updated_at'
+        'title', 'description', 'price', 'category', 'image', 'user_id', 'quantity', 'status', 'created_at', 'updated_at', 'discount_till'
     ];
+
+
+    public function getDiscountTillAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
+    }
+
 
     /**
      * @description : This function is used to get top 6 posts from the database.
@@ -32,23 +41,13 @@ class PostModel extends Model
     public function getTopDeals()
     {
 
-        $posts = DB::table('posts')
-            ->join('product_meta', 'posts.id', '=', 'product_meta.product_id')
+        $posts = PostModel::join('product_meta', 'posts.id', '=', 'product_meta.product_id')
             ->select('*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
             ->orderBy('discount', 'desc')
             ->limit(6)
             ->get();
 
-
         $this->helperRating($posts);
-
-        foreach ($posts as $post) {
-
-            if ($post->discount_till != null) {
-                $post->discount_till  = Carbon::parse($post->discount_till);
-                $post->discount_till = $post->discount_till->diffForHumans();
-            }
-        }
 
         return $posts;
     }
@@ -56,26 +55,15 @@ class PostModel extends Model
     public function getTrendingPosts()
     {
 
-        $posts = DB::table('posts')
+        $posts = PostModel::select('*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
             ->join('product_meta', 'posts.id', '=', 'product_meta.product_id')
-            ->select('*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
             ->orderBy('discount', 'desc')
             ->limit(6)
             ->get();
 
-        //calculate the rating of the product and set it to the post using loop
+        error_log("posts: " . print_r($posts,true));
 
         $this->helperRating($posts);
-
-        foreach ($posts as $post) {
-
-            if ($post->discount_till != null) {
-                $post->discount_till  = Carbon::parse($post->discount_till);
-                $post->discount_till = $post->discount_till->diffForHumans();
-            }
-        }
-
-        // error_log(print_r($posts, true));
 
         return $posts;
     }
@@ -90,16 +78,19 @@ class PostModel extends Model
 
     public function getPostsByCategory($category)
     {
-        $posts = DB::table('posts')->where('category', $category)->paginate(10);
+
+        $posts = PostModel::where('category', $category)->paginate(6);
+
         return $posts;
     }
 
     public function searchItems($search)
     {
         //search items from the database on titie and tags
-        $posts = DB::table('posts')->where('title', 'like', '%' . $search . '%')
-            ->orWhere('tags', 'like', '%' . $search . '%')->paginate(10);
 
+        $posts = PostModel::where('title', 'like', '%' . $search . '%')
+            ->orWhere('tags', 'like', '%' . $search . '%')
+            ->paginate(6);
 
         return $posts;
     }

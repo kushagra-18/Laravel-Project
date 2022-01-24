@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -28,6 +29,7 @@ class WelcomeMail extends Mailable
      */
     public function build()
     {
-        return $this->view('auth.name');
+        return $this->view('auth.mail')
+            ->with('emailData', $this->emailData)->delay(Carbon::now()->addSeconds(10));
     }
 }
