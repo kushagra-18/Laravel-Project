@@ -23,7 +23,7 @@
 <br>
 
 <!-- table to show all the products of the seller coming from database -->
-<div class="container">
+<div class="container mt-5">
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 product-info">
             <div class="table-responsive">
@@ -65,6 +65,21 @@
         </div>
     </div>
 </div>
+
+<!-- pagination with bootstrap-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="text-center">
+            {{$products->links(("pagination::bootstrap-4"))}}
+            <a href = "" class="btn btn-primary">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 
 

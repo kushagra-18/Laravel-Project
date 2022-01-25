@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Exception;
 use App\Models\CartModel;
 
-   
-
-
 class CartController extends Controller
 {
 

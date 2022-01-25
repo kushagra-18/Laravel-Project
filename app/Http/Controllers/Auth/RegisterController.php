@@ -77,6 +77,7 @@ class RegisterController extends Controller
 
         error_log("email data: " . print_r($emailData, true));
 
+        //priority high
         dispatch(new SendRemainderEmail($emailData));
 
         return User::create([

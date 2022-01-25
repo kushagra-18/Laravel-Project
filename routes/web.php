@@ -58,7 +58,7 @@ Route::group(['middleware' => ['auth', 'CheckCustomer']], function () {
 
     Route::get('/seller', 'SellerController@index')->name('sellerProduct');
 
-    Route::get('/sellerView', 'SellerController@sellerView')->name('sellerView');
+    Route::get('/myProducts', 'SellerController@sellerView')->name('sellerView');
 
     Route::post('/sellerProduct', 'SellerController@addProduct')->name('addProduct');
 });

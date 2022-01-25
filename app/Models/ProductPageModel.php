@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductPageModel extends Model
 {
+
+
+    protected $table = 'user_meta';
+
+    protected $fillable = [
+        'user_email', 'product_id', 'rating', 'created_at',
+    ];
+
     /**
      *  @description check if user has bought the product from database
      * @param  int  $id
@@ -20,9 +28,8 @@ class ProductPageModel extends Model
     public function checkIfBought($id)
     {
         try {
-            $checkIfBought = DB::table('user_meta')
-                ->where('product_id', '=', $id)
-                ->where('user_email', '=', Auth::user()->email)
+            $checkIfBought = ProductPageModel::where('product_id', $id)
+                ->where('user_email', Auth::user()->email)
                 ->get();
         } catch (Exception $e) {
             return $e;
@@ -40,10 +47,10 @@ class ProductPageModel extends Model
      * check if the user has already rated the product
      */
 
-    public function checkIfRated($id){
+    public function checkIfRated($id)
+    {
         try {
-            $checkIfRated = DB::table('user_meta')
-                ->where('product_id', '=', $id)
+            $checkIfRated = ProductPageModel::where('product_id', '=', $id)
                 ->where('user_email', '=', Auth::user()->email)
                 ->where('rating', '!=', 0)
                 ->get();
@@ -71,8 +78,7 @@ class ProductPageModel extends Model
         $email = Auth::user()->email;
 
         try {
-            DB::table('user_meta')
-                ->where('product_id', '=', $product_id)
+            ProductPageModel::where('product_id', '=', $product_id)
                 ->where('user_email', '=', $email)
                 ->update(['rating' => $rating]);
         } catch (Exception $e) {
@@ -123,7 +129,7 @@ class ProductPageModel extends Model
         $rating_4 = $rating[0]->rating_4;
         $rating_5 = $rating[0]->rating_5;
 
-        $total = ($rating_1)*1 + ($rating_2)*2 + ($rating_3)*3 + ($rating_4)*4 + ($rating_5)*5;
+        $total = ($rating_1) * 1 + ($rating_2) * 2 + ($rating_3) * 3 + ($rating_4) * 4 + ($rating_5) * 5;
 
         return $total;
     }
@@ -135,7 +141,8 @@ class ProductPageModel extends Model
      * @throws Exception
      */
 
-    public function showAllCommulativeUsersRated(){
+    public function showAllCommulativeUsersRated()
+    {
         try {
             $rating = DB::table('product_meta')
                 ->sum('rating_one') + DB::table('product_meta')
@@ -171,7 +178,7 @@ class ProductPageModel extends Model
             $rating[0]->rating_four +
             $rating[0]->rating_five;
 
-            return $totRating;
+        return $totRating;
     }
 
     /**

@@ -27,7 +27,6 @@ class PostModel extends Model
         return Carbon::parse($value)->diffForHumans();
     }
 
-
     /**
      * @description : This function is used to get top 6 posts from the database.
      * whose discount is most
@@ -61,7 +60,7 @@ class PostModel extends Model
             ->limit(6)
             ->get();
 
-        error_log("posts: " . print_r($posts,true));
+        error_log("posts: " . print_r($posts, true));
 
         $this->helperRating($posts);
 
@@ -100,24 +99,24 @@ class PostModel extends Model
     {
 
         if ($sort == 'newest') {
-            $posts = DB::table('posts')->where('category', $category)->orderBy('created_at', 'desc')->paginate(10);
+            $posts = PostModel::where('category', $category)->orderBy('created_at', 'desc')->paginate(10);
         } elseif ($sort == 'oldest') {
-            $posts = DB::table('posts')->where('category', $category)->orderBy('created_at', 'asc')->paginate(10);
+            $posts = PostModel::where('category', $category)->orderBy('created_at', 'asc')->paginate(10);
         } elseif ($sort == 'price_low_high') {
-            $posts = DB::table('posts')->where('category', $category)->orderBy('price_revised', 'asc')->paginate(10);
+            $posts = PostModel::where('category', $category)->orderBy('price_revised', 'asc')->paginate(10);
         } elseif ($sort == 'price_high_low') {
-            $posts = DB::table('posts')->where('category', $category)->orderBy('price_revised', 'desc')->paginate(10);
+            $posts = PostModel::where('category', $category)->orderBy('price_revised', 'desc')->paginate(10);
         } elseif ($sort == 'rating_high_low') {
-            $posts = DB::table('posts')->where('category', $category)->orderBy('rating', 'desc')->get()->paginate(10);
+            $posts = PostModel::where('category', $category)->orderBy('rating', 'desc')->get()->paginate(10);
         } elseif ($sort == 'rating_low_high') {
-            $posts = DB::table('posts')->where('category', $category)->orderBy('rating', 'asc')->get()->paginate(10);
+            $posts = PostModel::where('category', $category)->orderBy('rating', 'asc')->get()->paginate(10);
         }
         return $posts;
     }
 
     public function addProduct($data)
     {
-        DB::table('posts')->insert($data);
+        PostModel::insert($data);
     }
 
 

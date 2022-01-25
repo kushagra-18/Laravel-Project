@@ -32,7 +32,7 @@ class SellerModel extends Model
         $sellerProducts = DB::table('posts')
             ->join('product_meta', 'posts.id', '=', 'product_meta.product_id')
             ->select("*")
-            ->get();
+            ->paginate(6);
 
             return $sellerProducts;
     }

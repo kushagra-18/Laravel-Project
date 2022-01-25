@@ -1,13 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\users;
 use App\Models\ProductPageModel;
 use App\Models\PostModel;
-
 
 class PostController extends Controller
 {
@@ -89,6 +87,7 @@ class PostController extends Controller
 
         //create object of PostModel class
         $postModel = new PostModel();
+
         $posts = $postModel->sortPostsByCategory($category, $sort);
 
         $isEmpty = false;
@@ -98,6 +97,7 @@ class PostController extends Controller
 
             $isEmpty = true;
         }
+        
         return view('category', compact('posts','isEmpty'));
     }
 }

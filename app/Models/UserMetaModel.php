@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +23,6 @@ class UserMetaModel extends Model
 
     public function saveProductInfo($product_id)
     {
-
         //get current time 
 
         $current_time = date("Y-m-d H:i:s");
@@ -56,16 +54,14 @@ class UserMetaModel extends Model
     /**
      * modelfor
      * show details of posts added by user in the meta table
-     * join user_meta table with product table
+     * join user_meta table with posts table
      * @return \Illuminate\Http\Response
      */
 
     public function showUserDetails()
     {
-
         $user_email = Auth::user()->email;
-        $userMeta = DB::table('user_meta')
-            ->join('posts', 'user_meta.product_id', '=', 'posts.id')
+        $userMeta = UserMetaModel::join('posts', 'user_meta.product_id', '=', 'posts.id')
             ->select(
                 'posts.id',
                 'user_meta.created_at',
