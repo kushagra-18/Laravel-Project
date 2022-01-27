@@ -8,7 +8,7 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ProductMeta;
 
-class ProductPageModel extends Model
+class ProductPage extends Model
 {
 
 
@@ -27,7 +27,7 @@ class ProductPageModel extends Model
     public function checkIfBought($id)
     {
         try {
-            $checkIfBought = ProductPageModel::where('product_id', $id)
+            $checkIfBought = ProductPage::where('product_id', $id)
                 ->where('user_email', Auth::user()->email)
                 ->get();
         } catch (Exception $e) {
@@ -49,7 +49,7 @@ class ProductPageModel extends Model
     public function checkIfRated($id)
     {
         try {
-            $checkIfRated = ProductPageModel::where('product_id', '=', $id)
+            $checkIfRated = ProductPage::where('product_id', '=', $id)
                 ->where('user_email', '=', Auth::user()->email)
                 ->where('rating', '!=', 0)
                 ->get();
@@ -77,7 +77,7 @@ class ProductPageModel extends Model
         $email = Auth::user()->email;
 
         try {
-            ProductPageModel::where('product_id', '=', $product_id)
+            ProductPage::where('product_id', '=', $product_id)
                 ->where('user_email', '=', $email)
                 ->update(['rating' => $rating]);
         } catch (Exception $e) {

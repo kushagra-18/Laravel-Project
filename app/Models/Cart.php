@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
-class CartModel extends Model
+class Cart extends Model
 {
 
     protected $table = 'cart';
@@ -56,7 +56,7 @@ class CartModel extends Model
     {
 
         //get details of the items of the post table corresponding to the id
-        $cartItems = PostModel::where('id', '=', $id)
+        $cartItems = Post::where('id', '=', $id)
             ->get();
 
         return $cartItems;
@@ -68,7 +68,7 @@ class CartModel extends Model
         // check if user has saved address and return bool
 
         try {
-            $savedAddress = UserModel::where('email', '=', Auth::user()->email)
+            $savedAddress = User::where('email', '=', Auth::user()->email)
                 ->get();
             if (count($savedAddress) > 0) {
                 return true;
@@ -85,7 +85,7 @@ class CartModel extends Model
         // check if user has saved address and return bool
 
         try {
-            $getSavedAddress = UserModel::where('email', '=', Auth::user()->email)
+            $getSavedAddress = User::where('email', '=', Auth::user()->email)
                 ->get();
         } catch (Exception $e) {
             return $e;

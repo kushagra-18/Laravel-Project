@@ -13,6 +13,9 @@ class CheckCustomer {
      * @param  \Closure  $next
      * @return mixed
      */
+
+     protected $SELLER_TYPE = 'seller';
+     
     public function handle($request, Closure $next)
     {
         if (!Auth()->user()->user == 'seller') {

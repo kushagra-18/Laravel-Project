@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Exception;
-use App\Models\CartModel;
+use App\Models\Cart;
 
 class CartController extends Controller
 {
@@ -36,7 +36,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $cartModel = new CartModel();
+        $cartModel = new Cart();
         try {
             $cartModel->addCartItems($request);
             return  back();
@@ -47,16 +47,14 @@ class CartController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return view
      */
     public function show()
     {
         $isEmpty = false;
         $id = Auth::user()->id;
         //show cart items and return 
-        $cartModel = new CartModel();
+        $cartModel = new Cart();
         $cartItemsShow = $cartModel->showCartItems($id);
         //find if query return any data 
         if (count($cartItemsShow) == 0) {
@@ -71,10 +69,11 @@ class CartController extends Controller
      * This function is used to delete cart items
      * @param  int  $id
      * @return {NULL}
+     * @throws Exception
      */
     public function destroy(Request $request)
     {
-        $cartModel = new CartModel();
+        $cartModel = new Cart();
         try {
             $cartModel->deleteCartItems($request);
             return  $this->show();
@@ -82,7 +81,6 @@ class CartController extends Controller
             error_log($e);
         }
     }
-
 
 
     /**
@@ -94,19 +92,19 @@ class CartController extends Controller
     public function checkoutCart($id)
     {
 
-        $cartModel = new CartModel();
+        $cartModel = new Cart();
         $cartItemsShow = $cartModel->checkoutItem($id);
 
         $checkSavedAddress = $cartModel->checkSavedAddress();
 
         $getSavedAddress = $cartModel->getSavedAddress();
-        
+
         return view('checkout', compact('cartItemsShow', 'checkSavedAddress', 'getSavedAddress'));
     }
 
     public function cartNumber()
     {
-        $cartModel = new CartModel();
+        $cartModel = new Cart();
         $cartItemsShow = $cartModel->cartNumber();
         return $cartItemsShow;
     }

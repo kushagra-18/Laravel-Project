@@ -7,19 +7,16 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Exception;
 
-class PostModel extends Model
+class Post extends Model
 {
-
     /**
      * Posts table can use the following columns
      */
-
     protected $table = 'posts';
 
     protected $fillable = [
         'title', 'description', 'price', 'category', 'image', 'user_id', 'quantity', 'status', 'created_at', 'updated_at', 'discount_till'
     ];
-
 
     public function getDiscountTillAttribute($value)
     {
@@ -35,11 +32,10 @@ class PostModel extends Model
      * @author : Kushagra Sharma
      */
 
-
     public function getTopDeals()
     {
 
-        $posts = PostModel::join('product_meta', 'posts.id', '=', 'product_meta.product_id')
+        $posts = Post::join('product_meta', 'posts.id', '=', 'product_meta.product_id')
             ->select('*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
             ->orderBy('discount', 'desc')
             ->limit(6)
@@ -53,7 +49,7 @@ class PostModel extends Model
     public function getTrendingPosts()
     {
 
-        $posts = PostModel::select('*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
+        $posts = Post::select('*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
             ->join('product_meta', 'posts.id', '=', 'product_meta.product_id')
             ->orderBy('discount', 'desc')
             ->limit(6)
@@ -73,11 +69,10 @@ class PostModel extends Model
      * @param $category
      * @return {array}
      */
-
     public function getPostsByCategory($category)
     {
 
-        $posts = PostModel::where('category', $category)->paginate(6);
+        $posts = Post::where('category', $category)->paginate(6);
 
         return $posts;
     }
@@ -86,38 +81,37 @@ class PostModel extends Model
     {
         //search items from the database on titie and tags
 
-        $posts = PostModel::where('title', 'like', '%' . $search . '%')
+        $posts = Post::where('title', 'like', '%' . $search . '%')
             ->orWhere('tags', 'like', '%' . $search . '%')
             ->paginate(6);
 
         return $posts;
     }
 
-
     public function sortPostsByCategory($category, $sort)
     {
 
         if ($sort == 'newest') {
-            $posts = PostModel::where('category', $category)->orderBy('created_at', 'desc')->paginate(10);
+            $posts = Post::where('category', $category)->orderBy('created_at', 'desc')->paginate(10);
         } elseif ($sort == 'oldest') {
-            $posts = PostModel::where('category', $category)->orderBy('created_at', 'asc')->paginate(10);
+            $posts = Post::where('category', $category)->orderBy('created_at', 'asc')->paginate(10);
         } elseif ($sort == 'price_low_high') {
-            $posts = PostModel::where('category', $category)->orderBy('price_revised', 'asc')->paginate(10);
+            $posts = Post::where('category', $category)->orderBy('price_revised', 'asc')->paginate(10);
         } elseif ($sort == 'price_high_low') {
-            $posts = PostModel::where('category', $category)->orderBy('price_revised', 'desc')->paginate(10);
+            $posts = Post::where('category', $category)->orderBy('price_revised', 'desc')->paginate(10);
         } elseif ($sort == 'rating_high_low') {
-            $posts = PostModel::where('category', $category)->orderBy('rating', 'desc')->get()->paginate(10);
+            $posts = Post::where('category', $category)->orderBy('rating', 'desc')->get()->paginate(10);
         } elseif ($sort == 'rating_low_high') {
-            $posts = PostModel::where('category', $category)->orderBy('rating', 'asc')->get()->paginate(10);
+            $posts = Post::where('category', $category)->orderBy('rating', 'asc')->get()->paginate(10);
         }
+
         return $posts;
     }
 
     public function addProduct($data)
     {
-        PostModel::insert($data);
+        Post::insert($data);
     }
-
 
     public function helperRating($posts)
     {

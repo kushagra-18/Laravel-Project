@@ -31,7 +31,7 @@ class UserMetaModel extends Model
 
         $data = array('user_email' => $user_email, 'product_id' => $product_id, 'created_at' => $current_time);
 
-        $userMetaModel = new UserMetaModel();
+        $userMeta = new UserMetaModel();
 
         //using db transactions
 
@@ -39,7 +39,7 @@ class UserMetaModel extends Model
 
         try {
 
-            $userMetaModel->insert($data);
+            $userMeta->insert($data);
 
             DB::commit();
             

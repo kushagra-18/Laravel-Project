@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
-class SellerModel extends Model
+class Seller extends Model
 {
     
     // public function addProduct($data)
@@ -30,7 +30,7 @@ class SellerModel extends Model
 
     public function getSellerInfo(){
 
-        $sellerProducts = PostModel::join('product_meta', 'posts.id', '=', 'product_meta.product_id')
+        $sellerProducts = Post::join('product_meta', 'posts.id', '=', 'product_meta.product_id')
             ->select("*")
             ->paginate(6);
 

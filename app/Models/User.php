@@ -6,11 +6,10 @@ namespace App\Models;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 
-class UserModel extends Model
+class User extends Model
 {
     protected $table = 'user_address';
 
@@ -27,7 +26,7 @@ class UserModel extends Model
 
         //save information in user_address coming from request
       
-        $userModel = new UserModel();
+        $userModel = new User();
         try{
             $userModel->insert($data);
         }catch(Exception $e){
