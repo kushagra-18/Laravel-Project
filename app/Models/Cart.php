@@ -97,9 +97,9 @@ class Cart extends Model
     public function deleteCartItems($request)
     {
 
-        if (!Auth::check()) {
-            return redirect('/login');
-        }
+        // if (!Auth::check()) {
+        //     return redirect('/login');
+        // }
 
         try {
             self::where('product_id', '=', $request->input('itemId'))->where('email', '=', Auth::user()->email)->delete();

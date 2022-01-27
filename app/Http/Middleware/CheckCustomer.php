@@ -14,11 +14,15 @@ class CheckCustomer {
      * @return mixed
      */
 
-     protected $SELLER_TYPE = 'seller';
+    //constructer with seller type
+
+    public function __construct() {
+        $this->SELLER_TYPE = "seller";
+    }
      
     public function handle($request, Closure $next)
     {
-        if (!Auth()->user()->user == 'seller') {
+        if (!Auth()->user()->user == $this->SELLER_TYPE) {
             return redirect('/');
         }
         return $next($request);
