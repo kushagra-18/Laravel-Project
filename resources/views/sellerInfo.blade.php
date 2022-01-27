@@ -69,19 +69,24 @@
 <!-- pagination with bootstrap-->
 <div class="container">
     <div class="row">
-        <div class="col-md-12 ">
+        <div class="col-md-12 mb-3">
             <div class="text-center">
             {{$products->links(("pagination::bootstrap-4"))}}
-            <a href = "" class="btn btn-primary">Back</a>
+            <a href = "" id = "mail" name = "mail" class="btn btn-primary">Mail report</a>
             </div>
         </div>
     </div>
 </div>
 
 
+<script>
 
+        //spinner when mail is being sent
+        $('#mail').click(function(){
+            $('#mail').html('<i class="fa fa-spinner fa-spin"></i> Sending...');
+        });
 
-
+    </script>
 
 @include('essentials.footer')
 

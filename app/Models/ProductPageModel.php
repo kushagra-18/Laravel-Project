@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\ProductMeta;
 
 class ProductPageModel extends Model
 {
@@ -101,8 +100,7 @@ class ProductPageModel extends Model
     {
 
         try {
-            $rating = DB::table('product_meta')
-                ->where('product_id', '=', $id)->get();
+            $rating = ProductMeta::where('product_id', '=', $id)->get();
         } catch (Exception $e) {
             return $e;
         }
@@ -144,12 +142,12 @@ class ProductPageModel extends Model
     public function showAllCommulativeUsersRated()
     {
         try {
-            $rating = DB::table('product_meta')
-                ->sum('rating_one') + DB::table('product_meta')
-                ->sum('rating_two') + DB::table('product_meta')
-                ->sum('rating_three') + DB::table('product_meta')
-                ->sum('rating_four') + DB::table('product_meta')
-                ->sum('rating_five');
+            $rating = ProductMeta::sum('rating_one') +
+             ProductMeta::sum('rating_two') + 
+             ProductMeta::sum('rating_three') +
+              ProductMeta::sum('rating_four') + 
+              ProductMeta::sum('rating_five');
+
         } catch (Exception $e) {
             return $e;
         }
@@ -166,8 +164,7 @@ class ProductPageModel extends Model
     {
 
         try {
-            $rating = DB::table('product_meta')
-                ->where('product_id', '=', $id)->get();
+            $rating = ProductMeta::where('product_id', '=', $id)->get();
         } catch (Exception $e) {
             return $e;
         }
@@ -206,40 +203,35 @@ class ProductPageModel extends Model
             error_log("rating: " . $rating);
             try {
 
-                DB::table('product_meta')->where('product_id', $product_id)
+                ProductMeta::where('product_id', $product_id)
                     ->increment('rating_one');
             } catch (Exception $e) {
                 error_log($e);
-                return $e;
             }
         } else if ($rating == 2) {
             try {
-                DB::table('product_meta')
-                    ->where('product_id', '=', $product_id)
+                ProductMeta::where('product_id', '=', $product_id)
                     ->increment('rating_two');
             } catch (Exception $e) {
                 error_log($e);
             }
         } else if ($rating == 3) {
             try {
-                DB::table('product_meta')
-                    ->where('product_id', '=', $product_id)
+                ProductMeta::where('product_id', '=', $product_id)
                     ->increment('rating_three');
             } catch (Exception $e) {
                 error_log($e);
             }
         } else if ($rating == 4) {
             try {
-                DB::table('product_meta')
-                    ->where('product_id', '=', $product_id)
+                ProductMeta::where('product_id', '=', $product_id)
                     ->increment('rating_four');
             } catch (Exception $e) {
                 error_log($e);
             }
         } else if ($rating == 5) {
             try {
-                DB::table('product_meta')
-                    ->where('product_id', '=', $product_id)
+                ProductMeta::where('product_id', '=', $product_id)
                     ->increment('rating_five');
             } catch (Exception $e) {
                 error_log($e);

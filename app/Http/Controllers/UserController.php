@@ -9,26 +9,37 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\UserMetaModel;
 use App\Models\UserModel;
 
-
 /**
- // TODO : Filtering on price range
- //TODO : Filtering on rating
- //TODO : Rating on main page
+    //TODO: Naming convention for models
+    //TODO: relationships
+    //TODO: return view correct way
  */
 
 class UserController extends Controller
 {
-    public function checkoutCartFinal(Request $request){
+    public function checkoutCartFinal(Request $request)
+    {
 
         //check if save-info is true
-        if($request->input('save-info') == 'on'){
+        if ($request->input('save-info') == 'on') {
             //save user info
+            $email = Auth::user()->email;
+            $first_name = $request->input('first_name');
+            $last_name = $request->input('last_name');
+            $address = $request->input('address');
+            $address2 = $request->input('address2');
+            $city = "Bhiwadi";
+            $state = $request->input('state');
+            $zip = $request->input('zip');
+            //current time stamp IST
+            $created_at = date('Y-m-d H:i:s');
+            $data = array('email' => $email, 'first_name' => $first_name, 'last_name' => $last_name, 'address' => $address, 'address2' => $address2, 'city' => $city, 'state' => $state, 'zip' => $zip, 'created_at' => $created_at);
+
             $userModel = new UserModel();
 
-            try{
-            $userModel->saveUserInfo($request);
-            }
-            catch(Exception $e){
+            try {
+                $userModel->saveUserInfo($data);
+            } catch (Exception $e) {
                 echo $e;
             }
         }
@@ -37,17 +48,17 @@ class UserController extends Controller
         $product_id = $request->input('product_id');
         $this->saveProductInfo($product_id);
         $this->saveProductBuy($request);
-
         return redirect()->back()->with('success', 'Item purchased successfully. Check your email for confirmation.');
     }
 
 
 
-    public function saveProductBuy(Request $request){
+    public function saveProductBuy(Request $request)
+    {
 
         $product_id = $request->input('product_id');
-        
-       
+
+
         try {
             $userModel = new UserModel();
             $userModel->updateBought($product_id);
@@ -56,23 +67,20 @@ class UserController extends Controller
         }
     }
 
-
     /**
      * save product_id and user_email in UserMeta tables
      * @param Request $request
      */
 
-    public function saveProductInfo($product_id){
-     
+    public function saveProductInfo($product_id)
+    {
+
 
         $userMetaModel = new UserMetaModel();
-        try{
+        try {
             $userMetaModel->saveProductInfo($product_id);
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             echo $e;
         }
     }
-
-
 }

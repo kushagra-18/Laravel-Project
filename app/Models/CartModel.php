@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Auth;
 class CartModel extends Model
 {
 
+    protected $table = 'cart';
+
+    protected $fillable = [
+        'user_id', 'product_id', 'quantity', 'price', 'total_price'
+    ];
+
     public function addCartItems(Request $request)
     {
         //    insert user email id and product id in cart table
@@ -22,7 +28,7 @@ class CartModel extends Model
         $product_id = $request->input('itemId');
         $quantity = 1;
         $data = array('email' => $email, 'product_id' => $product_id, 'quantity' => $quantity);
-        DB::table('cart')->insert($data);
+        self::insert($data);
     }
 
     public function showCartItems($id)
@@ -32,11 +38,16 @@ class CartModel extends Model
             return redirect('/login');
         }
 
-        $cartItems = DB::table('cart')
-            ->join('users', 'cart.email', '=', 'users.email')
+        try{
+
+        $cartItems = self::join('users', 'cart.email', '=', 'users.email')
             ->join('posts', 'cart.product_id', '=', 'posts.id')
             ->where('users.id', '=', $id)
             ->get();
+        }
+        catch(Exception $e){
+            error_log("Exception: " . $e->getMessage());
+        }
 
         return $cartItems;
     }
@@ -45,8 +56,7 @@ class CartModel extends Model
     {
 
         //get details of the items of the post table corresponding to the id
-        $cartItems = DB::table('posts')
-            ->where('id', '=', $id)
+        $cartItems = PostModel::where('id', '=', $id)
             ->get();
 
         return $cartItems;
@@ -58,8 +68,7 @@ class CartModel extends Model
         // check if user has saved address and return bool
 
         try {
-            $savedAddress = DB::table('user_address')
-                ->where('email', '=', Auth::user()->email)
+            $savedAddress = UserModel::where('email', '=', Auth::user()->email)
                 ->get();
             if (count($savedAddress) > 0) {
                 return true;
@@ -73,12 +82,10 @@ class CartModel extends Model
 
     public function getSavedAddress()
     {
-
         // check if user has saved address and return bool
 
         try {
-            $getSavedAddress = DB::table('user_address')
-                ->where('email', '=', Auth::user()->email)
+            $getSavedAddress = UserModel::where('email', '=', Auth::user()->email)
                 ->get();
         } catch (Exception $e) {
             return $e;
@@ -95,7 +102,7 @@ class CartModel extends Model
         }
 
         try {
-            DB::table('cart')->where('product_id', '=', $request->input('itemId'))->where('email', '=', Auth::user()->email)->delete();
+            self::where('product_id', '=', $request->input('itemId'))->where('email', '=', Auth::user()->email)->delete();
         } catch (Exception $e) {
             return $e;
         }
@@ -105,8 +112,7 @@ class CartModel extends Model
     {
 
         try {
-            $cartNumber = DB::table('cart')
-                ->where('email', '=', Auth::user()->email)
+            $cartNumber = self::where('email', '=', Auth::user()->email)
                 ->count();
         } catch (Exception $e) {
             return 0;
@@ -120,4 +126,3 @@ class CartModel extends Model
         }
     }
 }
-

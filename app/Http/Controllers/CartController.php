@@ -17,7 +17,6 @@ class CartController extends Controller
     //    $this->USER_ID  = Auth::user()->id;
    }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -27,16 +26,6 @@ class CartController extends Controller
     public function index()
     {
         return view('cart');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -50,9 +39,9 @@ class CartController extends Controller
         $cartModel = new CartModel();
         try {
             $cartModel->addCartItems($request);
-            return  $this->show();
+            return  back();
         } catch (Exception $e) {
-            return $e;
+            error_log($e);
         }
     }
 
@@ -78,32 +67,7 @@ class CartController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-
-
-    /**
+   /**
      * This function is used to delete cart items
      * @param  int  $id
      * @return {NULL}
@@ -115,7 +79,7 @@ class CartController extends Controller
             $cartModel->deleteCartItems($request);
             return  $this->show();
         } catch (Exception $e) {
-            return $e;
+            error_log($e);
         }
     }
 
@@ -136,7 +100,7 @@ class CartController extends Controller
         $checkSavedAddress = $cartModel->checkSavedAddress();
 
         $getSavedAddress = $cartModel->getSavedAddress();
-
+        
         return view('checkout', compact('cartItemsShow', 'checkSavedAddress', 'getSavedAddress'));
     }
 

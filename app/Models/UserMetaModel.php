@@ -58,6 +58,8 @@ class UserMetaModel extends Model
      * @return \Illuminate\Http\Response
      */
 
+     //apend the user_meta table with posts table
+
     public function showUserDetails()
     {
         $user_email = Auth::user()->email;

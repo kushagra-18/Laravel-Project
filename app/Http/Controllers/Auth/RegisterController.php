@@ -69,16 +69,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
+        //call validator
+
+        validator();
+
         // email data
         $emailData = array(
             'name' => $data['name'],
             'email' => $data['email'],
         );
-
-        error_log("email data: " . print_r($emailData, true));
-
-        //priority high
-        dispatch(new SendRemainderEmail($emailData));
 
         return User::create([
             'name' => $data['name'],
@@ -87,5 +86,8 @@ class RegisterController extends Controller
             'companyName' => $data['companyName'],
             'password' => bcrypt($data['password']),
         ]);
+
+        //priority high
+      //  dispatch(new SendRemainderEmail($emailData));
     }
 }

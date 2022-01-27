@@ -19,7 +19,7 @@ class ProductPageController extends Controller
 
         $ProductModel = new ProductPageModel();
 
-        $posts = DB::table('posts')->where('id', $id)->get();
+        $posts = PostModel::where('id', $id)->get();
 
         $checkBought = $this->checkBought($id);
 

@@ -80,10 +80,7 @@ class SellerController extends Controller
             'seller_email' => $seller_email
         );
 
-     
-
-
-
+    
         $PostModel = new PostModel();
 
         try {

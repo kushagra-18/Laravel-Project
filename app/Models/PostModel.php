@@ -1,12 +1,11 @@
 <?php
-
-namespace App\Models;
-
+namespace App;
+namespace App\Models;                                                                                                                                                                                                                                                                    
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Exception;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Exception;
 
 class PostModel extends Model
 {
