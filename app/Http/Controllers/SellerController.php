@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SellerModel;
-use App\Models\PostModel;
+use App\Models\Seller;
+use App\Models\Post;
 use Exception;
+use App\Http\Requests\SellerProductValidation;
 use Illuminate\Support\Facades\Auth;
 
 class SellerController extends Controller
@@ -16,35 +17,22 @@ class SellerController extends Controller
         return view('sellerProduct');
     }
 
-
-    
-
     public function sellerView()
     {
         //create object of seller model
-        $sellerModel = new SellerModel();
+        $sellerModel = new Seller();
         //get seller info
         $product = $sellerModel->getSellerInfo();
 
         return view('sellerInfo', ['products' => $product]);
     }
 
-    public function addProduct(Request $request)
+    public function addProduct(SellerProductValidation $request)
     {
 
+        //return if the requests are validated by the SellerProductValidation class
 
-        $this->validate($request, [
-            'product_name' => ['required', 'max:255'],
-            'product_description' => ['required', 'min:50'],
-            'product_image' => 'required|image|mimes:jpeg,png,jpg|max:6144',
-            'product_category' => 'required',
-            'quantity' => 'required|numeric',
-            'product_price_original' => 'required|numeric',
-            'product_price_revised' => 'required|numeric',
-            'tags' => 'required',
-            'product_discount_till' => 'required',
-            'product_key_points' => 'required',
-        ]);
+        $request = $request->validated();
 
         $seller_email = Auth::user()->email;
 
@@ -81,7 +69,7 @@ class SellerController extends Controller
         );
 
     
-        $PostModel = new PostModel();
+        $PostModel = new Post();
 
         try {
             $PostModel->addProduct($data);
