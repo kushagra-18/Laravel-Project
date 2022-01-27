@@ -155,10 +155,10 @@
             </div>
 
             <div class="col-md-2 mb-3">
-                <label for="product_discount_till">Quantity:</label>
+                <label for="quantity">Quantity:</label>
                 <input type="number" class="form-control" name="quantity" id="quantity" placeholder="Add Quantity" required>
-                @if($errors->has('product_quantity'))
-                <div class="error">{{ $errors->first('product_quantity') }}</div>
+                @if($errors->has('quantity'))
+                <div class="error">{{ $errors->first('quantity') }}</div>
                 @endif
                 <div class="invalid-feedback">
                     Add Quantity

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
-class UserMetaModel extends Model
+class UserMeta extends Model
 {
 
     protected $table = 'user_meta';
@@ -31,7 +31,7 @@ class UserMetaModel extends Model
 
         $data = array('user_email' => $user_email, 'product_id' => $product_id, 'created_at' => $current_time);
 
-        $userMeta = new UserMetaModel();
+        $userMeta = new UserMeta();
 
         //using db transactions
 
@@ -63,7 +63,7 @@ class UserMetaModel extends Model
     public function showUserDetails()
     {
         $user_email = Auth::user()->email;
-        $userMeta = UserMetaModel::join('posts', 'user_meta.product_id', '=', 'posts.id')
+        $userMeta = UserMeta::join('posts', 'user_meta.product_id', '=', 'posts.id')
             ->select(
                 'posts.id',
                 'user_meta.created_at',

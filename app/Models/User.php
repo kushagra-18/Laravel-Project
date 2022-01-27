@@ -14,29 +14,28 @@ class User extends Model
     protected $table = 'user_address';
 
     protected $fillable = [
-        'email', 'first_name', 'last_name',
+        'email', 'first_name',
+        'last_name',
         'address2', 'address',
-        'city', 'state', 'zip', 'created_at',
+        'city', 'state',
+        'zip', 'created_at',
     ];
-
-
 
     public function saveUserInfo($data)
     {
 
         //save information in user_address coming from request
-      
+
         $userModel = new User();
-        try{
+        try {
             $userModel->insert($data);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             error_log("Exception: " . $e->getMessage());
         }
-     
     }
 
     //update bought by + 1 corresponding to product_id product_meta table IF PRODUCT EXITS ELSE INSERT
-    
+
     public function updateBought($product_id)
     {
         $product_meta = ProductMeta::where('product_id', $product_id)->get();

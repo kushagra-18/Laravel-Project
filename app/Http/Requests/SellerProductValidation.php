@@ -34,6 +34,7 @@ class SellerProductValidation extends FormRequest
             'tags' => 'required',
             'product_discount_till' => 'required',
             'product_key_points' => 'required',
+            'quantity' => 'required|numeric',
         ];
     }
 }

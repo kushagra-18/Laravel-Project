@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Auth;
-use App\Models\UserMetaModel;
-use App\Models\UserModel;
+use App\Models\UserMeta;
+use App\Models\User;
 
 /**
     //TODO: Naming convention for models
@@ -35,7 +35,7 @@ class UserController extends Controller
             $created_at = date('Y-m-d H:i:s');
             $data = array('email' => $email, 'first_name' => $first_name, 'last_name' => $last_name, 'address' => $address, 'address2' => $address2, 'city' => $city, 'state' => $state, 'zip' => $zip, 'created_at' => $created_at);
 
-            $userModel = new UserModel();
+            $userModel = new User();
 
             try {
                 $userModel->saveUserInfo($data);
@@ -60,7 +60,7 @@ class UserController extends Controller
 
 
         try {
-            $userModel = new UserModel();
+            $userModel = new User();
             $userModel->updateBought($product_id);
         } catch (Exception $e) {
             echo $e;
@@ -76,7 +76,7 @@ class UserController extends Controller
     {
 
 
-        $userMetaModel = new UserMetaModel();
+        $userMetaModel = new UserMeta();
         try {
             $userMetaModel->saveProductInfo($product_id);
         } catch (Exception $e) {

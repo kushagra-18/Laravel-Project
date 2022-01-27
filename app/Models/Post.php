@@ -69,6 +69,7 @@ class Post extends Model
      * @param $category
      * @return {array}
      */
+    
     public function getPostsByCategory($category)
     {
 
