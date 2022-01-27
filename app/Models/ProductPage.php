@@ -24,6 +24,7 @@ class ProductPage extends Model
      * @return \Illuminate\Http\Response
      * @throws Exception
      */
+
     public function checkIfBought($id)
     {
         try {
@@ -40,7 +41,6 @@ class ProductPage extends Model
             return false;
         }
     }
-
 
     /**
      * check if the user has already rated the product
@@ -83,8 +83,6 @@ class ProductPage extends Model
         } catch (Exception $e) {
 
             error_log($e);
-
-            return $e;
         }
     }
 
@@ -112,7 +110,6 @@ class ProductPage extends Model
         $rating[0]->rating_3 = $rating[0]->rating_three;
         $rating[0]->rating_4 = $rating[0]->rating_four;
         $rating[0]->rating_5 = $rating[0]->rating_five;
-
 
         return $rating;
     }

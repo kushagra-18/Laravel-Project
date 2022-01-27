@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\users;
 use Exception;
-use App\Models\PostModel;
-use App\Models\ProductPageModel;
+use App\Models\Post;
+use App\Models\ProductPage;
 
 class ProductPageController extends Controller
 {
@@ -17,9 +17,9 @@ class ProductPageController extends Controller
 
         $isRated = 0;
 
-        $ProductModel = new ProductPageModel();
+        $ProductModel = new ProductPage();
 
-        $posts = PostModel::where('id', $id)->get();
+        $posts = Post::where('id', $id)->get();
 
         $checkBought = $this->checkBought($id);
 
@@ -59,7 +59,7 @@ class ProductPageController extends Controller
 
     public function checkBought($id)
     {
-        $ProductModel = new ProductPageModel();
+        $ProductModel = new ProductPage();
         $checkBought = $ProductModel->checkIfBought($id);
         return $checkBought;
     }
@@ -68,7 +68,7 @@ class ProductPageController extends Controller
     public function rating(Request $request)
     {
         $product_id = $request->input('itemId');
-        $ProductModel = new ProductPageModel();
+        $ProductModel = new ProductPage();
         try {
             $ProductModel->rating($request);
             $this->productMetaRating($request);
@@ -87,7 +87,7 @@ class ProductPageController extends Controller
 
     public function showIndividualRating($id)
     {
-        $ProductModel = new ProductPageModel();
+        $ProductModel = new ProductPage();
         $rating = $ProductModel->showIndividualRating($id);
         return $rating;
     }
@@ -95,7 +95,7 @@ class ProductPageController extends Controller
     public function productMetaRating(Request $request)
     {
         $product_id = $request->input('itemId');
-        $ProductModel = new ProductPageModel();
+        $ProductModel = new ProductPage();
         try {
             $ProductModel->productMetaRating($request);
             return  $this->index($product_id);

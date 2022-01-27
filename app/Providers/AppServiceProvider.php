@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 use Illuminate\Support\Facades\View;
-use App\Models\CartModel;
+use App\Models\Cart;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('*', function ($view) {
-            $cartModel = new CartModel();
+            $cartModel = new Cart();
             $cartNumber = $cartModel->cartNumber();
             $view->with('cartNumber', $cartNumber);
         });

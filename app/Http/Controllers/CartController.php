@@ -10,12 +10,6 @@ use App\Models\Cart;
 class CartController extends Controller
 {
 
-    //create const user_email from auth
-   public function __construct()
-   {
-    //    $this->USER_EMAIL = Auth::user()->email;
-    //    $this->USER_ID  = Auth::user()->id;
-   }
 
     /**
      * Display a listing of the resource.

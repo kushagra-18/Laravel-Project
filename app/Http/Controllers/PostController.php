@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\users;
-use App\Models\ProductPageModel;
-use App\Models\PostModel;
+use App\Models\ProductPage;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -13,9 +13,9 @@ class PostController extends Controller
     public function index()
     {
         //return data from getTrendingPosts function
-        $postModel = new PostModel();
+        $postModel = new Post();
 
-        $ProductModel = new ProductPageModel();
+        $ProductModel = new ProductPage();
 
         $posts = $postModel->getTrendingPosts();
 
@@ -40,7 +40,7 @@ class PostController extends Controller
     {
 
         //create object of PostModel class
-        $postModel = new PostModel();
+        $postModel = new Post();
         $posts = $postModel->getPostsByCategory($category);
         //return view with data
         $isEmpty = false;
@@ -64,7 +64,7 @@ class PostController extends Controller
 
        // echo $search;
 
-        $postModel = new PostModel();
+        $postModel = new Post();
         $posts = $postModel->searchItems($search);
 
         $isEmpty = false;
@@ -86,7 +86,7 @@ class PostController extends Controller
     {
 
         //create object of PostModel class
-        $postModel = new PostModel();
+        $postModel = new Post();
 
         $posts = $postModel->sortPostsByCategory($category, $sort);
 
