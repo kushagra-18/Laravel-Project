@@ -10,7 +10,6 @@ use App\Models\UserMeta;
 use App\Models\User;
 
 /**
-    //TODO: Naming convention for models
     //TODO: relationships
     //TODO: return view correct way
  */

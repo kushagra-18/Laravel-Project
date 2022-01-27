@@ -1,6 +1,9 @@
 <?php
+
 namespace App;
-namespace App\Models;                                                                                                                                                                                                                                                                    
+
+namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +18,10 @@ class Post extends Model
     protected $table = 'posts';
 
     protected $fillable = [
-        'title', 'description', 'price', 'category', 'image', 'user_id', 'quantity', 'status', 'created_at', 'updated_at', 'discount_till'
+        'title', 'description', 'price',
+        'category', 'image', 'user_id',
+        'quantity', 'status', 'created_at',
+        'updated_at', 'discount_till'
     ];
 
     public function getDiscountTillAttribute($value)
@@ -69,7 +75,7 @@ class Post extends Model
      * @param $category
      * @return {array}
      */
-    
+
     public function getPostsByCategory($category)
     {
 
