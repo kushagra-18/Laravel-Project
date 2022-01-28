@@ -20,103 +20,33 @@ class Cart extends Model
         'user_id', 'product_id', 'quantity', 'price', 'total_price'
     ];
 
-    public function addCartItems(Request $request)
+    public function addCartItems($data)
     {
         //    insert user email id and product id in cart table
-
-        $email = Auth::user()->email;
-        $product_id = $request->input('itemId');
-        $quantity = 1;
-        $data = array('email' => $email, 'product_id' => $product_id, 'quantity' => $quantity);
         self::insert($data);
     }
 
     public function showCartItems($id)
     {
 
-        if (!Auth::check()) {
-            return redirect('/login');
-        }
-
-        try{
-
         $cartItems = self::join('users', 'cart.email', '=', 'users.email')
             ->join('posts', 'cart.product_id', '=', 'posts.id')
             ->where('users.id', '=', $id)
             ->get();
-        }
-        catch(Exception $e){
-            error_log("Exception: " . $e->getMessage());
-        }
+
 
         return $cartItems;
     }
 
-    public function checkoutItem($id)
+    public function deleteCartItems($itemId,$email)
     {
-
-        //get details of the items of the post table corresponding to the id
-        $cartItems = Post::where('id', '=', $id)
-            ->get();
-
-        return $cartItems;
+        self::where('product_id', '=', $itemId)->where('email', '=', $email)->delete();
     }
 
-    public function checkSavedAddress()
+    public function cartNumber($email)
     {
-
-        // check if user has saved address and return bool
-
-        try {
-            $savedAddress = User::where('email', '=', Auth::user()->email)
-                ->get();
-            if (count($savedAddress) > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception $e) {
-            return $e;
-        }
-    }
-
-    public function getSavedAddress()
-    {
-        // check if user has saved address and return bool
-
-        try {
-            $getSavedAddress = User::where('email', '=', Auth::user()->email)
-                ->get();
-        } catch (Exception $e) {
-            return $e;
-        }
-
-        return $getSavedAddress;
-    }
-
-    public function deleteCartItems($request)
-    {
-
-        // if (!Auth::check()) {
-        //     return redirect('/login');
-        // }
-
-        try {
-            self::where('product_id', '=', $request->input('itemId'))->where('email', '=', Auth::user()->email)->delete();
-        } catch (Exception $e) {
-            return $e;
-        }
-    }
-
-    public function cartNumber()
-    {
-
-        try {
-            $cartNumber = self::where('email', '=', Auth::user()->email)
-                ->count();
-        } catch (Exception $e) {
-            return 0;
-        }
+        $cartNumber = self::where('email', '=', $email)
+            ->count();
 
         //if cart is empty return 0
         if ($cartNumber == 0) {

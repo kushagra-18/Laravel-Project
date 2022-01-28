@@ -15,14 +15,10 @@ class PostController extends Controller
         //return data from getTrendingPosts function
         $postModel = new Post();
 
-        $ProductModel = new ProductPage();
-
         $posts = $postModel->getTrendingPosts();
 
         //return data from getTopDeals function
         $topDeals = $postModel->getTopDeals();
-
-        // error_log("topDeals: " . print_r($topDeals));
 
         return view('welcome', compact('posts', 'topDeals'));
     }

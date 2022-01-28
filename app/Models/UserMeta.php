@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -31,18 +32,15 @@ class UserMeta extends Model
 
         $data = array('user_email' => $user_email, 'product_id' => $product_id, 'created_at' => $current_time);
 
-        $userMeta = new UserMeta();
-
         //using db transactions
 
         DB::beginTransaction();
 
         try {
 
-            $userMeta->insert($data);
+            self::insert($data);
 
             DB::commit();
-            
         } catch (Exception $e) {
 
             DB::rollback();
@@ -50,7 +48,6 @@ class UserMeta extends Model
             error_log("Exception: " . $e->getMessage());
         }
     }
-
     /**
      * modelfor
      * show details of posts added by user in the meta table
@@ -58,7 +55,7 @@ class UserMeta extends Model
      * @return \Illuminate\Http\Response
      */
 
-     //apend the user_meta table with posts table
+    //apend the user_meta table with posts table
 
     public function showUserDetails()
     {
@@ -78,5 +75,65 @@ class UserMeta extends Model
             ->get();
 
         return $userMeta;
+    }
+
+    /**
+     * check if the user has already rated the product
+     */
+
+    public function checkIfRated($id)
+    {
+        try {
+            $checkIfRated = self::where('product_id', '=', $id)
+                ->where('user_email', '=', Auth::user()->email)
+                ->where('rating', '!=', 0)
+                ->get();
+        } catch (Exception $e) {
+            return $e;
+        }
+
+        if (count($checkIfRated) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     *  @description check if user has bought the product from database
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     * @throws Exception
+     */
+
+    public function checkIfBought($id)
+    {
+        try {
+            $checkIfBought = self::where('product_id', $id)
+                ->where('user_email', Auth::user()->email)
+                ->get();
+        } catch (Exception $e) {
+            return $e;
+        }
+
+        if (count($checkIfBought) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @description update the rating of the product
+     * @param  int  $product_id
+     * @param  int  $rating
+     *
+     */
+
+    public function ratingUpdate($email,$product_id, $rating)
+    {
+            self::where('product_id', '=', $product_id)
+                ->where('user_email', '=', $email)
+                ->update(['rating' => $rating]);
     }
 }

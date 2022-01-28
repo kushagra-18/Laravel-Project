@@ -41,7 +41,7 @@ class Post extends Model
     public function getTopDeals()
     {
 
-        $posts = Post::join('product_meta', 'posts.id', '=', 'product_meta.product_id')
+        $posts = self::join('product_meta', 'posts.id', '=', 'product_meta.product_id')
             ->select('*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
             ->orderBy('discount', 'desc')
             ->limit(6)
@@ -55,7 +55,7 @@ class Post extends Model
     public function getTrendingPosts()
     {
 
-        $posts = Post::select('*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
+        $posts = self::select('*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
             ->join('product_meta', 'posts.id', '=', 'product_meta.product_id')
             ->orderBy('discount', 'desc')
             ->limit(6)
@@ -79,7 +79,7 @@ class Post extends Model
     public function getPostsByCategory($category)
     {
 
-        $posts = Post::where('category', $category)->paginate(6);
+        $posts = self::where('category', $category)->paginate(6);
 
         return $posts;
     }
@@ -88,7 +88,7 @@ class Post extends Model
     {
         //search items from the database on titie and tags
 
-        $posts = Post::where('title', 'like', '%' . $search . '%')
+        $posts = self::where('title', 'like', '%' . $search . '%')
             ->orWhere('tags', 'like', '%' . $search . '%')
             ->paginate(6);
 
@@ -99,17 +99,17 @@ class Post extends Model
     {
 
         if ($sort == 'newest') {
-            $posts = Post::where('category', $category)->orderBy('created_at', 'desc')->paginate(10);
+            $posts = self::where('category', $category)->orderBy('created_at', 'desc')->paginate(10);
         } elseif ($sort == 'oldest') {
-            $posts = Post::where('category', $category)->orderBy('created_at', 'asc')->paginate(10);
+            $posts = self::where('category', $category)->orderBy('created_at', 'asc')->paginate(10);
         } elseif ($sort == 'price_low_high') {
-            $posts = Post::where('category', $category)->orderBy('price_revised', 'asc')->paginate(10);
+            $posts = self::where('category', $category)->orderBy('price_revised', 'asc')->paginate(10);
         } elseif ($sort == 'price_high_low') {
-            $posts = Post::where('category', $category)->orderBy('price_revised', 'desc')->paginate(10);
+            $posts = self::where('category', $category)->orderBy('price_revised', 'desc')->paginate(10);
         } elseif ($sort == 'rating_high_low') {
-            $posts = Post::where('category', $category)->orderBy('rating', 'desc')->get()->paginate(10);
+            $posts = self::where('category', $category)->orderBy('rating', 'desc')->get()->paginate(10);
         } elseif ($sort == 'rating_low_high') {
-            $posts = Post::where('category', $category)->orderBy('rating', 'asc')->get()->paginate(10);
+            $posts = self::where('category', $category)->orderBy('rating', 'asc')->get()->paginate(10);
         }
 
         return $posts;
@@ -117,7 +117,7 @@ class Post extends Model
 
     public function addProduct($data)
     {
-        Post::insert($data);
+        self::insert($data);
     }
 
     public function helperRating($posts)
@@ -138,5 +138,23 @@ class Post extends Model
                 $post->avgRating = 0;
             }
         }
+    }
+
+    public function checkoutItem($id)
+    {
+        //get details of the items of the post table corresponding to the id
+        $cartItems = self::where('id', '=', $id)
+            ->get();
+
+        return $cartItems;
+    }
+
+    public function getSellerInfo(){
+
+        $sellerProducts = self::join('product_meta', 'posts.id', '=', 'product_meta.product_id')
+            ->select("*")
+            ->paginate(6);
+
+            return $sellerProducts;
     }
 }

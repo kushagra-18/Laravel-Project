@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/category/{category}/{sort}', 'PostController@categorySort')->name('categorySort');
 
-    Route::post('/rating', 'ProductPageController@rating')->name('rating');
+    Route::post('/rating', 'ProductPageController@ratingupdate')->name('ratingUpdate');
 
     Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
 

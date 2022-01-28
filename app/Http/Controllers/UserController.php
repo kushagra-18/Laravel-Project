@@ -2,25 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddressValidation;
+use App\Models\ProductMeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserMeta;
 use App\Models\User;
+use Faker\Provider\ar_JO\Address;
 
 /**
-    //TODO: relationships
-    //TODO: return view correct way
+    //TODO: respective models
+   
  */
+
 
 class UserController extends Controller
 {
     public function checkoutCartFinal(Request $request)
     {
-
         //check if save-info is true
         if ($request->input('save-info') == 'on') {
+
+            $request->validate([
+                'first_name' => 'required|max:255',
+                'last_name' => 'required|max:255',
+                'address' => 'required|max:255',
+                'state' => 'required',
+                'zip' => 'required|max:255',
+            ]);
+
             //save user info
             $email = Auth::user()->email;
             $first_name = $request->input('first_name');
@@ -51,18 +63,21 @@ class UserController extends Controller
     }
 
 
-
     public function saveProductBuy(Request $request)
     {
 
+        //validate request
+        $this->validate($request, [
+            'product_id' => 'required',
+        ]);
+
         $product_id = $request->input('product_id');
 
-
         try {
-            $userModel = new User();
-            $userModel->updateBought($product_id);
+            $productMeta = new ProductMeta();
+            $productMeta->updateBought($product_id);
         } catch (Exception $e) {
-            echo $e;
+            error_log($e);
         }
     }
 

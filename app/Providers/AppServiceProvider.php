@@ -3,6 +3,7 @@
 namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -17,7 +18,8 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('*', function ($view) {
             $cartModel = new Cart();
-            $cartNumber = $cartModel->cartNumber();
+            $email = Auth::user()->email;
+            $cartNumber = $cartModel->cartNumber($email);
             $view->with('cartNumber', $cartNumber);
         });
     }

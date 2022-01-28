@@ -4,6 +4,8 @@
     <title>
         Shopwayy | Search
     </title>
+
+    
 </head>
 
 <style>
@@ -14,6 +16,7 @@
 
 <!-- link style_postsCategory -->
 <link rel="stylesheet" href="{{ URL::asset('css/style_postsCategory.css') }}">
+
 <body>
     @include('essentials.navbar')
 
@@ -90,6 +93,8 @@
         </div>
         @else
 
+    
+
         <!-- not found -->
         <center>
             <div class="not-found">
@@ -100,10 +105,11 @@
 
         @endif
 
-</body>
 @include('essentials.footer')
+    </div>
 
-</div>
+</body>
+
 
 </html>
 
@@ -131,6 +137,25 @@
             });
         }
     });
+
+    //sorting with ajax without page reload
+
+    $(document).ready(function() {
+        $("#paginationResults").on("click", ".sorting a", function(e) {
+            e.preventDefault();
+            var page = $(this).attr("href").split("page=")[1];
+            getPosts(page);
+        });
+
+        function getPosts(page) {
+            $.ajax({
+                url: "?page=" + page
+            }).done(function(data) {
+                $("#paginationResults").html(data);
+            });
+        }
+    });
+
 
 
     $("#filters").click(function() {

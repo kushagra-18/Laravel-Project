@@ -20,9 +20,9 @@ class SellerController extends Controller
     public function sellerView()
     {
         //create object of seller model
-        $sellerModel = new Seller();
+        $postModel = new Post();
         //get seller info
-        $product = $sellerModel->getSellerInfo();
+        $product = $postModel->getSellerInfo();
 
         return view('sellerInfo', ['products' => $product]);
     }

@@ -70,7 +70,7 @@
                             <hr>
 
                             <h3 class="box-title mt-1">Your Rating</h3>
-                            <form action={{route('rating')}} name="ratingForm" method="post" id="ratingForm" class="rating">
+                            <form action={{route('ratingUpdate')}} name="ratingForm" method="post" id="ratingForm" class="rating">
                                 <input type="hidden" name="_token" value="{{ csrf_token()}}">
                                 <input type="hidden" name="itemId" value="{{ $posts[0]->id }}">
                                 <label>
