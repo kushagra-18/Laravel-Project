@@ -24,6 +24,15 @@ class Post extends Model
         'updated_at', 'discount_till'
     ];
 
+
+
+    public function getProduct($id)
+    {
+        $posts = Post::where('id', $id)->get();
+
+        return $posts;
+    }
+
     public function getDiscountTillAttribute($value)
     {
         return Carbon::parse($value)->diffForHumans();

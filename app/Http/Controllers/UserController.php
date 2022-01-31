@@ -17,11 +17,17 @@ use Faker\Provider\ar_JO\Address;
    
  */
 
-
 class UserController extends Controller
 {
     public function checkoutCartFinal(Request $request)
     {
+
+        //validate product_id 
+
+        $this->validate($request, [
+            'product_id' => 'required',
+        ]);
+
         //check if save-info is true
         if ($request->input('save-info') == 'on') {
 
@@ -58,20 +64,13 @@ class UserController extends Controller
         //get product_id
         $product_id = $request->input('product_id');
         $this->saveProductInfo($product_id);
-        $this->saveProductBuy($request);
+        $this->saveProductBuy($product_id);
         return redirect()->back()->with('success', 'Item purchased successfully. Check your email for confirmation.');
     }
 
 
-    public function saveProductBuy(Request $request)
+    public function saveProductBuy($product_id)
     {
-
-        //validate request
-        $this->validate($request, [
-            'product_id' => 'required',
-        ]);
-
-        $product_id = $request->input('product_id');
 
         try {
             $productMeta = new ProductMeta();

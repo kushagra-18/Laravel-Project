@@ -21,7 +21,9 @@ class ProductPageController extends Controller
 
         $userModel = new UserMeta();
 
-        $posts = Post::where('id', $id)->get();
+        $postModel = new Post();
+
+        $posts = $postModel->getProduct($id);
 
         $checkBought = $this->checkBought($id);
 
