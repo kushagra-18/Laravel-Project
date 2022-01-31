@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserMetaModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\UserMeta;
 use Exception;
 
 class UserMetaController extends Controller
@@ -19,7 +20,7 @@ class UserMetaController extends Controller
     public function showUserDetails()
     {
 
-        $userMetaModel = new UserMetaModel();
+        $userMetaModel = new UserMeta();
 
         try {
 
@@ -27,7 +28,6 @@ class UserMetaController extends Controller
             
             return view('user', compact('userMeta'));
             
-
         } catch (Exception $e) {
             return $e;
         }

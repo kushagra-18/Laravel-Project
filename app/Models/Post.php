@@ -25,18 +25,11 @@ class Post extends Model
     ];
 
 
-
-    public function getProduct($id)
-    {
-        $posts = Post::where('id', $id)->get();
-
-        return $posts;
-    }
-
     public function getDiscountTillAttribute($value)
     {
         return Carbon::parse($value)->diffForHumans();
     }
+
 
     /**
      * @description : This function is used to get top 6 posts from the database.
@@ -51,22 +44,44 @@ class Post extends Model
     {
 
         $posts = self::join('product_meta', 'posts.id', '=', 'product_meta.product_id')
-            ->select('*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
-            ->orderBy('discount', 'desc')
+            ->select('*')
+            ->orderByRaw('(posts.price_original - posts.price_revised) DESC')
             ->limit(6)
             ->get();
+
+
+
+            // $post = self::whereIn('emp_id', function ($query) use ($empid){
+
+            //     $query->select('emp_id')
+    
+            //         ->from('employees')
+    
+            //         ->where('m_id',$empid)
+    
+            //         ->where('status',0);
+    
+            // })->get();
 
         $this->helperRating($posts);
 
         return $posts;
     }
 
+    public function getProduct($id)
+    {
+        $posts = Post::where('id', $id)->get();
+
+        return $posts;
+    }
+
+
     public function getTrendingPosts()
     {
 
-        $posts = self::select('*', DB::raw('(posts.price_original - posts.price_revised) as discount'))
+        $posts = self::select('*')
             ->join('product_meta', 'posts.id', '=', 'product_meta.product_id')
-            ->orderBy('discount', 'desc')
+            ->orderByRaw('(posts.price_original - posts.price_revised) DESC')
             ->limit(6)
             ->get();
 

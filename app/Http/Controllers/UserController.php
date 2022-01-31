@@ -13,7 +13,7 @@ use App\Models\User;
 use Faker\Provider\ar_JO\Address;
 
 /**
-    //TODO: respective models
+
    
  */
 
@@ -88,10 +88,10 @@ class UserController extends Controller
     public function saveProductInfo($product_id)
     {
 
-
+        $user_email = Auth::user()->email;
         $userMetaModel = new UserMeta();
         try {
-            $userMetaModel->saveProductInfo($product_id);
+            $userMetaModel->saveProductInfo($product_id, $user_email);
         } catch (Exception $e) {
             echo $e;
         }

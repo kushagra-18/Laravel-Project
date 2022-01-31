@@ -19,6 +19,8 @@ class ProductPageController extends Controller
 
         $isRated = 0;
 
+        $email = Auth::user()->email;
+
         $userModel = new UserMeta();
 
         $postModel = new Post();
@@ -27,7 +29,7 @@ class ProductPageController extends Controller
 
         $checkBought = $this->checkBought($id);
 
-        $checkIfRated = $userModel->checkIfRated($id);
+        $checkIfRated = $userModel->checkIfRated($id, $email);
 
         try {
 
@@ -61,7 +63,10 @@ class ProductPageController extends Controller
     public function checkBought($id)
     {
         $userMetaModel = new UserMeta();
-        $checkBought = $userMetaModel->checkIfBought($id);
+
+        $email = Auth::user()->email;
+
+        $checkBought = $userMetaModel->checkIfBought($id,$email);
         return $checkBought;
     }
 

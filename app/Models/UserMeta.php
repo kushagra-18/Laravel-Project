@@ -22,7 +22,7 @@ class UserMeta extends Model
      * save product_id and user_email in UserMeta tables
      */
 
-    public function saveProductInfo($product_id)
+    public function saveProductInfo($product_id, $user_email)
     {
         //get current time 
 
@@ -81,11 +81,11 @@ class UserMeta extends Model
      * check if the user has already rated the product
      */
 
-    public function checkIfRated($id)
+    public function checkIfRated($id,$user_email)
     {
         try {
             $checkIfRated = self::where('product_id', '=', $id)
-                ->where('user_email', '=', Auth::user()->email)
+                ->where('user_email', '=', $user_email)
                 ->where('rating', '!=', 0)
                 ->get();
         } catch (Exception $e) {
@@ -106,11 +106,11 @@ class UserMeta extends Model
      * @throws Exception
      */
 
-    public function checkIfBought($id)
+    public function checkIfBought($id,$email)
     {
         try {
             $checkIfBought = self::where('product_id', $id)
-                ->where('user_email', Auth::user()->email)
+                ->where('user_email', $email)
                 ->get();
         } catch (Exception $e) {
             return $e;
