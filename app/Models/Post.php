@@ -51,17 +51,17 @@ class Post extends Model
 
 
 
-            // $post = self::whereIn('emp_id', function ($query) use ($empid){
+        // $post = self::whereIn('emp_id', function ($query) use ($empid){
 
-            //     $query->select('emp_id')
-    
-            //         ->from('employees')
-    
-            //         ->where('m_id',$empid)
-    
-            //         ->where('status',0);
-    
-            // })->get();
+        //     $query->select('emp_id')
+
+        //         ->from('employees')
+
+        //         ->where('m_id',$empid)
+
+        //         ->where('status',0);
+
+        // })->get();
 
         $this->helperRating($posts);
 
@@ -167,18 +167,50 @@ class Post extends Model
     public function checkoutItem($id)
     {
         //get details of the items of the post table corresponding to the id
-        $cartItems = self::where('id', '=', $id)
+        $cartItems = self::where('id', $id)
             ->get();
 
         return $cartItems;
     }
 
-    public function getSellerInfo(){
+    public function getSellerInfo()
+    {
 
         $sellerProducts = self::join('product_meta', 'posts.id', '=', 'product_meta.product_id')
             ->select("*")
             ->paginate(6);
 
-            return $sellerProducts;
+        return $sellerProducts;
+    }
+
+
+    /**
+     * Function to get all the products avaiable in the database
+     * along with certain filters
+     * most recent, price low to high, price high to low, rating high to low, rating low to high
+     * will be used for the API calls
+     */
+
+    public function getAllProductsAPI($sort, $category){
+            
+            if($sort == 'newest'){
+                $posts = self::where('category', $category)->orderBy('created_at', 'desc')->get();
+            }elseif($sort == 'oldest'){
+                $posts = self::where('category', $category)->orderBy('created_at', 'asc')->get();
+            }elseif($sort == 'price_low_high'){
+                $posts = self::where('category', $category)->orderBy('price_revised', 'asc')->get();
+            }elseif($sort == 'price_high_low'){
+                $posts = self::where('category', $category)->orderBy('price_revised', 'desc')->get();
+            }elseif($sort == 'rating_high_low'){
+                $posts = self::where('category', $category)->orderBy('rating', 'desc')->get()->get();
+            }elseif($sort == 'rating_low_high'){
+                $posts = self::where('category', $category)->orderBy('rating', 'asc')->get()->get();
+            }else{
+    
+                $posts = self::get();
+
+            }
+    
+            return $posts;
     }
 }

@@ -1,15 +1,8 @@
 <?php
 
 namespace App;
-
-
 namespace App\Models;
-
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-use Exception;
-use Illuminate\Support\Facades\Auth;
 
 class Cart extends Model
 {
@@ -30,22 +23,21 @@ class Cart extends Model
     {
 
         $cartItems = self::join('users', 'cart.email', '=', 'users.email')
-            ->join('posts', 'cart.product_id', '=', 'posts.id')
+            ->join('posts', 'cart.product_id', 'posts.id')
             ->where('users.id', '=', $id)
             ->get();
-
 
         return $cartItems;
     }
 
     public function deleteCartItems($itemId,$email)
     {
-        self::where('product_id', '=', $itemId)->where('email', '=', $email)->delete();
+        self::where('product_id', $itemId)->where('email', $email)->delete();
     }
 
     public function cartNumber($email)
     {
-        $cartNumber = self::where('email', '=', $email)
+        $cartNumber = self::where('email', $email)
             ->count();
 
         //if cart is empty return 0

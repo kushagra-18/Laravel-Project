@@ -5,7 +5,7 @@
         Shopwayy | Search
     </title>
 
-    
+
 </head>
 
 <style>
@@ -87,13 +87,14 @@
 
             @endforeach
         </div>
-
-        <div id="pagination">
-            {{$posts->links(("pagination::bootstrap-4"))}}
-        </div>
+        <ul class="pagination justify-content-center mt-3">
+            <div id="pagination">
+                {{$posts->links(("pagination::bootstrap-4"))}}
+            </div>
+        </ul>
         @else
 
-    
+
 
         <!-- not found -->
         <center>
@@ -105,7 +106,7 @@
 
         @endif
 
-@include('essentials.footer')
+        @include('essentials.footer')
     </div>
 
 </body>

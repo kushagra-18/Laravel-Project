@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\users;
 use Exception;
 use App\Models\Post;
 use App\Models\ProductMeta;
-use App\Models\ProductPage;
 use App\Models\UserMeta;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,8 +44,6 @@ class ProductPageController extends Controller
             //return $e;
             return view('productpage', compact('posts', 'checkBought', 'checkIfRated'));
         }
-
-        //error_log($individualRating);
 
         return view('productpage', compact('posts', 'checkBought', 'individualRating', 'totRating', 'avgRating', 'checkIfRated'));
     }
