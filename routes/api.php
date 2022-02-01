@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/shopwayy', ['category' => '', 'sort' => '','uses' => 'APIController@index'])->name('shopwayy');
+Route::get('/shopwayy', ['uses' => 'APIController@index'])->name('shopwayy');

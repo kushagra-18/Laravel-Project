@@ -191,26 +191,36 @@ class Post extends Model
      * will be used for the API calls
      */
 
-    public function getAllProductsAPI($sort, $category){
-            
-            if($sort == 'newest'){
-                $posts = self::where('category', $category)->orderBy('created_at', 'desc')->get();
-            }elseif($sort == 'oldest'){
-                $posts = self::where('category', $category)->orderBy('created_at', 'asc')->get();
-            }elseif($sort == 'price_low_high'){
-                $posts = self::where('category', $category)->orderBy('price_revised', 'asc')->get();
-            }elseif($sort == 'price_high_low'){
-                $posts = self::where('category', $category)->orderBy('price_revised', 'desc')->get();
-            }elseif($sort == 'rating_high_low'){
-                $posts = self::where('category', $category)->orderBy('rating', 'desc')->get()->get();
-            }elseif($sort == 'rating_low_high'){
-                $posts = self::where('category', $category)->orderBy('rating', 'asc')->get()->get();
-            }else{
-    
-                $posts = self::get();
+    public function getAllProductsAPI($sort = "", $category = "", $page = "")
+    {
 
-            }
+        if ($sort == "") {
+            $sort = "newest";
+        }
+        if ($category == "") {
+            $category = "";
+        }
+        if ($page == "") {
+            $page = 1;
+        }
     
-            return $posts;
+
+        if ($sort == 'newest') {
+            $posts = self::where('category', $category)->offset($page)->limit(5)->orderBy('created_at', 'desc')->get();
+        } elseif ($sort == 'oldest') {
+            $posts = self::where('category', $category)->offset($page)->limit(5)->orderBy('created_at', 'asc')->get();
+        } elseif ($sort == 'price_low_high') {
+            $posts = self::where('category', $category)->offset($page)->limit(5)->orderBy('price_revised', 'asc')->get();
+        } elseif ($sort == 'price_high_low') {
+            $posts = self::where('category', $category)->offset($page)->limit(5)->orderBy('price_revised', 'desc')->get();
+        } elseif ($sort == 'rating_high_low') {
+            $posts = self::where('category', $category)->offset($page)->limit(5)->orderBy('rating', 'desc')->get()->get();
+        } elseif ($sort == 'rating_low_high') {
+            $posts = self::where('category', $category)->offset($page)->limit(5)->orderBy('rating', 'asc')->get()->get();
+        } else {
+            $posts = self::get();
+        }
+
+        return $posts;
     }
 }
