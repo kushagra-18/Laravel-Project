@@ -11,8 +11,15 @@ class APIController extends Controller
      * through API with certain filters
      * 
      */
-    public function index($sort='', $category='')
+    public function index(Request $request)
     {
+
+        error_log("Request: " . print_r($request->all(), true));
+
+        $sort = $request->input('sort');
+        $category = $request->input('category');
+        error_log("sort: ".$sort);
+        error_log("category: ".$category);
 
         $postModel = new Post();
         $posts = $postModel->getAllProductsAPI($sort, $category);

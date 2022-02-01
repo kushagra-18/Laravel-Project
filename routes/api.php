@@ -18,4 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/shopwayy', 'APIController@index')->name('home');
+
+Route::get('/shopwayy', ['category' => '', 'sort' => '','uses' => 'APIController@index'])->name('shopwayy');
