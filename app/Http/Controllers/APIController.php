@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class APIController extends Controller
 {
@@ -13,6 +14,7 @@ class APIController extends Controller
      * through API with certain filters
      * 
      */
+
     public function index(Request $request)
     {
 
@@ -22,9 +24,6 @@ class APIController extends Controller
         $category = $request->input('category');
         $page = $request->input('page');
 
-        // error_log("Sort: " . print_r($sort, true));
-        // error_log("Category: " . print_r($category, true));
-        // error_log("Page: " . print_r($page, true));
 
 
         //validate if page number is integer and greater than 0 and if not send error 500
@@ -34,31 +33,31 @@ class APIController extends Controller
         }
 
         try {
-
             $postModel = new Post();
             $posts = $postModel->getAllProductsAPI($sort, $category, $page);
         } catch (Exception $e) {
             return response()->json(['error' => 'Something went wrong'], 500);
         }
 
-
-        if ($posts == null) {
+        if (sizeof($posts) == 0) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'No products found'
             ], 404);
-        }
+        } else {
 
-        try {
-            return response()->json([
-                'status' => 'success',
-                'count' => count($posts),
-                'data' => $posts,
-                'message' => 'Products found',
-            ], 200);
-        } catch (Exception $e) {
-            error_log("Error: " . print_r($e, true));
-            return response()->json(['error' => 'Something went wrong'], 500);
+            try {
+                return response()->json([
+                    'status' => 'success',
+                    'count' => count($posts),
+                    'page' => $page,
+                    'message' => 'Products found',
+                    'data' => $posts,
+                ], 200);
+            } catch (Exception $e) {
+                error_log("Error: " . print_r($e, true));
+                return response()->json(['error' => 'Something went wrong'], 500);
+            }
         }
     }
 }

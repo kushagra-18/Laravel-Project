@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Exception;
 use App\Http\Controllers\Controller;
-use App\Jobs\SendRemainderEmail;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\WelcomeMail;
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -85,6 +83,7 @@ class RegisterController extends Controller
             'user' => $data['user'],
             'companyName' => $data['companyName'],
             'password' => bcrypt($data['password']),
+            'api_token' => Str::random(40),
         ]);
 
         //priority high

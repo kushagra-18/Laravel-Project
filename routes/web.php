@@ -47,9 +47,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/rating', 'ProductPageController@ratingupdate')->name('ratingUpdate');
 
-    Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
+    Route::post('/profile','HomeController@changePassword')->name('changePassword');
 
-    Route::get('/changePassword', 'HomeController@showChangePasswordForm')->name('changePassword');
+    Route::get('/profile', 'HomeController@showChangePasswordForm')->name('changePassword');
 });
 
 Route::group(['middleware' => ['auth', 'CheckCustomer']], function () {

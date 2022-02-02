@@ -24,12 +24,10 @@ class Post extends Model
         'updated_at', 'discount_till'
     ];
 
-
     public function getDiscountTillAttribute($value)
     {
         return Carbon::parse($value)->diffForHumans();
     }
-
 
     /**
      * @description : This function is used to get top 6 posts from the database.
@@ -74,7 +72,6 @@ class Post extends Model
 
         return $posts;
     }
-
 
     public function getTrendingPosts()
     {
@@ -183,7 +180,6 @@ class Post extends Model
         return $sellerProducts;
     }
 
-
     /**
      * Function to get all the products avaiable in the database
      * along with certain filters
@@ -203,8 +199,8 @@ class Post extends Model
         if ($page == "") {
             $page = 1;
         }
-    
 
+    
         if ($sort == 'newest') {
             $posts = self::where('category', $category)->offset($page)->limit(5)->orderBy('created_at', 'desc')->get();
         } elseif ($sort == 'oldest') {
@@ -214,9 +210,9 @@ class Post extends Model
         } elseif ($sort == 'price_high_low') {
             $posts = self::where('category', $category)->offset($page)->limit(5)->orderBy('price_revised', 'desc')->get();
         } elseif ($sort == 'rating_high_low') {
-            $posts = self::where('category', $category)->offset($page)->limit(5)->orderBy('rating', 'desc')->get()->get();
+            $posts = self::where('category', $category)->offset($page)->limit(5)->orderBy('rating', 'desc')->get();
         } elseif ($sort == 'rating_low_high') {
-            $posts = self::where('category', $category)->offset($page)->limit(5)->orderBy('rating', 'asc')->get()->get();
+            $posts = self::where('category', $category)->offset($page)->limit(5)->orderBy('rating', 'asc')->get();
         } else {
             $posts = self::get();
         }
